@@ -4,6 +4,7 @@ import * as React from "react";
 import { SafeAreaView, FlatList, StyleSheet, Button } from "react-native";
 import CustomTextInput from "../components/CustomTextInput";
 import FlatListItem from "../components/FlatListItem";
+import { v4 as uuidv4 } from "uuid";
 
 export default function TabTwoScreen() {
   const navigation = useNavigation();
@@ -38,7 +39,7 @@ export default function TabTwoScreen() {
 
   const OnSubmit = (text: string) => {
     let x = data;
-    x.push({ id: "s", title: text, income: "" });
+    x.push({ id: uuidv4(), title: text, income: "" });
     setData(x);
     setRefresh(!refresh);
   };
