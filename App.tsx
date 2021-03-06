@@ -5,14 +5,14 @@ import Navigation from "./src/navigation";
 import useCachedResources from "./src/hooks/useCachedResources";
 import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
 import * as eva from "@eva-design/eva";
-import { EvaIconsPack } from "@ui-kitten/eva-icons";
+import { MaterialCommunityIconsPack } from "./src/adapter/IconAdapter";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
   if (isLoadingComplete) {
     return (
       <>
-        <IconRegistry icons={EvaIconsPack} />
+        <IconRegistry icons={MaterialCommunityIconsPack} />
         <ApplicationProvider {...eva} theme={eva.light}>
           <SafeAreaProvider>
             <Navigation />
