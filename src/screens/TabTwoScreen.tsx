@@ -5,6 +5,8 @@ import { SafeAreaView, FlatList, StyleSheet, Button } from "react-native";
 import CustomTextInput from "../components/CustomTextInput";
 import FlatListItem from "../components/FlatListItem";
 import { v4 as uuidv4 } from "uuid";
+import { useSelector, useDispatch } from "react-redux";
+import { AddUsers, GetUsers } from "../redux/reducer/baseReducer";
 
 export default function TabTwoScreen() {
   const navigation = useNavigation();
@@ -26,6 +28,7 @@ export default function TabTwoScreen() {
     },
   ]);
   const [refresh, setRefresh] = React.useState(false);
+  const dispatch = useDispatch();
 
   const DeleteItem = (id: any) => {
     const lists = data.filter((x) => x.id != id);
@@ -34,7 +37,10 @@ export default function TabTwoScreen() {
   };
 
   const StartNextScreen = () => {
-    navigation.navigate("TabOne", { data: data });
+    // navigation.navigate("TabOne", { data: data });
+    dispatch(AddUsers(data));
+    const count = GetUsers(store.getState());
+    console.log(count);
   };
 
   const OnSubmit = (text: string) => {
@@ -46,7 +52,6 @@ export default function TabTwoScreen() {
 
   const OnIncomeAdded = (id: any, income: string) => {
     const index = data.findIndex((x) => x.id === id);
-    console.log(index);
     if (index != -1) {
       data[index].income = income;
       setData(data);

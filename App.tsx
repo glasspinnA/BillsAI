@@ -6,6 +6,8 @@ import useCachedResources from "./src/hooks/useCachedResources";
 import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
 import * as eva from "@eva-design/eva";
 import { MaterialCommunityIconsPack } from "./src/adapter/IconAdapter";
+import { Provider } from "react-redux";
+import { Store } from "./src/redux/store/store";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -14,10 +16,12 @@ export default function App() {
       <>
         <IconRegistry icons={MaterialCommunityIconsPack} />
         <ApplicationProvider {...eva} theme={eva.light}>
-          <SafeAreaProvider>
-            <Navigation />
-            <StatusBar />
-          </SafeAreaProvider>
+          <Provider store={Store}>
+            <SafeAreaProvider>
+              <Navigation />
+              <StatusBar />
+            </SafeAreaProvider>
+          </Provider>
         </ApplicationProvider>
       </>
     );
