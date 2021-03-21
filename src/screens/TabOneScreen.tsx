@@ -10,7 +10,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import AddForm from "../components/AddForm";
+import AddForm from "../components/add_bill_form/AddBillPresenter";
 import UserChooserRowItem from "../components/UserChooserRowItem";
 
 export default function TabOneScreen() {
