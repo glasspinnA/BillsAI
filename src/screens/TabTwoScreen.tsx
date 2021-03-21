@@ -7,10 +7,11 @@ import FlatListItem from "../components/FlatListItem";
 import { v4 as uuidv4 } from "uuid";
 import { useSelector, useDispatch } from "react-redux";
 import { AddUsers, GetUsers } from "../redux/reducer/baseReducer";
+import { Store } from "../redux/store/store";
 
 export default function TabTwoScreen() {
   const navigation = useNavigation();
-  const [data, setData] = React.useState([
+  let [data, setData] = React.useState([
     {
       id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
       title: "First Item",
@@ -37,16 +38,16 @@ export default function TabTwoScreen() {
   };
 
   const StartNextScreen = () => {
-    // navigation.navigate("TabOne", { data: data });
     dispatch(AddUsers(data));
-    const count = GetUsers(store.getState());
-    console.log(count);
+    const count = GetUsers(Store.getState());
+    navigation.navigate("TabOne");
   };
 
   const OnSubmit = (text: string) => {
-    let x = data;
-    x.push({ id: uuidv4(), title: text, income: "" });
-    setData(x);
+    setData((oldData) => [
+      ...oldData,
+      { id: uuidv4(), title: text, income: "" },
+    ]);
     setRefresh(!refresh);
   };
 

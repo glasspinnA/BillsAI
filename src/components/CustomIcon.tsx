@@ -8,5 +8,7 @@ export const CustomIcon = (icon: IconChooser) => {
       return <Icon name="currency-usd" />;
     case IconChooser.REMOVE:
       return <Icon name="delete-outline" />;
+    case IconChooser.CHECK:
+      return <Icon name="check-circle" />;
   }
 };
