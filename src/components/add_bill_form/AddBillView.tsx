@@ -23,10 +23,11 @@ export interface IFormInputs {
 
 export function AddBillView(props: AddBillViewProps) {
   const { control, handleSubmit, trigger, errors } = useForm<IFormInputs>();
-
   return (
     <View style={{ flex: 1 }}>
-      <View style={{ flex: 1, flexDirection: "row" }}>
+      <View
+        style={{ height: 60, flexDirection: "row", backgroundColor: "red" }}
+      >
         <View style={{ flex: 1 }}>
           <Controller
             control={control}
@@ -64,7 +65,7 @@ export function AddBillView(props: AddBillViewProps) {
           {errors.PRICE && <Text>Lastname is required.</Text>}
         </View>
       </View>
-      <View style={{ flex: 1 }}>
+      <View style={{ height: 100, backgroundColor: "orange" }}>
         <Controller
           control={control}
           render={({ onChange }) => (
@@ -86,8 +87,9 @@ export function AddBillView(props: AddBillViewProps) {
         />
         {errors.USER && <Text>ss is required.</Text>}
       </View>
-      <View>
+      <View style={{ height: 45, backgroundColor: "cyan" }}>
         <RadioGroup
+          style={{ flexDirection: "row" }}
           selectedIndex={props.selectedIndex}
           onChange={(index) => props.setSelectedIndex(index)}
         >
@@ -95,7 +97,7 @@ export function AddBillView(props: AddBillViewProps) {
           <Radio>50/50 Shared</Radio>
         </RadioGroup>
       </View>
-      <View>
+      <View style={{ flex: 6 }}>
         <Button onPress={handleSubmit(props.onSubmit)}>Level up</Button>
       </View>
     </View>

@@ -1,9 +1,12 @@
+import BottomSheet from "@gorhom/bottom-sheet";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { StyleSheet } from "react-native";
 import { AddBillView } from "./AddBillView";
 
-interface AddFormPresenterProps {}
+interface AddFormPresenterProps {
+  bottomSheetRef: any;
+}
 
 const AddForm = (props: AddFormPresenterProps) => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
@@ -62,15 +65,29 @@ const AddForm = (props: AddFormPresenterProps) => {
 
   const OnSubmit = (data) => console.log("Submit");
 
+  const snapPoints = React.useMemo(() => [-1, "50%"], []);
+
+  // callbacks
+  const handleSheetChanges = React.useCallback((index: number) => {
+    console.log("handleSheetChanges", index);
+  }, []);
+
   return (
-    <AddBillView
-      data={data}
-      selectedIndex={selectedIndex}
-      setSelectedIndex={(index: number) => setSelectedIndex(index)}
-      isAnyItemSelected={IsAnyItemSelected}
-      updateData={UpdateData}
-      onSubmit={OnSubmit}
-    />
+    <BottomSheet
+      ref={props.bottomSheetRef}
+      index={1}
+      snapPoints={snapPoints}
+      onChange={handleSheetChanges}
+    >
+      <AddBillView
+        data={data}
+        selectedIndex={selectedIndex}
+        setSelectedIndex={(index: number) => setSelectedIndex(index)}
+        isAnyItemSelected={IsAnyItemSelected}
+        updateData={UpdateData}
+        onSubmit={OnSubmit}
+      />
+    </BottomSheet>
   );
 };
 

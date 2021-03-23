@@ -58,9 +58,7 @@ const UserChooserRowItem = (props: UserChooserRowItemProps) => {
         style={{
           flex: 1,
           justifyContent: "center",
-          alignItems: "center",
           marginHorizontal: 10,
-          backgroundColor: "orange",
         }}
       >
         {_Body()}
