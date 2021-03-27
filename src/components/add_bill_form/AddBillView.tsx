@@ -3,22 +3,16 @@ import * as React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Text, View, StyleSheet, TextInput } from "react-native";
 import { ADD_BILL_FORM } from "../../constants/FormNames";
+import { IFormInputs } from "../../interface/IFormInputs";
 import { HList } from "../HList";
 
 export interface AddBillViewProps {
-  data: any;
+  data: UserDTO[];
   onSubmit(data: any): void;
-  updateData(data: any): void;
-  isAnyItemSelected(data: any): void;
+  updateData(users: UserDTO[]): void;
+  isAnyItemSelected(users: UserDTO[]): void;
   setSelectedIndex(index: number): void;
   selectedIndex: number;
-}
-
-export interface IFormInputs {
-  PRODUCT: string;
-  PRICE: string;
-  USER: string;
-  BILL_TYPE: string;
 }
 
 export function AddBillView(props: AddBillViewProps) {
@@ -88,14 +82,24 @@ export function AddBillView(props: AddBillViewProps) {
         {errors.USER && <Text>ss is required.</Text>}
       </View>
       <View style={{ height: 45, backgroundColor: "cyan" }}>
-        <RadioGroup
-          style={{ flexDirection: "row" }}
-          selectedIndex={props.selectedIndex}
-          onChange={(index) => props.setSelectedIndex(index)}
-        >
-          <Radio>Income based</Radio>
-          <Radio>50/50 Shared</Radio>
-        </RadioGroup>
+        <Controller
+          control={control}
+          render={({ onChange }) => (
+            <RadioGroup
+              style={{ flexDirection: "row" }}
+              selectedIndex={props.selectedIndex}
+              onChange={(index) => {
+                onChange(index);
+                props.setSelectedIndex(index);
+              }}
+            >
+              <Radio>Income based</Radio>
+              <Radio>50/50 Shared</Radio>
+            </RadioGroup>
+          )}
+          name={ADD_BILL_FORM.EXPENSE_TYPE}
+          defaultValue="0"
+        />
       </View>
       <View style={{ flex: 6 }}>
         <Button onPress={handleSubmit(props.onSubmit)}>Level up</Button>

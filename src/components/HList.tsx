@@ -3,18 +3,18 @@ import { View, Text, FlatList } from "react-native";
 import UserChooserRowItem from "./UserChooserRowItem";
 
 export interface HListProps {
-  data: any;
-  updateData(data: any): void;
+  data: UserDTO[];
+  updateData(data: UserDTO[]): void;
 }
 
 export function HList(props: HListProps) {
   const [canAnyItemBeSelected, setCanAnyItemBeSelected] = React.useState(true);
   const [refresh, setRefresh] = React.useState(false);
   const [selectedItem, setSelectedItem] = React.useState<any>([]);
-  const OnSelectedRowItem = (item, isSelectedState: boolean) => {
-    const index = props.data.findIndex((x) => x.id === item.id);
+  const OnSelectedRowItem = (item: UserDTO, isSelectedState: boolean) => {
+    const index = props.data.findIndex((x) => x.Id === item.Id);
     if (index != -1) {
-      props.data[index].isSelected = isSelectedState;
+      props.data[index].IsSelected = isSelectedState;
       props.updateData(props.data);
       setRefresh(!refresh);
     }
@@ -24,7 +24,7 @@ export function HList(props: HListProps) {
       extraData={refresh}
       horizontal={true}
       data={props.data}
-      keyExtractor={(item) => item.id}
+      keyExtractor={(item) => item.Id}
       renderItem={({ item }) => {
         return (
           <UserChooserRowItem

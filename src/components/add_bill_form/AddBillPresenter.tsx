@@ -1,7 +1,12 @@
 import BottomSheet from "@gorhom/bottom-sheet";
 import * as React from "react";
-import { useForm } from "react-hook-form";
 import { StyleSheet } from "react-native";
+import { useDispatch } from "react-redux";
+import { ExpenseDTO } from "../../DTO/ExpenseDTO";
+import { ExpenseType } from "../../enum/ExpenseType";
+import { IExpensesSectionList } from "../../interface/IExpensesSectionList";
+import { IFormInputs } from "../../interface/IFormInputs";
+import { AddExpenses } from "../../redux/reducer/baseReducer";
 import { AddBillView } from "./AddBillView";
 
 interface AddFormPresenterProps {
@@ -10,60 +15,43 @@ interface AddFormPresenterProps {
 
 const AddForm = (props: AddFormPresenterProps) => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const [data, setData] = React.useState([
+  const dispatch = useDispatch();
+  const [data, setData] = React.useState<UserDTO[]>([
     {
-      id: "c1b1-46c2-aed5-3ad53abb28ba",
-      title: "JÖ",
-      income: "",
-      isSelected: false,
+      Id: "c1b1-46c2-aed5-3ad53abb28ba",
+      Title: "JÖ",
+      Income: "",
+      IsSelected: false,
     },
     {
-      id: "3ac68afc-48d3-a4f8-fbd91aa97f63",
-      title: "OS",
-      income: "",
-      isSelected: false,
-    },
-    {
-      id: "58694a0f-3da1-4171f-bd96-145571e29d72",
-      title: "FA",
-      income: "",
-      isSelected: false,
-    },
-    {
-      id: "584694a0f-471f-bd96-145571e29d72",
-      title: "X",
-      income: "",
-      isSelected: false,
-    },
-    {
-      id: "3d5a1-471f-bd96-145571e29d72",
-      title: "A",
-      income: "",
-      isSelected: false,
-    },
-    {
-      id: "586954a0f-3da1-471f-bd96",
-      title: "DA",
-      income: "",
-      isSelected: false,
-    },
-    {
-      id: "586954a0f-3da1-bd96-145571e29d72",
-      title: "XA",
-      income: "",
-      isSelected: false,
+      Id: "3ac68afc-48d3-a4f8-fbd91aa97f63",
+      Title: "OS",
+      Income: "",
+      IsSelected: false,
     },
   ]);
 
-  const UpdateData = (data) => {
+  const UpdateData = (data: UserDTO[]) => {
     setData(data);
   };
 
-  const IsAnyItemSelected = (v) => {
-    return v.filter((x) => x.isSelected).length != 0;
+  const IsAnyItemSelected = (users: UserDTO[]) => {
+    return users.filter((x) => x.IsSelected).length != 0;
   };
 
-  const OnSubmit = (data) => console.log("Submit");
+  const OnSubmit = (data: IFormInputs) => {
+    const obj = {
+      Name: data.PRODUCT,
+      Price: parseInt(data.PRICE),
+      Users: data.USER.filter((x) => x.IsSelected),
+      ExpenseType: data.EXPENSE_TYPE,
+    } as ExpenseDTO;
+    if (data.EXPENSE_TYPE == ExpenseType.EVEN_SHARED) {
+      dispatch(AddExpenses({ EvenShared: [obj] } as IExpensesSectionList));
+    } else {
+      dispatch(AddExpenses({ IncomeBased: [obj] } as IExpensesSectionList));
+    }
+  };
 
   const snapPoints = React.useMemo(() => [-1, "50%"], []);
 

@@ -5,7 +5,7 @@ import { IconChooser } from "../enum/IconChooser";
 import { CustomIcon } from "./CustomIcon";
 
 interface UserChooserRowItemProps {
-  item: any;
+  item: UserDTO;
   setCanAnyItemBeSelected: boolean;
   itemThatCanBeSelected: any;
   onSelected(item: any, isSelectedState: boolean): void;
@@ -31,7 +31,7 @@ const UserChooserRowItem = (props: UserChooserRowItemProps) => {
             justifyContent: "center",
           }}
         >
-          <Text>{props.item.title}</Text>
+          <Text>{props.item.Title}</Text>
           {isSelectedState && (
             <View
               style={{
