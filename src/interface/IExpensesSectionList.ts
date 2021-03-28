@@ -1,6 +1,9 @@
 import { ExpenseDTO } from "../DTO/ExpenseDTO";
+import { ExpenseType } from "../enum/ExpenseType";
 
 export interface IExpensesSectionList {
-  IncomeBased?: ExpenseDTO[];
-  EvenShared?: ExpenseDTO[];
+  Id: ExpenseType;
+  Data: ExpenseDTO[];
 }
+
+interface TestObject {}

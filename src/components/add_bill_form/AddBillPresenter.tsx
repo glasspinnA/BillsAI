@@ -46,11 +46,10 @@ const AddForm = (props: AddFormPresenterProps) => {
       Users: data.USER.filter((x) => x.IsSelected),
       ExpenseType: data.EXPENSE_TYPE,
     } as ExpenseDTO;
-    if (data.EXPENSE_TYPE == ExpenseType.EVEN_SHARED) {
-      dispatch(AddExpenses({ EvenShared: [obj] } as IExpensesSectionList));
-    } else {
-      dispatch(AddExpenses({ IncomeBased: [obj] } as IExpensesSectionList));
-    }
+
+    const d = { Id: data.EXPENSE_TYPE, Data: [obj] } as IExpensesSectionList;
+
+    dispatch(AddExpenses(d));
   };
 
   const snapPoints = React.useMemo(() => [-1, "50%"], []);

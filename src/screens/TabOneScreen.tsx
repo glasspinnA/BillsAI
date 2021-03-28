@@ -39,9 +39,7 @@ export default function TabOneScreen() {
   ];
 
   const check = () => {
-    console.log("check");
     const expenses = GetExpenses(Store.getState());
-    console.log(expenses);
   };
 
   const Item = ({ title }) => (

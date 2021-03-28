@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IExpensesSectionList } from "../../interface/IExpensesSectionList";
 import { RootState } from "../store/store";
+import produce from "immer";
 
 export const baseReducer = createSlice({
   name: "counter",
@@ -13,10 +14,18 @@ export const baseReducer = createSlice({
       state.users = action.payload;
     },
     AddExpenses: (state, action) => {
-      return {
-        ...state,
-        expenses: [...state.expenses, action.payload],
-      };
+      const obj = action.payload as IExpensesSectionList;
+      const index = state.expenses.findIndex((x) => x.Id == obj.Id);
+      if (index == -1) {
+        return { ...state, expenses: [...state.expenses, action.payload] };
+      } else {
+        return produce(state, (draft) => {
+          draft.expenses[index].Data = [
+            ...draft.expenses[index].Data,
+            action.payload.Data[0],
+          ];
+        });
+      }
     },
   },
 });
