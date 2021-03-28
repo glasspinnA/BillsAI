@@ -14,20 +14,23 @@ export default function TabTwoScreen() {
   let [data, setData] = React.useState([
     {
       id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-      title: "First Item",
+      name: "First Item",
       income: "",
+      title: "FI",
     },
     {
       id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-      title: "Second Item",
+      name: "Second Item",
       income: "",
+      title: "SI",
     },
     {
       id: "58694a0f-3da1-471f-bd96-145571e29d72",
-      title: "Third Item",
+      name: "Third Item",
       income: "",
+      title: "TI",
     },
-  ]);
+  ] as UserDTO[]);
   const [refresh, setRefresh] = React.useState(false);
   const dispatch = useDispatch();
 
@@ -46,7 +49,14 @@ export default function TabTwoScreen() {
   const OnSubmit = (text: string) => {
     setData((oldData) => [
       ...oldData,
-      { id: uuidv4(), title: text, income: "" },
+      {
+        id: uuidv4(),
+        name: text,
+        title:
+          text.length > 2
+            ? text.substring(0, 2).toUpperCase()
+            : text.toUpperCase(),
+      },
     ]);
     setRefresh(!refresh);
   };

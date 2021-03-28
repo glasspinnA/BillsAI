@@ -15,7 +15,6 @@ const UserChooserRowItem = (props: UserChooserRowItemProps) => {
   const ToggleSelectedState = () => {
     setSelectedState(!isSelectedState);
     props.onSelected(props.item, !isSelectedState);
-    console.log(!isSelectedState);
   };
 
   const _Body = () => {
@@ -31,7 +30,7 @@ const UserChooserRowItem = (props: UserChooserRowItemProps) => {
             justifyContent: "center",
           }}
         >
-          <Text>{props.item.Title}</Text>
+          <Text>{props.item.title}</Text>
           {isSelectedState && (
             <View
               style={{

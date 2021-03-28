@@ -1,12 +1,13 @@
 import BottomSheet from "@gorhom/bottom-sheet";
 import * as React from "react";
 import { StyleSheet } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ExpenseDTO } from "../../DTO/ExpenseDTO";
 import { ExpenseType } from "../../enum/ExpenseType";
 import { IExpensesSectionList } from "../../interface/IExpensesSectionList";
 import { IFormInputs } from "../../interface/IFormInputs";
 import { AddExpenses } from "../../redux/reducer/baseReducer";
+import { RootState } from "../../redux/store/store";
 import { AddBillView } from "./AddBillView";
 
 interface AddFormPresenterProps {
@@ -16,34 +17,21 @@ interface AddFormPresenterProps {
 const AddForm = (props: AddFormPresenterProps) => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const dispatch = useDispatch();
-  const [data, setData] = React.useState<UserDTO[]>([
-    {
-      Id: "c1b1-46c2-aed5-3ad53abb28ba",
-      Title: "JÖ",
-      Income: "",
-      IsSelected: false,
-    },
-    {
-      Id: "3ac68afc-48d3-a4f8-fbd91aa97f63",
-      Title: "OS",
-      Income: "",
-      IsSelected: false,
-    },
-  ]);
+  const data = useSelector((state: RootState) => state.baseReducer.users);
 
   const UpdateData = (data: UserDTO[]) => {
-    setData(data);
+    // setData(data);
   };
 
   const IsAnyItemSelected = (users: UserDTO[]) => {
-    return users.filter((x) => x.IsSelected).length != 0;
+    return users.filter((x) => x.isSelected).length != 0;
   };
 
   const OnSubmit = (data: IFormInputs) => {
     const obj = {
       Name: data.PRODUCT,
       Price: parseInt(data.PRICE),
-      Users: data.USER.filter((x) => x.IsSelected),
+      Users: data.USER.filter((x) => x.isSelected),
       ExpenseType: ExpenseType[data.EXPENSE_TYPE],
     } as ExpenseDTO;
 

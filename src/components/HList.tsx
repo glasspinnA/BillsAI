@@ -12,9 +12,9 @@ export function HList(props: HListProps) {
   const [refresh, setRefresh] = React.useState(false);
   const [selectedItem, setSelectedItem] = React.useState<any>([]);
   const OnSelectedRowItem = (item: UserDTO, isSelectedState: boolean) => {
-    const index = props.data.findIndex((x) => x.Id === item.Id);
+    const index = props.data.findIndex((x) => x.id === item.id);
     if (index != -1) {
-      props.data[index].IsSelected = isSelectedState;
+      props.data[index].isSelected = isSelectedState;
       props.updateData(props.data);
       setRefresh(!refresh);
     }
@@ -24,7 +24,7 @@ export function HList(props: HListProps) {
       extraData={refresh}
       horizontal={true}
       data={props.data}
-      keyExtractor={(item) => item.Id}
+      keyExtractor={(item) => item.id}
       renderItem={({ item }) => {
         return (
           <UserChooserRowItem

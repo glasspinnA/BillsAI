@@ -24,8 +24,9 @@
 // }
 
 interface UserDTO {
-  Id: string;
-  Income: string;
-  IsSelected: boolean;
-  Title: string;
+  id: string;
+  income?: string;
+  isSelected?: boolean;
+  name: string;
+  title: string;
 }

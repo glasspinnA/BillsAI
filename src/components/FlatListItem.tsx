@@ -7,7 +7,7 @@ import { CustomIcon } from "./CustomIcon";
 import CustomTextInput from "./CustomTextInput";
 
 interface FlatListItemProps {
-  item: any;
+  item: UserDTO;
   OnDeleteItem(id: any): void;
   onIncomeAdded(id: any, text: string): void;
 }
@@ -34,7 +34,7 @@ const FlatListItem = (props: FlatListItemProps) => {
       <SafeAreaView style={styles.container}>
         <View style={GlobalLayout.globalStyles.row}>
           <View style={{ flex: 3 }}>
-            <Text category="s1">{props.item.title}</Text>
+            <Text category="s1">{props.item.name}</Text>
             <Text category="s2">{props.item.income}</Text>
           </View>
           <View style={{ flex: 1 }}>
