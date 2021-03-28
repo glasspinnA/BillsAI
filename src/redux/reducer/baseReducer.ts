@@ -11,18 +11,18 @@ export const baseReducer = createSlice({
   },
   reducers: {
     AddUsers: (state, action) => {
-      state.users = action.payload;
+      return { ...state, users: action.payload };
     },
     AddExpenses: (state, action) => {
       const obj = action.payload as IExpensesSectionList;
-      const index = state.expenses.findIndex((x) => x.Id == obj.Id);
+      const index = state.expenses.findIndex((x) => x.id == obj.id);
       if (index == -1) {
         return { ...state, expenses: [...state.expenses, action.payload] };
       } else {
         return produce(state, (draft) => {
-          draft.expenses[index].Data = [
-            ...draft.expenses[index].Data,
-            action.payload.Data[0],
+          draft.expenses[index].data = [
+            ...draft.expenses[index].data,
+            action.payload.data[0],
           ];
         });
       }
@@ -36,4 +36,5 @@ export default baseReducer.reducer;
 
 export const GetUsers = (state: RootState) => state.baseReducer.users;
 
-export const GetExpenses = (state: RootState) => state.baseReducer.expenses;
+export const GetExpenses = (state: RootState): IExpensesSectionList[] =>
+  state.baseReducer.expenses;

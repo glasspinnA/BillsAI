@@ -9,52 +9,41 @@ import {
   SectionList,
   Text,
 } from "react-native";
+import { useSelector } from "react-redux";
 import AddForm from "../components/add_bill_form/AddBillPresenter";
+import { ExpenseDTO } from "../DTO/ExpenseDTO";
 import { GetExpenses } from "../redux/reducer/baseReducer";
 import { Store } from "../redux/store/store";
+import { RootState } from "../redux/store/store";
 
 export default function TabOneScreen() {
   const { handleSubmit } = useForm();
   const bottomSheetRef = React.useRef<BottomSheet>(null);
+  const data = useSelector((state: RootState) => state.baseReducer.expenses);
 
   const onSubmit = (data: any) => console.log(data);
-
-  const DATA = [
-    {
-      title: "Main dishes",
-      data: ["Pizza", "Burger", "Risotto"],
-    },
-    {
-      title: "Sides",
-      data: ["French Fries", "Onion Rings", "Fried Shrimps"],
-    },
-    {
-      title: "Drinks",
-      data: ["Water", "Coke", "Beer"],
-    },
-    {
-      title: "Desserts",
-      data: ["Cheese Cake", "Ice Cream"],
-    },
-  ];
 
   const check = () => {
     const expenses = GetExpenses(Store.getState());
   };
 
-  const Item = ({ title }) => (
-    <View>
-      <Text>{title}</Text>
-    </View>
-  );
+  const Item = (data: { item: ExpenseDTO }) => {
+    return (
+      <View>
+        <Text>{data.item.Name}</Text>
+      </View>
+    );
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <SectionList
-        sections={DATA}
-        keyExtractor={(item, index) => item + index}
-        renderItem={({ item }) => <Item title={item} />}
-        renderSectionHeader={({ section: { title } }) => <Text>{title}</Text>}
+        sections={data}
+        keyExtractor={(item, index) => item.ExpenseType + index}
+        renderItem={({ item }) => <Item item={item} />}
+        renderSectionHeader={({ section: { sectionTitle } }) => (
+          <Text>{sectionTitle}</Text>
+        )}
       />
       <AddForm bottomSheetRef={bottomSheetRef} />
       <View>

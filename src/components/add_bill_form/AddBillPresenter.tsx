@@ -44,10 +44,14 @@ const AddForm = (props: AddFormPresenterProps) => {
       Name: data.PRODUCT,
       Price: parseInt(data.PRICE),
       Users: data.USER.filter((x) => x.IsSelected),
-      ExpenseType: data.EXPENSE_TYPE,
+      ExpenseType: ExpenseType[data.EXPENSE_TYPE],
     } as ExpenseDTO;
 
-    const d = { Id: data.EXPENSE_TYPE, Data: [obj] } as IExpensesSectionList;
+    const d = {
+      id: data.EXPENSE_TYPE,
+      sectionTitle: ExpenseType[data.EXPENSE_TYPE],
+      data: [obj],
+    } as IExpensesSectionList;
 
     dispatch(AddExpenses(d));
   };
