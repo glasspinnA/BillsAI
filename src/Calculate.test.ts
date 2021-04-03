@@ -1,126 +1,249 @@
-import {
-  Calculate,
-  CalculateEvenSharedExpenses,
-  CalculateIncomeBasedExpenses,
-} from "./Calculate";
-import { UserDTO } from "./DTO/UserDTO";
+import { Calculate } from "./Calculate";
+import { RootState } from "./redux/store/store";
+import { ExpenseType } from "./enum/ExpenseType";
 
-test("Calculate Even Shared Expenses", () => {
-  const users = [
-    {
-      Username: "A",
-      EvenSharedExpenses: [{ Price: 1000 }] as ExpenseDTO[],
-      TotalEvenSharedExpenses: 1000,
-    } as UserDTO,
-    {
-      Username: "B",
-      EvenSharedExpenses: [{ Price: 2000 }] as ExpenseDTO[],
-      TotalEvenSharedExpenses: 2000,
-    } as UserDTO,
-    {
-      Username: "C",
-      EvenSharedExpenses: [{ Price: 5000 }] as ExpenseDTO[],
-      TotalEvenSharedExpenses: 5000,
-    } as UserDTO,
-  ] as UserDTO[];
-
-  expect(CalculateEvenSharedExpenses(users)).toEqual([
-    { Username: "A", SumToPay: "1666.67" } as PayDTO,
-    { Username: "B", SumToPay: "666.67" } as PayDTO,
-    { Username: "C", SumToPay: "-2333.33" } as PayDTO,
-  ] as PayDTO[]);
-});
-
-test("Calculate Income Based Expenses", () => {
-  const users = [
-    {
-      Username: "A",
-      Income: 10000,
-      IncomeBasedExpenses: [{ Price: 1000 }] as ExpenseDTO[],
-      TotalIncomeBasedExpenses: 1000,
-    } as UserDTO,
-    {
-      Username: "B",
-      Income: 20000,
-      IncomeBasedExpenses: [{ Price: 2000 }] as ExpenseDTO[],
-      TotalIncomeBasedExpenses: 2000,
-    } as UserDTO,
-  ] as UserDTO[];
-
-  expect(CalculateIncomeBasedExpenses(users)).toEqual([
-    { Username: "A", SumToPay: "1000.00" } as PayDTO,
-    { Username: "B", SumToPay: "2000.00" } as PayDTO,
-  ] as PayDTO[]);
-});
-
-test("Calculate", () => {
-  const users = [
-    {
-      Username: "A",
-      Income: 10000,
-      IncomeBasedExpenses: [{ Price: 1000 }] as ExpenseDTO[],
-      TotalIncomeBasedExpenses: 1000,
-      EvenSharedExpenses: [{ Price: 1000 }] as ExpenseDTO[],
-      TotalEvenSharedExpenses: 1000,
-    } as UserDTO,
-    {
-      Username: "B",
-      Income: 20000,
-      IncomeBasedExpenses: [{ Price: 2000 }] as ExpenseDTO[],
-      TotalIncomeBasedExpenses: 2000,
-      EvenSharedExpenses: [{ Price: 2000 }] as ExpenseDTO[],
-      TotalEvenSharedExpenses: 2000,
-    } as UserDTO,
-    {
-      Username: "C",
-      Income: 0,
-      IncomeBasedExpenses: [{ Price: 0 }] as ExpenseDTO[],
-      TotalIncomeBasedExpenses: 0,
-      EvenSharedExpenses: [{ Price: 5000 }] as ExpenseDTO[],
-      TotalEvenSharedExpenses: 5000,
-    } as UserDTO,
-  ] as UserDTO[];
-
-  expect(Calculate(users)).toEqual({
-    SumToPayEvenShared: [
-      { Username: "A", SumToPay: "1666.67" } as PayDTO,
-      { Username: "B", SumToPay: "666.67" } as PayDTO,
-      { Username: "C", SumToPay: "-2333.33" } as PayDTO,
-    ] as PayDTO[],
-    SumToPayIncomeBased: [
-      { Username: "A", SumToPay: "1000.00" } as PayDTO,
-      { Username: "B", SumToPay: "2000.00" } as PayDTO,
-      { Username: "C", SumToPay: "0.00" } as PayDTO,
+const data: RootState = {
+  baseReducer: {
+    users: [
+      {
+        id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+        name: "First Item",
+        income: 1000,
+        title: "JO",
+        isSelected: true,
+      },
+      {
+        id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+        name: "Second Item",
+        income: 2000,
+        title: "SI",
+        isSelected: true,
+      },
     ],
-  } as ResultDTO);
+    expenses: [
+      {
+        id: 0,
+        sectionTitle: "INCOME_BASED",
+        data: [
+          {
+            Name: "1",
+            Price: 100,
+            Users: [
+              {
+                id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+                name: "First Item",
+                income: 1000,
+                title: "JO",
+                isSelected: true,
+              },
+              {
+                id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+                name: "Second Item",
+                income: 2000,
+                title: "SI",
+                isSelected: true,
+              },
+            ],
+            ExpenseType: ExpenseType.INCOME_BASED,
+          },
+          {
+            Name: "1",
+            Price: 50,
+            Users: [
+              {
+                id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+                name: "First Item",
+                income: 1000,
+                title: "JO",
+                isSelected: true,
+              },
+              {
+                id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+                name: "Second Item",
+                income: 2000,
+                title: "SI",
+                isSelected: true,
+              },
+            ],
+            ExpenseType: ExpenseType.INCOME_BASED,
+          },
+          {
+            Name: "1",
+            Price: 100,
+            Users: [
+              {
+                id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+                name: "First Item",
+                income: 1000,
+                title: "JO",
+                isSelected: true,
+              },
+              {
+                id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+                name: "Second Item",
+                income: 2000,
+                title: "SI",
+                isSelected: true,
+              },
+            ],
+            ExpenseType: ExpenseType.INCOME_BASED,
+          },
+          {
+            Name: "1",
+            Price: 3000,
+            Users: [
+              {
+                id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+                name: "First Item",
+                income: 1000,
+                title: "JO",
+                isSelected: true,
+              },
+              {
+                id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+                name: "Second Item",
+                income: 2000,
+                title: "SI",
+                isSelected: true,
+              },
+            ],
+            ExpenseType: ExpenseType.INCOME_BASED,
+          },
+          {
+            Name: "1",
+            Price: 1,
+            Users: [
+              {
+                id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+                name: "First Item",
+                income: 1000,
+                title: "JO",
+                isSelected: true,
+              },
+              {
+                id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+                name: "Second Item",
+                income: 2000,
+                title: "SI",
+                isSelected: true,
+              },
+            ],
+            ExpenseType: ExpenseType.INCOME_BASED,
+          },
+        ],
+      },
+      {
+        id: 1,
+        sectionTitle: "EVEN_SHARED",
+        data: [
+          {
+            Name: "Tomat",
+            Price: 40,
+            Users: [
+              {
+                id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+                name: "First Item",
+                income: 1000,
+                title: "JO",
+                isSelected: true,
+              },
+              {
+                id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+                name: "Second Item",
+                income: 2000,
+                title: "SI",
+                isSelected: true,
+              },
+            ],
+            ExpenseType: ExpenseType.EVEN_SHARED,
+          },
+          {
+            Name: "Snö",
+            Price: 300,
+            Users: [
+              {
+                id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+                name: "First Item",
+                income: 1000,
+                title: "JO",
+                isSelected: true,
+              },
+              {
+                id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+                name: "Second Item",
+                income: 2000,
+                title: "SI",
+                isSelected: true,
+              },
+            ],
+            ExpenseType: ExpenseType.EVEN_SHARED,
+          },
+          {
+            Name: "Köttbullar",
+            Price: 30,
+            Users: [
+              {
+                id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+                name: "First Item",
+                income: 1000,
+                title: "JO",
+                isSelected: true,
+              },
+              {
+                id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+                name: "Second Item",
+                income: 2000,
+                title: "SI",
+                isSelected: true,
+              },
+            ],
+            ExpenseType: ExpenseType.EVEN_SHARED,
+          },
+          {
+            Name: "Potatis",
+            Price: 20,
+            Users: [
+              {
+                id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+                name: "First Item",
+                income: 1000,
+                title: "JO",
+                isSelected: true,
+              },
+              {
+                id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+                name: "Second Item",
+                income: 2000,
+                title: "SI",
+                isSelected: true,
+              },
+            ],
+            ExpenseType: ExpenseType.EVEN_SHARED,
+          },
+        ],
+      },
+    ],
+  },
+};
+
+test("Calculate_TwoUsers_ShouldReturnTwoUsers", () => {
+  expect(Calculate(data).length).toEqual(2);
 });
 
-test("", () => {
-  const users = [
-    {
-      Username: "A",
-      EvenSharedExpenses: [{ Price: 1000 }] as ExpenseDTO[],
-      TotalEvenSharedExpenses: 1000,
-    } as UserDTO,
-    {
-      Username: "B",
-      EvenSharedExpenses: [{ Price: 2000 }] as ExpenseDTO[],
-      TotalEvenSharedExpenses: 2000,
-    } as UserDTO,
-    {
-      Username: "C",
-      EvenSharedExpenses: [{ Price: 5000 }] as ExpenseDTO[],
-      TotalEvenSharedExpenses: 5000,
-    } as UserDTO,
-  ] as UserDTO[];
+test("Calculate_", () => {
+  const totalSum = Calculate(data).map((x) =>
+    x.reduce((cv, pv) => pv.sumToPay + cv, 0).toFixed(0)
+  );
+  expect(totalSum).toEqual(["1279", "2362"]);
+});
 
-  const result = {
-    SumToPayEvenShared: [
-      { Username: "A", SumToPay: "1666.67" } as PayDTO,
-      { Username: "B", SumToPay: "666.67" } as PayDTO,
-      { Username: "C", SumToPay: "-2333.33" } as PayDTO,
-    ],
-  } as ResultDTO;
-
-  expect(Calculate(users)).toEqual(result);
+test("Calculate_EvenSharedIncome_ShouldReturn195ForEachUser", () => {
+  const calculate = Calculate(data);
+  const user_1 = calculate[0]
+    .filter((x) => x.expenseType == ExpenseType.EVEN_SHARED)
+    .reduce((cv, pv) => pv.sumToPay + cv, 0);
+  const user_2 = calculate[1]
+    .filter((x) => x.expenseType == ExpenseType.EVEN_SHARED)
+    .reduce((cv, pv) => pv.sumToPay + cv, 0);
+  expect([user_1, user_2]).toEqual([195, 195]);
 });

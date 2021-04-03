@@ -25,7 +25,7 @@
 
 interface UserDTO {
   id: string;
-  income?: string;
+  income?: number;
   isSelected?: boolean;
   name: string;
   title: string;

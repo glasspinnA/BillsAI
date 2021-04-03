@@ -1,46 +1,62 @@
-import { UserDTO } from "./DTO/UserDTO";
+import { Dictionary } from "lodash";
+import { ExpenseDTO } from "./DTO/ExpenseDTO";
+import { PayDTO } from "./DTO/PayDTO";
+import { ExpenseType } from "./enum/ExpenseType";
+import { GroupSumToPayByUserId } from "./helpers/grouping";
+import { RootState } from "./redux/store/store";
 
-export const Calculate = (users: UserDTO[]): ResultDTO => {
-  let result = {} as ResultDTO;
-  if (users.some((x) => x.TotalEvenSharedExpenses > 0))
-    result.SumToPayEvenShared = CalculateEvenSharedExpenses(users);
-  if (users.some((x) => x.TotalIncomeBasedExpenses > 0)) {
-    result.SumToPayIncomeBased = CalculateIncomeBasedExpenses(users);
-  }
-  return result;
+export const Calculate = (data: RootState): PayDTO[][] => {
+  const expensesByExpenseType = data.baseReducer.expenses;
+  let pays: PayDTO[] = [];
+  expensesByExpenseType.map((expenseType) => {
+    if (expenseType.id == ExpenseType.EVEN_SHARED) {
+      pays = pays.concat(CalculateEvenSharedExpenses(expenseType.data));
+    } else {
+      pays = pays.concat(CalculateIncomeBased(expenseType.data));
+    }
+  });
+  return GroupSumToPayByUserId(pays);
 };
 
-export const CalculateIncomeBasedExpenses = (users: UserDTO[]): PayDTO[] => {
-  const totalIncome = users.reduce((pv, cv) => pv + cv.Income, 0);
-  const totalIncomeBasedExpenses = users.reduce(
-    (pv, cv) => pv + cv.TotalIncomeBasedExpenses,
-    0
-  );
+const CalculateIncomeBased = (expenses: ExpenseDTO[]): PayDTO[] => {
+  return expenses
+    .map((expense) => {
+      const totalIncome = expense.Users.reduce(
+        (pv, cv) => pv + (cv.income != undefined ? cv.income : 0),
+        0
+      );
+      const procental = expense.Price / totalIncome;
 
-  const procental = totalIncomeBasedExpenses / totalIncome;
-
-  return users.map(
-    (x) =>
-      ({
-        Username: x.Username,
-        SumToPay: (x.Income * procental).toFixed(2),
-      } as PayDTO)
-  );
+      return expense.Users.map(
+        (user) =>
+          ({
+            username: user.name,
+            expenseType: expense.ExpenseType,
+            productname: expense.Name,
+            sumToPay: (user.income != undefined ? user.income : 0) * procental,
+            name: expense.Name,
+            userId: user.id,
+          } as PayDTO)
+      );
+    })
+    .flat();
 };
 
-export const CalculateEvenSharedExpenses = (users: UserDTO[]): PayDTO[] => {
-  const totalSumToPay = users.reduce(
-    (pv, cv) => pv + cv.TotalEvenSharedExpenses,
-    0
-  );
-
-  const sum = totalSumToPay / users.length;
-
-  return users.map(
-    (x) =>
-      ({
-        Username: x.Username,
-        SumToPay: (sum - x.TotalEvenSharedExpenses).toFixed(2),
-      } as PayDTO)
-  );
+const CalculateEvenSharedExpenses = (expenses: ExpenseDTO[]): PayDTO[] => {
+  return expenses
+    .map((expense) => {
+      const priceToPay = expense.Price / expense.Users.length;
+      return expense.Users.map(
+        (user) =>
+          ({
+            username: user.name,
+            expenseType: expense.ExpenseType,
+            productname: expense.Name,
+            sumToPay: priceToPay,
+            name: expense.Name,
+            userId: user.id,
+          } as PayDTO)
+      );
+    })
+    .flat();
 };

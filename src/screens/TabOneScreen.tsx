@@ -23,8 +23,9 @@ export default function TabOneScreen() {
 
   const onSubmit = (data: any) => console.log(data);
 
-  const check = () => {
+  const Calculate = () => {
     const expenses = GetExpenses(Store.getState());
+    console.log(expenses);
   };
 
   const Item = (data: { item: ExpenseDTO }) => {
@@ -37,6 +38,7 @@ export default function TabOneScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <Button title="Calculate" onPress={Calculate} />
       <SectionList
         sections={data}
         keyExtractor={(item, index) => item.ExpenseType + index}
@@ -49,7 +51,6 @@ export default function TabOneScreen() {
       <View>
         <Button title="Add" onPress={() => bottomSheetRef.current?.expand()} />
         <Button title="Submit" onPress={handleSubmit(onSubmit)} />
-        <Button title="Check" onPress={check} />
       </View>
     </SafeAreaView>
   );
