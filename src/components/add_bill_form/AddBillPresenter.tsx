@@ -31,8 +31,8 @@ const AddForm = (props: AddFormPresenterProps) => {
     const obj = {
       Name: data.PRODUCT,
       Price: parseInt(data.PRICE),
-      Users: data.USER.filter((x) => x.isSelected).map((x) => x.id),
-      ExpenseType: ExpenseType[data.EXPENSE_TYPE],
+      Users: data.USER.filter((x) => x.isSelected).map((x) => x as UserDTO),
+      ExpenseType: data.EXPENSE_TYPE,
     } as ExpenseDTO;
 
     const d = {

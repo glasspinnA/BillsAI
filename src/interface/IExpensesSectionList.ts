@@ -6,5 +6,3 @@ export interface IExpensesSectionList {
   sectionTitle: string;
   data: ExpenseDTO[];
 }
-
-interface TestObject {}

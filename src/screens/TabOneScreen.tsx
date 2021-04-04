@@ -1,4 +1,5 @@
 import BottomSheet from "@gorhom/bottom-sheet";
+import { useNavigation } from "@react-navigation/native";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import {
@@ -10,22 +11,25 @@ import {
   Text,
 } from "react-native";
 import { useSelector } from "react-redux";
+import { CalculateExpenses } from "../Calculate";
 import AddForm from "../components/add_bill_form/AddBillPresenter";
 import { ExpenseDTO } from "../DTO/ExpenseDTO";
-import { GetExpenses } from "../redux/reducer/baseReducer";
-import { Store } from "../redux/store/store";
+import { IUserExpensesRoute } from "../interface/IRoute";
 import { RootState } from "../redux/store/store";
+import { TabThreeScreen } from "./TabThreeScreen";
 
 export default function TabOneScreen() {
   const { handleSubmit } = useForm();
   const bottomSheetRef = React.useRef<BottomSheet>(null);
   const data = useSelector((state: RootState) => state.baseReducer.expenses);
-
+  const navigation = useNavigation();
   const onSubmit = (data: any) => console.log(data);
 
   const Calculate = () => {
-    const expenses = GetExpenses(Store.getState());
-    console.log(expenses);
+    navigation.navigate("TabThree", {
+      screen: "TabThreeScreen",
+      params: { userExpenses: CalculateExpenses(data) } as IUserExpensesRoute,
+    });
   };
 
   const Item = (data: { item: ExpenseDTO }) => {
@@ -38,7 +42,7 @@ export default function TabOneScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Button title="Calculate" onPress={Calculate} />
+      <Button title="Calculate" onPress={() => Calculate()} />
       <SectionList
         sections={data}
         keyExtractor={(item, index) => item.ExpenseType + index}

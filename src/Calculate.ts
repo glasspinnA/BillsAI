@@ -1,14 +1,12 @@
-import { Dictionary } from "lodash";
 import { ExpenseDTO } from "./DTO/ExpenseDTO";
 import { PayDTO } from "./DTO/PayDTO";
 import { ExpenseType } from "./enum/ExpenseType";
 import { GroupSumToPayByUserId } from "./helpers/grouping";
-import { RootState } from "./redux/store/store";
+import { IExpensesSectionList } from "./interface/IExpensesSectionList";
 
-export const Calculate = (data: RootState): PayDTO[][] => {
-  const expensesByExpenseType = data.baseReducer.expenses;
+export const CalculateExpenses = (data: IExpensesSectionList[]) => {
   let pays: PayDTO[] = [];
-  expensesByExpenseType.map((expenseType) => {
+  data.map((expenseType) => {
     if (expenseType.id == ExpenseType.EVEN_SHARED) {
       pays = pays.concat(CalculateEvenSharedExpenses(expenseType.data));
     } else {
