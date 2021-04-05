@@ -4,11 +4,11 @@ import { useForm, Controller } from "react-hook-form";
 import { Text, View, StyleSheet, TextInput } from "react-native";
 import { ADD_BILL_FORM } from "../../constants/FormNames";
 import { IFormInputs } from "../../interface/IFormInputs";
-import { HList } from "../HList";
+import { HList } from "../AddExpenseBottomSheet/HList";
 
 export interface AddBillViewProps {
   data: UserDTO[];
-  onSubmit(data: any): void;
+  onAddExpense(data: IFormInputs): void;
   updateData(users: UserDTO[]): void;
   isAnyItemSelected(users: UserDTO[]): void;
   setSelectedIndex(index: number): void;
@@ -102,7 +102,7 @@ export function AddBillView(props: AddBillViewProps) {
         />
       </View>
       <View style={{ flex: 6 }}>
-        <Button onPress={handleSubmit(props.onSubmit)}>Level up</Button>
+        <Button onPress={handleSubmit(props.onAddExpense)}>Level up</Button>
       </View>
     </View>
   );

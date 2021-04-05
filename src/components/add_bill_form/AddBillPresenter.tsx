@@ -31,7 +31,7 @@ const AddForm = (props: AddFormPresenterProps) => {
     return users.filter((x) => x.isSelected).length != 0;
   };
 
-  const OnSubmit = (data: IFormInputs) => {
+  const OnAddExpense = (data: IFormInputs) => {
     const obj = {
       Name: data.PRODUCT,
       Price: parseInt(data.PRICE),
@@ -68,22 +68,10 @@ const AddForm = (props: AddFormPresenterProps) => {
         setSelectedIndex={(index: number) => setSelectedIndex(index)}
         isAnyItemSelected={IsAnyItemSelected}
         updateData={UpdateData}
-        onSubmit={OnSubmit}
+        onAddExpense={OnAddExpense}
       />
     </BottomSheet>
   );
 };
 
 export default AddForm;
-
-const styles = StyleSheet.create({
-  container: {},
-
-  input: {
-    backgroundColor: "white",
-    borderColor: "blue",
-    height: 40,
-    padding: 10,
-    borderRadius: 4,
-  },
-});

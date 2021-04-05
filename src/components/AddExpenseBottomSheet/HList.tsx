@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text, FlatList } from "react-native";
+import { FlatList } from "react-native";
 import UserChooserRowItem from "./UserChooserRowItem";
 
 export interface HListProps {
@@ -31,7 +31,7 @@ export function HList(props: HListProps) {
             onSelected={OnSelectedRowItem}
             setCanAnyItemBeSelected={canAnyItemBeSelected}
             itemThatCanBeSelected={selectedItem}
-            item={item}
+            user={item}
           />
         );
       }}

@@ -1,23 +1,25 @@
 import * as React from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
-import { IconChooser } from "../enum/IconChooser";
-import { CustomIcon } from "./CustomIcon";
+import { IconChooser } from "../../enum/IconChooser";
+import { CustomIcon } from "../CustomIcon";
 
 interface UserChooserRowItemProps {
-  item: UserDTO;
+  user: UserDTO;
   setCanAnyItemBeSelected: boolean;
   itemThatCanBeSelected: any;
   onSelected(item: any, isSelectedState: boolean): void;
 }
 
 const UserChooserRowItem = (props: UserChooserRowItemProps) => {
-  const [isSelectedState, setSelectedState] = React.useState(false);
+  const [isSelectedState, setSelectedState] = React.useState(
+    props.user.isSelected
+  );
   const ToggleSelectedState = () => {
     setSelectedState(!isSelectedState);
-    props.onSelected(props.item, !isSelectedState);
+    props.onSelected(props.user, !isSelectedState);
   };
 
-  const _Body = () => {
+  const UserChooserBody = () => {
     return (
       <View>
         <View
@@ -30,7 +32,7 @@ const UserChooserRowItem = (props: UserChooserRowItemProps) => {
             justifyContent: "center",
           }}
         >
-          <Text>{props.item.title}</Text>
+          <Text>{props.user.title}</Text>
           {isSelectedState && (
             <View
               style={{
@@ -60,7 +62,7 @@ const UserChooserRowItem = (props: UserChooserRowItemProps) => {
           marginHorizontal: 10,
         }}
       >
-        {_Body()}
+        {UserChooserBody()}
       </TouchableOpacity>
     );
   };
@@ -69,7 +71,3 @@ const UserChooserRowItem = (props: UserChooserRowItemProps) => {
 };
 
 export default UserChooserRowItem;
-
-const styles = StyleSheet.create({
-  container: {},
-});
