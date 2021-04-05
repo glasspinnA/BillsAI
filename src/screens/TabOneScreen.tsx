@@ -10,9 +10,11 @@ import {
   SectionList,
   Text,
 } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
 import { CalculateExpenses } from "../Calculate";
 import AddForm from "../components/add_bill_form/AddBillPresenter";
+import { UserExpenseRowItem } from "../components/UserExpenseFlatList/UserExpenseRowItem";
 import { ExpenseDTO } from "../DTO/ExpenseDTO";
 import { IUserExpensesRoute } from "../interface/IRoute";
 import { RootState } from "../redux/store/store";
@@ -32,23 +34,15 @@ export default function TabOneScreen() {
     });
   };
 
-  const Item = (data: { item: ExpenseDTO }) => {
-    return (
-      <View>
-        <Text>{data.item.Name}</Text>
-      </View>
-    );
-  };
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Button title="Calculate" onPress={() => Calculate()} />
-      <SectionList
-        sections={data}
+
+      <FlatList
+        data={data}
         keyExtractor={(item, index) => item.ExpenseType + index}
-        renderItem={({ item }) => <Item item={item} />}
-        renderSectionHeader={({ section: { sectionTitle } }) => (
-          <Text>{sectionTitle}</Text>
+        renderItem={({ item }) => (
+          <UserExpenseRowItem item={item} enableAccordion={false} />
         )}
       />
       <AddForm bottomSheetRef={bottomSheetRef} />

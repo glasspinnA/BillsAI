@@ -1,6 +1,5 @@
 import { Divider } from "@ui-kitten/components/ui/divider/divider.component";
-import { Card, Text } from "@ui-kitten/components";
-
+import { Text } from "@ui-kitten/components";
 import * as React from "react";
 import { useRef } from "react";
 import {
@@ -15,13 +14,18 @@ import { PayDTO } from "../../DTO/PayDTO";
 import { IconChooser } from "../../enum/IconChooser";
 import { IUserPayFlatList } from "../../interface/IUserPaySectionList";
 import { CustomIcon } from "../CustomIcon";
+import { IExpensesSectionList } from "../../interface/IExpensesSectionList";
+import { ExpenseDTO } from "../../DTO/ExpenseDTO";
 
 export interface UserExpenseRowItemProps {
-  item: IUserPayFlatList;
+  item: IUserPayFlatList | IExpensesSectionList;
+  enableAccordion: boolean;
 }
 
 export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
-  const [isBodyOpen, setBodyState] = React.useState(true);
+  const [isBodyOpen, setBodyState] = React.useState(
+    props.enableAccordion ? false : true
+  );
 
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
@@ -40,7 +44,11 @@ export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
     outputRange: ["180deg", "0deg"],
   });
 
-  const Item = (data: { data: PayDTO }) => {
+  const IsPayDTOObject = (data: PayDTO | ExpenseDTO): data is PayDTO => {
+    return (data as PayDTO).userId !== undefined;
+  };
+
+  const Item = (data: { data: PayDTO | ExpenseDTO }) => {
     return (
       <React.Fragment>
         <View
@@ -50,16 +58,56 @@ export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
             marginHorizontal: 10,
           }}
         >
-          <View style={{ flex: 1 }}>
-            <Text>{data.data.productname}</Text>
-          </View>
-          <View>
-            <Text>{data.data.sumToPay}</Text>
-          </View>
+          {GetItemBody(data.data)}
         </View>
         <Divider />
       </React.Fragment>
     );
+  };
+
+  const GetItemBody = (data: PayDTO | ExpenseDTO) => {
+    if (IsPayDTOObject(data)) {
+      return (
+        <View style={{ flex: 1 }}>
+          <Text>{data.sumToPay}</Text>
+        </View>
+      );
+    } else {
+      return (
+        <View style={{ flex: 1 }}>
+          <Text>{data.Name}</Text>
+        </View>
+      );
+    }
+  };
+
+  const GetItemHeader = (data: PayDTO | ExpenseDTO) => {
+    if (IsPayDTOObject(data)) {
+      return (
+        <View>
+          <View style={{ flex: 1 }}>
+            <Text>{data.sumToPay}</Text>
+            <Text>{data.userId}</Text>
+          </View>
+          <Animated.View
+            style={{
+              justifyContent: "center",
+              transform: [{ rotateZ: rotateData }],
+            }}
+          >
+            {CustomIcon(IconChooser.CHEVRON)}
+          </Animated.View>
+        </View>
+      );
+    } else {
+      return (
+        <View>
+          <View style={{ flex: 1 }}>
+            <Text>{props.item.id}</Text>
+          </View>
+        </View>
+      );
+    }
   };
 
   const RenderItemBody = () => {
@@ -73,7 +121,7 @@ export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
           marginHorizontal: 10,
         }}
       >
-        {props.item.data.map((x, index) => (
+        {props.item.data.map((x: ExpenseDTO | PayDTO, index: number) => (
           <Item data={x} key={index}></Item>
         ))}
       </View>
@@ -95,23 +143,11 @@ export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
           flexDirection: "row",
           marginHorizontal: 10,
           paddingVertical: 5,
-
           borderRadius: 5,
           borderWidth: 1,
         }}
       >
-        <View style={{ flex: 1 }}>
-          <Text>{props.item.id}</Text>
-          <Text>{props.item.totalPay}</Text>
-        </View>
-        <Animated.View
-          style={{
-            justifyContent: "center",
-            transform: [{ rotateZ: rotateData }],
-          }}
-        >
-          {CustomIcon(IconChooser.CHEVRON)}
-        </Animated.View>
+        {GetItemHeader(props.item.data[0])}
       </View>
     );
   };
@@ -120,6 +156,7 @@ export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
     <SafeAreaView style={{ flex: 1 }}>
       <TouchableWithoutFeedback
         onPress={OnItemHeaderClicked}
+        disabled={!props.enableAccordion}
         style={{ paddingVertical: 5 }}
       >
         {RenderItemHeader()}

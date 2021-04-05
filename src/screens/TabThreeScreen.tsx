@@ -27,7 +27,9 @@ export function TabThreeScreen(props: TabThreeScreenProps) {
         <SafeAreaView>
           <FlatList
             data={flatlistDummyData}
-            renderItem={({ item }) => <UserExpenseRowItem item={item} />}
+            renderItem={({ item }) => (
+              <UserExpenseRowItem item={item} enableAccordion={true} />
+            )}
             keyExtractor={(item) => `row-${item.id}`}
           />
         </SafeAreaView>
