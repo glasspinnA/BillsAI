@@ -10,13 +10,18 @@ export interface AddBillViewProps {
   data: UserDTO[];
   onAddExpense(data: IFormInputs): void;
   updateData(users: UserDTO[]): void;
-  isAnyItemSelected(users: UserDTO[]): void;
+  isAnyItemSelected(users: UserDTO[]): boolean;
   setSelectedIndex(index: number): void;
   selectedIndex: number;
 }
 
 export function AddBillView(props: AddBillViewProps) {
   const { control, handleSubmit, trigger, errors } = useForm<IFormInputs>();
+
+  React.useEffect(() => {
+    trigger("USER");
+  }, []);
+
   return (
     <View style={{ flex: 1 }}>
       <View
@@ -77,7 +82,7 @@ export function AddBillView(props: AddBillViewProps) {
             required: true,
             validate: props.isAnyItemSelected,
           }}
-          defaultValue=""
+          defaultValue={props.data}
         />
         {errors.USER && <Text>ss is required.</Text>}
       </View>

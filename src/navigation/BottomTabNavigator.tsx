@@ -15,7 +15,7 @@ const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
   return (
-    <BottomTab.Navigator initialRouteName="TabOne">
+    <BottomTab.Navigator initialRouteName="TabTwo">
       <BottomTab.Screen
         name="TabOne"
         component={TabOneNavigator}
