@@ -1,9 +1,13 @@
 import BottomSheet from "@gorhom/bottom-sheet";
 import * as React from "react";
-import { StyleSheet } from "react-native";
+import { LayoutAnimation, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { ExpenseDTO } from "../../DTO/ExpenseDTO";
 import { ExpenseType } from "../../enum/ExpenseType";
+import {
+  AnimationTypes,
+  PerformAnimation,
+} from "../../helpers/LayoutAnimation";
 import { IExpensesSectionList } from "../../interface/IExpensesSectionList";
 import { IFormInputs } from "../../interface/IFormInputs";
 import { AddExpenses } from "../../redux/reducer/baseReducer";
@@ -40,8 +44,8 @@ const AddForm = (props: AddFormPresenterProps) => {
       sectionTitle: ExpenseType[data.EXPENSE_TYPE],
       data: [obj],
     } as IExpensesSectionList;
-
     dispatch(AddExpenses(d));
+    PerformAnimation(AnimationTypes.ROW_ITEM_ADD);
   };
 
   const snapPoints = React.useMemo(() => [-1, "50%"], []);

@@ -32,7 +32,7 @@ const UserItemRow = (props: UserItemRowProps) => {
   const AddIncome = () => {
     setIncomeTextInputVisibility(!incomeTextInputVisibility);
     TextInputRef.current?.focus();
-    PerformAnimation(AnimationTypes.FLATLIST_ADD_INCOME);
+    PerformAnimation(AnimationTypes.ROW_ITEM_ADD);
   };
 
   const OnSubmit = (text: string) => {

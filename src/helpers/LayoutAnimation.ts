@@ -17,5 +17,5 @@ export const AnimationTypes = {
       springDamping: 0.7,
     },
   } as LayoutAnimationConfig,
-  FLATLIST_ADD_INCOME: LayoutAnimation.Presets.easeInEaseOut,
+  ROW_ITEM_ADD: LayoutAnimation.Presets.easeInEaseOut,
 };
