@@ -2,9 +2,11 @@ import { Input } from "@ui-kitten/components";
 import * as React from "react";
 import {
   KeyboardTypeOptions,
+  LayoutAnimation,
   ReturnKeyTypeOptions,
   TextInput,
 } from "react-native";
+import { AnimationTypes, PerformAnimation } from "../helpers/LayoutAnimation";
 
 interface TextInputProps {
   placeholder: string;
@@ -25,6 +27,7 @@ const CustomTextInput = (props: TextInputProps) => {
     if (text.length === 0) return;
     props.onSubmit(text);
     TextInputRef.current?.clear();
+    PerformAnimation(AnimationTypes.FLATLIST_ADD_USER);
   };
 
   return (

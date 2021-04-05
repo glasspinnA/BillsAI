@@ -1,13 +1,11 @@
 import { useNavigation } from "@react-navigation/native";
 import { Layout, Text } from "@ui-kitten/components";
 import * as React from "react";
-import { SafeAreaView, FlatList, StyleSheet, Button } from "react-native";
-import CustomTextInput from "../components/CustomTextInput";
-import FlatListItem from "../components/FlatListItem";
-import { v4 as uuidv4 } from "uuid";
-import { useSelector, useDispatch } from "react-redux";
+import { SafeAreaView, StyleSheet, Button } from "react-native";
+import { useDispatch } from "react-redux";
 import { AddUsers, GetUsers } from "../redux/reducer/baseReducer";
 import { Store } from "../redux/store/store";
+import { UserFlatList } from "../components/AddUserForm/UserFlatList";
 
 export default function TabTwoScreen() {
   const navigation = useNavigation();
@@ -28,14 +26,7 @@ export default function TabTwoScreen() {
       title: "TI",
     },
   ] as UserDTO[]);
-  const [refresh, setRefresh] = React.useState(false);
   const dispatch = useDispatch();
-
-  const DeleteItem = (id: any) => {
-    const lists = data.filter((x) => x.id != id);
-    setData(lists);
-    setRefresh(!refresh);
-  };
 
   const StartNextScreen = () => {
     dispatch(AddUsers(data));
@@ -43,49 +34,15 @@ export default function TabTwoScreen() {
     navigation.navigate("TabOne");
   };
 
-  const OnSubmit = (text: string) => {
-    setData((oldData) => [
-      ...oldData,
-      {
-        id: uuidv4(),
-        name: text,
-        title:
-          text.length > 2
-            ? text.substring(0, 2).toUpperCase()
-            : text.toUpperCase(),
-      },
-    ]);
-    setRefresh(!refresh);
-  };
-
-  const OnIncomeAdded = (id: any, income: string) => {
-    const index = data.findIndex((x) => x.id === id);
-    if (index != -1) {
-      data[index].income = income;
-      setData(data);
-    }
-    setRefresh(!refresh);
+  const UpdateData = (users: UserDTO[]) => {
+    setData(users);
   };
 
   return (
-    <Layout level="1" style={styles.container}>
+    <Layout level="1">
       <SafeAreaView>
         <Text category="h3">Hello</Text>
-        <CustomTextInput placeholder="Hello" onSubmit={OnSubmit} />
-        <FlatList
-          data={data}
-          extraData={refresh}
-          renderItem={({ item }) => {
-            return (
-              <FlatListItem
-                item={item}
-                OnDeleteItem={DeleteItem}
-                onIncomeAdded={OnIncomeAdded}
-              />
-            );
-          }}
-          keyExtractor={(item) => item.id}
-        />
+        <UserFlatList data={data} updateData={UpdateData} />
         {data.length > 0 && (
           <Button title="Next" onPress={() => StartNextScreen()} />
         )}

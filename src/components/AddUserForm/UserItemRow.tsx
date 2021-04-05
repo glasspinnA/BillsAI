@@ -1,18 +1,28 @@
 import { Layout, Button, Text } from "@ui-kitten/components";
 import * as React from "react";
-import { View, StyleSheet, SafeAreaView, TextInput } from "react-native";
-import GlobalLayout from "../constants/GlobalLayout";
-import { IconChooser } from "../enum/IconChooser";
-import { CustomIcon } from "./CustomIcon";
-import CustomTextInput from "./CustomTextInput";
+import {
+  View,
+  StyleSheet,
+  SafeAreaView,
+  TextInput,
+  LayoutAnimation,
+} from "react-native";
+import GlobalLayout from "../../constants/GlobalLayout";
+import { IconChooser } from "../../enum/IconChooser";
+import {
+  AnimationTypes,
+  PerformAnimation,
+} from "../../helpers/LayoutAnimation";
+import { CustomIcon } from "../CustomIcon";
+import CustomTextInput from "../CustomTextInput";
 
-interface FlatListItemProps {
+interface UserItemRowProps {
   item: UserDTO;
   OnDeleteItem(id: any): void;
   onIncomeAdded(id: any, text: string): void;
 }
 
-const FlatListItem = (props: FlatListItemProps) => {
+const UserItemRow = (props: UserItemRowProps) => {
   const [
     incomeTextInputVisibility,
     setIncomeTextInputVisibility,
@@ -22,6 +32,7 @@ const FlatListItem = (props: FlatListItemProps) => {
   const AddIncome = () => {
     setIncomeTextInputVisibility(!incomeTextInputVisibility);
     TextInputRef.current?.focus();
+    PerformAnimation(AnimationTypes.FLATLIST_ADD_INCOME);
   };
 
   const OnSubmit = (text: string) => {
@@ -75,7 +86,7 @@ const FlatListItem = (props: FlatListItemProps) => {
   );
 };
 
-export default FlatListItem;
+export default UserItemRow;
 
 const styles = StyleSheet.create({
   container: {
