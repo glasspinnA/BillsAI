@@ -1,12 +1,17 @@
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
+import { Layout } from "@ui-kitten/components";
 import * as React from "react";
-import { View, Text, SectionList, FlatList } from "react-native";
-import { useSelector } from "react-redux";
-import { CalculateExpenses } from "../Calculate";
+import { View, Text, SectionList } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { UserExpenseRowItem } from "../components/UserExpenseFlatList/UserExpenseRowItem";
 import { PayDTO } from "../DTO/PayDTO";
+import { flatlistDummyData } from "../helpers/testData";
 import { IUserExpensesRoute } from "../interface/IRoute";
-import { IUserPaySectionList } from "../interface/IUserPaySectionList";
-import { RootState } from "../redux/store/store";
+import {
+  IUserPayFlatList,
+  IUserPaySectionList,
+} from "../interface/IUserPaySectionList";
 
 export interface TabThreeScreenProps {}
 
@@ -16,24 +21,17 @@ export function TabThreeScreen(props: TabThreeScreenProps) {
     route?.userExpenses
   );
 
-  const Item = (data: { item: PayDTO }) => {
-    return (
-      <View>
-        <Text>{data.item.productname}</Text>
-      </View>
-    );
-  };
-
   return (
-    <View>
-      <SectionList
-        sections={userExpenses}
-        keyExtractor={(item, index) => item.expenseType + index}
-        renderItem={({ item }) => <Item item={item} />}
-        renderSectionHeader={({ section: { sectionTitle } }) => (
-          <Text>{sectionTitle}</Text>
-        )}
-      />
-    </View>
+    <React.Fragment>
+      <Layout level="1">
+        <SafeAreaView>
+          <FlatList
+            data={flatlistDummyData}
+            renderItem={({ item }) => <UserExpenseRowItem item={item} />}
+            keyExtractor={(item) => `row-${item.id}`}
+          />
+        </SafeAreaView>
+      </Layout>
+    </React.Fragment>
   );
 }

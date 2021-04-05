@@ -10,5 +10,7 @@ export const CustomIcon = (icon: IconChooser) => {
       return <Icon name="delete-outline" />;
     case IconChooser.CHECK:
       return <Icon name="check-circle" />;
+    case IconChooser.CHEVRON:
+      return <Icon name="chevron-up-circle" size={20} />;
   }
 };

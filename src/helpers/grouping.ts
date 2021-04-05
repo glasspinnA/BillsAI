@@ -11,6 +11,7 @@ export const GroupSumToPayByUserId = (pays: PayDTO[]) => {
           id: userId,
           data: data,
           sectionTitle: data[0].username,
+          totalPay: data.reduce((cv, pv) => pv.sumToPay + cv, 0).toFixed(0),
         } as IUserPaySectionList)
     )
     .value();
