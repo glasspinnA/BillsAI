@@ -1,4 +1,3 @@
-import { useTheme } from "@ui-kitten/components/theme/theme/theme.service";
 import { Dimensions, StyleSheet } from "react-native";
 
 const width = Dimensions.get("window").width;
@@ -9,8 +8,17 @@ export default {
     width,
     height,
   },
-  isSmallDevice: width < 375,
   globalStyles: StyleSheet.create({
+    layout: { flex: 1, paddingHorizontal: 10 },
+  }),
+  flatList: StyleSheet.create({
+    rowContainer: {
+      borderRadius: 10,
+      paddingHorizontal: 15,
+      paddingVertical: 10,
+      marginVertical: 10,
+      marginHorizontal: 3,
+    },
     row: {
       flex: 1,
       flexDirection: "row",
@@ -23,7 +31,6 @@ export default {
       },
       shadowOpacity: 0.29,
       shadowRadius: 4.65,
-
       elevation: 7,
     },
   }),

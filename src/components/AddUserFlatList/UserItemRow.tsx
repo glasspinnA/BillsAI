@@ -35,19 +35,26 @@ const UserItemRow = (props: UserItemRowProps) => {
     setIncomeTextInputVisibility(!incomeTextInputVisibility);
   };
 
+  const GetPlaceholderText = (): string => {
+    const prefix = props.item.income == undefined ? "Add " : "Edit ";
+    return prefix + props.item.name + "'s income";
+  };
+
   return (
     <SafeAreaView
       style={[
-        styles.container,
-        GlobalLayout.globalStyles.rowItemShadow,
+        GlobalLayout.flatList.rowContainer,
+        GlobalLayout.flatList.rowItemShadow,
         { backgroundColor: theme["background-basic-color-1"] },
       ]}
     >
-      <View style={GlobalLayout.globalStyles.row}>
-        <View style={{ flex: 3, paddingVertical: 7 }}>
+      <View style={GlobalLayout.flatList.row}>
+        <View style={{ flex: 3, paddingVertical: 10 }}>
           <Text
             category="s1"
-            style={{ paddingBottom: 10, color: theme["text-primary-color"] }}
+            style={{
+              color: theme["text-primary-color"],
+            }}
           >
             {props.item.name}
           </Text>
@@ -79,7 +86,7 @@ const UserItemRow = (props: UserItemRowProps) => {
       >
         {incomeTextInputVisibility && (
           <CustomTextInput
-            placeholder="Income"
+            placeholder={GetPlaceholderText()}
             onSubmit={OnSubmit}
             keyboardType="numeric"
             returnKeyType="done"
@@ -92,12 +99,3 @@ const UserItemRow = (props: UserItemRowProps) => {
 };
 
 export default UserItemRow;
-
-const styles = StyleSheet.create({
-  container: {
-    borderRadius: 10,
-    paddingHorizontal: 15,
-    marginVertical: 10,
-    marginHorizontal: 3,
-  },
-});

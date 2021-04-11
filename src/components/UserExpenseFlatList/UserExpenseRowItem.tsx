@@ -1,14 +1,7 @@
 import { Divider } from "@ui-kitten/components/ui/divider/divider.component";
 import { Text, useTheme } from "@ui-kitten/components";
 import * as React from "react";
-import { useRef } from "react";
-import {
-  View,
-  Animated,
-  Easing,
-  LayoutAnimation,
-  SafeAreaView,
-} from "react-native";
+import { View, LayoutAnimation } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { PayDTO } from "../../DTO/PayDTO";
 import { IconChooser } from "../../enum/IconChooser";
@@ -18,6 +11,8 @@ import { IExpensesSectionList } from "../../interface/IExpensesSectionList";
 import { ExpenseDTO } from "../../DTO/ExpenseDTO";
 import GlobalLayout from "../../constants/GlobalLayout";
 import { ExpenseType } from "../../enum/ExpenseType";
+import { ItemRowTextContainer } from "../ItemRowTextContainer";
+import { Chevron } from "../Chevron";
 
 export interface UserExpenseRowItemProps {
   item: IUserPayFlatList | IExpensesSectionList;
@@ -30,31 +25,13 @@ export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
     props.enableAccordion ? false : true
   );
 
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-
-  const Rotate = () => {
-    fadeAnim.setValue(isBodyOpen ? 1 : 0);
-    Animated.timing(fadeAnim, {
-      toValue: isBodyOpen ? 0 : 1,
-      duration: 300,
-      easing: Easing.linear,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const rotateData = fadeAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: ["180deg", "0deg"],
-  });
-
   const IsPayDTOObject = (data: PayDTO | ExpenseDTO): data is PayDTO => {
     return (data as PayDTO).userId !== undefined;
   };
 
   const OnItemHeaderClicked = () => {
-    Rotate();
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setBodyState(!isBodyOpen);
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
   };
 
   const RenderItemHeader = () => {
@@ -63,12 +40,9 @@ export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
         style={[
           {
             backgroundColor: theme["background-basic-color-1"],
-            borderRadius: 10,
-            padding: 10,
-            marginHorizontal: 10,
           },
-          GlobalLayout.globalStyles.row,
-          GlobalLayout.globalStyles.rowItemShadow,
+          GlobalLayout.flatList.rowContainer,
+          GlobalLayout.flatList.rowItemShadow,
         ]}
       >
         {GetItemHeader(props.item.data[0])}
@@ -80,31 +54,16 @@ export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
     if (IsPayDTOObject(item)) {
       return (
         <View style={{ flex: 1, flexDirection: "row" }}>
-          <View style={{ flex: 1 }}>
-            <Text category="s1" style={{ color: theme["text-basic-color"] }}>
-              {item.username}
-            </Text>
-            <Text>{item.sumToPay}</Text>
-          </View>
-          <Animated.View
-            style={{
-              justifyContent: "center",
-              transform: [{ rotateZ: rotateData }],
-            }}
-          >
-            {CustomIcon(IconChooser.CHEVRON)}
-          </Animated.View>
+          <ItemRowTextContainer
+            headerText={item.username}
+            subText={item.sumToPay.toString()}
+          />
+          <Chevron shouldToggleRotation={isBodyOpen} />
         </View>
       );
     } else {
       return (
-        <View>
-          <View style={{ flex: 1 }}>
-            <Text category="s1" style={{ color: theme["text-basic-color"] }}>
-              {GetHeaderTitle(item.ExpenseType)}
-            </Text>
-          </View>
-        </View>
+        <ItemRowTextContainer headerText={GetHeaderTitle(item.ExpenseType)} />
       );
     }
   };
@@ -123,12 +82,10 @@ export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
       <View
         style={[
           {
-            marginTop: 10,
-            borderRadius: 10,
-            marginHorizontal: 10,
             backgroundColor: theme["background-basic-color-1"],
           },
-          GlobalLayout.globalStyles.rowItemShadow,
+          GlobalLayout.flatList.rowContainer,
+          GlobalLayout.flatList.rowItemShadow,
         ]}
       >
         {props.item.data.map((x: ExpenseDTO | PayDTO, index: number) => (

@@ -56,7 +56,10 @@ export function UserFlatList(props: UserFlatListProps) {
 
   return (
     <>
-      <CustomTextInput placeholder="Add a user" onSubmit={OnSubmit} />
+      <CustomTextInput
+        placeholder="Add two or more users"
+        onSubmit={OnSubmit}
+      />
       <FlatList
         ref={flatlistRef}
         data={props.data}

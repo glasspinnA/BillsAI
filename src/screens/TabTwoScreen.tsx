@@ -7,6 +7,7 @@ import { AddUsers } from "../redux/reducer/baseReducer";
 import { UserFlatList } from "../components/AddUserFlatList/UserFlatList";
 import { RoundedButton } from "../components/RoundedButton";
 import { View } from "react-native";
+import GlobalLayout from "../constants/GlobalLayout";
 
 export default function TabTwoScreen() {
   const navigation = useNavigation();
@@ -42,7 +43,7 @@ export default function TabTwoScreen() {
   };
 
   return (
-    <Layout level="3" style={{ flex: 1, paddingHorizontal: 10 }}>
+    <Layout level="3" style={GlobalLayout.globalStyles.layout}>
       <SafeAreaView style={{ flex: 1 }}>
         <View style={{ flex: 4 }}>
           <UserFlatList data={data} updateData={UpdateData} />
@@ -54,7 +55,7 @@ export default function TabTwoScreen() {
           }}
         >
           <RoundedButton
-            disabled={data.length == 0}
+            disabled={data.length < 2}
             title={"Next"}
             onPress={StartNextScreen}
           />

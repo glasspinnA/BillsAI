@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { CalculateExpenses } from "../Calculate";
 import AddForm from "../components/add_bill_form/AddBillPresenter";
 import { UserExpenseRowItem } from "../components/UserExpenseFlatList/UserExpenseRowItem";
+import GlobalLayout from "../constants/GlobalLayout";
 import { IUserExpensesRoute } from "../interface/IRoute";
 import { RootState } from "../redux/store/store";
 
@@ -28,7 +29,7 @@ export default function TabOneScreen() {
   };
 
   return (
-    <Layout level="3" style={{ flex: 1, paddingHorizontal: 10 }}>
+    <Layout level="3" style={GlobalLayout.globalStyles.layout}>
       <SafeAreaView style={{ flex: 1 }}>
         <Button onPress={Calculate} disabled={expenses.length == 0}>
           Calculate
