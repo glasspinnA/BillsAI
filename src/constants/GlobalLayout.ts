@@ -1,7 +1,9 @@
+import { useTheme } from "@ui-kitten/components/theme/theme/theme.service";
 import { Dimensions, StyleSheet } from "react-native";
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
+
 export default {
   window: {
     width,
@@ -12,8 +14,17 @@ export default {
     row: {
       flex: 1,
       flexDirection: "row",
-      width: width,
-      padding: 5,
+    },
+    rowItemShadow: {
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 3,
+      },
+      shadowOpacity: 0.29,
+      shadowRadius: 4.65,
+
+      elevation: 7,
     },
   }),
 };

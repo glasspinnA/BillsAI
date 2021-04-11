@@ -1,39 +1,39 @@
 import { useNavigation } from "@react-navigation/native";
 import { Layout, Text } from "@ui-kitten/components";
 import * as React from "react";
-import { SafeAreaView, StyleSheet, Button } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 import { useDispatch } from "react-redux";
-import { AddUsers, GetUsers } from "../redux/reducer/baseReducer";
-import { Store } from "../redux/store/store";
-import { UserFlatList } from "../components/AddUserForm/UserFlatList";
+import { AddUsers } from "../redux/reducer/baseReducer";
+import { UserFlatList } from "../components/AddUserFlatList/UserFlatList";
+import { RoundedButton } from "../components/RoundedButton";
+import { View } from "react-native";
 
 export default function TabTwoScreen() {
   const navigation = useNavigation();
-  let [data, setData] = React.useState([
-    {
-      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-      name: "First Item",
-      title: "FI",
-      isSelected: true,
-    },
-    {
-      id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-      name: "Second Item",
-      title: "SI",
-      isSelected: true,
-    },
-    {
-      id: "58694a0f-3da1-471f-bd96-145571e29d72",
-      name: "Third Item",
-      title: "TI",
-      isSelected: true,
-    },
+  const [data, setData] = React.useState([
+    // {
+    //   id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+    //   name: "First Item",
+    //   title: "FI",
+    //   isSelected: true,
+    // },
+    // {
+    //   id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+    //   name: "Second Item",
+    //   title: "SI",
+    //   isSelected: true,
+    // },
+    // {
+    //   id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    //   name: "Third Item",
+    //   title: "TI",
+    //   isSelected: true,
+    // },
   ] as UserDTO[]);
   const dispatch = useDispatch();
 
   const StartNextScreen = () => {
     dispatch(AddUsers(data));
-    const count = GetUsers(Store.getState());
     navigation.navigate("TabOne");
   };
 
@@ -42,13 +42,23 @@ export default function TabTwoScreen() {
   };
 
   return (
-    <Layout level="1">
-      <SafeAreaView>
-        <Text category="h3">Hello</Text>
-        <UserFlatList data={data} updateData={UpdateData} />
-        {data.length > 0 && (
-          <Button title="Next" onPress={() => StartNextScreen()} />
-        )}
+    <Layout level="3" style={{ flex: 1, paddingHorizontal: 10 }}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={{ flex: 4 }}>
+          <UserFlatList data={data} updateData={UpdateData} />
+        </View>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+          }}
+        >
+          <RoundedButton
+            disabled={data.length == 0}
+            title={"Next"}
+            onPress={StartNextScreen}
+          />
+        </View>
       </SafeAreaView>
     </Layout>
   );

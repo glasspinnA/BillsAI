@@ -1,6 +1,6 @@
 import BottomSheet from "@gorhom/bottom-sheet";
+import { Button } from "@ui-kitten/components/ui/button/button.component";
 import * as React from "react";
-import { LayoutAnimation, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { ExpenseDTO } from "../../DTO/ExpenseDTO";
 import { ExpenseType } from "../../enum/ExpenseType";
@@ -50,18 +50,8 @@ const AddForm = (props: AddFormPresenterProps) => {
 
   const snapPoints = React.useMemo(() => [-1, "50%"], []);
 
-  // callbacks
-  const handleSheetChanges = React.useCallback((index: number) => {
-    console.log("handleSheetChanges", index);
-  }, []);
-
   return (
-    <BottomSheet
-      ref={props.bottomSheetRef}
-      index={1}
-      snapPoints={snapPoints}
-      onChange={handleSheetChanges}
-    >
+    <BottomSheet ref={props.bottomSheetRef} index={1} snapPoints={snapPoints}>
       <AddBillView
         data={data}
         selectedIndex={selectedIndex}

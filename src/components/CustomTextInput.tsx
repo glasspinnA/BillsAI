@@ -32,6 +32,7 @@ const CustomTextInput = (props: TextInputProps) => {
 
   return (
     <Input
+      style={{ paddingVertical: 5 }}
       placeholder={props.placeholder}
       ref={TextInputRef}
       onSubmitEditing={(event) => OnSubmit(event.nativeEvent.text)}

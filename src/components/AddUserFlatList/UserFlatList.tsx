@@ -7,6 +7,7 @@ import {
   AnimationTypes,
   PerformAnimation,
 } from "../../helpers/LayoutAnimation";
+import { EmptyListComponent } from "../EmptyListComponent";
 
 export interface UserFlatListProps {
   data: UserDTO[];
@@ -15,7 +16,7 @@ export interface UserFlatListProps {
 
 export function UserFlatList(props: UserFlatListProps) {
   const [refresh, setRefresh] = React.useState(false);
-
+  const flatlistRef = React.useRef<FlatList>(null);
   const DeleteItem = (id: any) => {
     const lists = props.data.filter((x) => x.id != id);
     props.updateData(lists);
@@ -49,10 +50,15 @@ export function UserFlatList(props: UserFlatListProps) {
     setRefresh(!refresh);
   };
 
+  const RenderEmptyListComponent = () => {
+    return <EmptyListComponent title={"Noting here"} text={"Add a user"} />;
+  };
+
   return (
-    <View>
-      <CustomTextInput placeholder="Hello" onSubmit={OnSubmit} />
+    <>
+      <CustomTextInput placeholder="Add a user" onSubmit={OnSubmit} />
       <FlatList
+        ref={flatlistRef}
         data={props.data}
         extraData={refresh}
         renderItem={({ item }) => {
@@ -65,7 +71,9 @@ export function UserFlatList(props: UserFlatListProps) {
           );
         }}
         keyExtractor={(item) => item.id}
+        ListEmptyComponent={RenderEmptyListComponent}
+        onContentSizeChange={() => flatlistRef.current?.scrollToEnd()}
       />
-    </View>
+    </>
   );
 }
