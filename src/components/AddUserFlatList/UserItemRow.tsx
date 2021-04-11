@@ -1,6 +1,6 @@
-import { Layout, Button, Text, useTheme } from "@ui-kitten/components";
+import { Button, useTheme } from "@ui-kitten/components";
 import * as React from "react";
-import { View, StyleSheet, SafeAreaView, TextInput } from "react-native";
+import { View, SafeAreaView, TextInput } from "react-native";
 import GlobalLayout from "../../constants/GlobalLayout";
 import { IconChooser } from "../../enum/IconChooser";
 import {
@@ -9,6 +9,7 @@ import {
 } from "../../helpers/LayoutAnimation";
 import { CustomIcon } from "../CustomIcon";
 import CustomTextInput from "../CustomTextInput";
+import { ItemRowTextContainer } from "../ItemRowTextContainer";
 
 interface UserItemRowProps {
   item: UserDTO;
@@ -50,17 +51,10 @@ const UserItemRow = (props: UserItemRowProps) => {
     >
       <View style={GlobalLayout.flatList.row}>
         <View style={{ flex: 3, paddingVertical: 10 }}>
-          <Text
-            category="s1"
-            style={{
-              color: theme["text-primary-color"],
-            }}
-          >
-            {props.item.name}
-          </Text>
-          <Text category="s2" style={{ color: theme["text-basic-color"] }}>
-            {props.item.income}
-          </Text>
+          <ItemRowTextContainer
+            headerText={props.item.name}
+            subText={props.item.income?.toString()}
+          />
         </View>
         <View style={{ flex: 1, justifyContent: "center" }}>
           <Button
