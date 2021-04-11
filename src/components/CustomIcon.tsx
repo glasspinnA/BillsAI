@@ -23,7 +23,13 @@ export const CustomIcon = (icon: IconChooser) => {
         />
       );
     case IconChooser.CHECK:
-      return <Icon name="check-circle" />;
+      return (
+        <Icon
+          name="check-circle"
+          size={17}
+          color={theme["color-success-700"]}
+        />
+      );
     case IconChooser.CHEVRON:
       return <Icon name="chevron-up-circle" size={20} />;
   }

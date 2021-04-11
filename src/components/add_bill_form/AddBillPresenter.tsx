@@ -48,7 +48,7 @@ const AddForm = (props: AddFormPresenterProps) => {
     PerformAnimation(AnimationTypes.ROW_ITEM_ADD);
   };
 
-  const snapPoints = React.useMemo(() => [-1, "50%"], []);
+  const snapPoints = React.useMemo(() => [-1, "70%"], []);
 
   return (
     <BottomSheet ref={props.bottomSheetRef} index={1} snapPoints={snapPoints}>

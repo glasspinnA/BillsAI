@@ -1,10 +1,18 @@
-import { RadioGroup, Radio, Button } from "@ui-kitten/components";
+import {
+  RadioGroup,
+  Radio,
+  Button,
+  Input,
+  Text,
+  useTheme,
+} from "@ui-kitten/components";
 import * as React from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Text, View, StyleSheet, TextInput } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { ADD_BILL_FORM } from "../../constants/FormNames";
 import { IFormInputs } from "../../interface/IFormInputs";
 import { HList } from "../AddExpenseBottomSheet/HList";
+import { RoundedButton } from "../RoundedButton";
 
 export interface AddBillViewProps {
   data: UserDTO[];
@@ -17,22 +25,38 @@ export interface AddBillViewProps {
 
 export function AddBillView(props: AddBillViewProps) {
   const { control, handleSubmit, trigger, errors } = useForm<IFormInputs>();
-
+  const theme = useTheme();
   React.useEffect(() => {
     trigger("USER");
   }, []);
 
+  const RenderErrorMessage = (error: string) => {
+    return (
+      <Text category="p1" style={{ color: theme["color-danger-600"] }}>
+        {error}
+      </Text>
+    );
+  };
+
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, paddingHorizontal: 10 }}>
+      <View style={{ flex: 1 }}>
+        <Text category="h4">Hello</Text>
+      </View>
       <View
-        style={{ height: 60, flexDirection: "row", backgroundColor: "red" }}
+        style={{
+          flex: 3,
+        }}
       >
-        <View style={{ flex: 1 }}>
+        <View
+          style={{
+            flex: 1,
+          }}
+        >
           <Controller
             control={control}
             render={({ onChange, onBlur, value }) => (
-              <TextInput
-                style={styles.input}
+              <Input
                 onBlur={onBlur}
                 onChangeText={(value) => onChange(value)}
                 value={value}
@@ -43,14 +67,13 @@ export function AddBillView(props: AddBillViewProps) {
             rules={{ required: true }}
             defaultValue=""
           />
-          {errors.PRODUCT && <Text>firstName is required.</Text>}
+          {errors.PRODUCT && RenderErrorMessage("Name is required.")}
         </View>
         <View style={{ flex: 1 }}>
           <Controller
             control={control}
             render={({ onChange, onBlur, value }) => (
-              <TextInput
-                style={styles.input}
+              <Input
                 onBlur={onBlur}
                 onChangeText={(value) => onChange(value)}
                 value={value}
@@ -61,32 +84,41 @@ export function AddBillView(props: AddBillViewProps) {
             rules={{ required: true }}
             defaultValue=""
           />
-          {errors.PRICE && <Text>Lastname is required.</Text>}
+          {errors.PRICE && RenderErrorMessage("Price is required.")}
         </View>
       </View>
-      <View style={{ height: 100, backgroundColor: "orange" }}>
-        <Controller
-          control={control}
-          render={({ onChange }) => (
-            <HList
-              data={props.data}
-              updateData={(v) => {
-                onChange(v);
-                trigger("USER");
-                props.updateData(v);
-              }}
-            />
-          )}
-          name={ADD_BILL_FORM.USER}
-          rules={{
-            required: true,
-            validate: props.isAnyItemSelected,
-          }}
-          defaultValue={props.data}
-        />
-        {errors.USER && <Text>ss is required.</Text>}
+      <View style={{ flex: 2 }}>
+        <View style={{ flex: 4 }}>
+          <Controller
+            control={control}
+            render={({ onChange, value }) => (
+              <HList
+                data={value}
+                updateData={(v) => {
+                  onChange(v);
+                  trigger("USER");
+                  props.updateData(v);
+                }}
+              />
+            )}
+            name={ADD_BILL_FORM.USER}
+            rules={{
+              required: true,
+              validate: props.isAnyItemSelected,
+            }}
+            defaultValue={props.data}
+          />
+        </View>
+        <View style={{ flex: 1 }}>
+          {errors.USER && RenderErrorMessage("User is required.")}
+        </View>
       </View>
-      <View style={{ height: 45, backgroundColor: "cyan" }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+        }}
+      >
         <Controller
           control={control}
           render={({ onChange }) => (
@@ -106,8 +138,11 @@ export function AddBillView(props: AddBillViewProps) {
           defaultValue="0"
         />
       </View>
-      <View style={{ flex: 6 }}>
-        <Button onPress={handleSubmit(props.onAddExpense)}>Level up</Button>
+      <View style={{ flex: 1, paddingVertical: 10 }}>
+        <RoundedButton
+          onPress={handleSubmit(props.onAddExpense)}
+          title={"Add"}
+        />
       </View>
     </View>
   );
@@ -115,12 +150,4 @@ export function AddBillView(props: AddBillViewProps) {
 
 const styles = StyleSheet.create({
   container: {},
-
-  input: {
-    backgroundColor: "white",
-    borderColor: "blue",
-    height: 40,
-    padding: 10,
-    borderRadius: 4,
-  },
 });

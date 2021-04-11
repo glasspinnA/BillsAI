@@ -1,5 +1,6 @@
 import BottomSheet from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
+import { Layout } from "@ui-kitten/components";
 import { Button } from "@ui-kitten/components/ui/button/button.component";
 import * as React from "react";
 import { SafeAreaView, FlatList } from "react-native";
@@ -27,18 +28,20 @@ export default function TabOneScreen() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <Button onPress={Calculate} disabled={expenses.length == 0}>
-        Calculate
-      </Button>
-      <FlatList
-        data={expenses}
-        keyExtractor={(item, index) => (item.id + index).toString()}
-        renderItem={({ item }) => (
-          <UserExpenseRowItem item={item} enableAccordion={false} />
-        )}
-      />
-      <AddForm bottomSheetRef={bottomSheetRef} />
-    </SafeAreaView>
+    <Layout level="3" style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <Button onPress={Calculate} disabled={expenses.length == 0}>
+          Calculate
+        </Button>
+        <FlatList
+          data={expenses}
+          keyExtractor={(item, index) => (item.id + index).toString()}
+          renderItem={({ item }) => (
+            <UserExpenseRowItem item={item} enableAccordion={false} />
+          )}
+        />
+        <AddForm bottomSheetRef={bottomSheetRef} />
+      </SafeAreaView>
+    </Layout>
   );
 }

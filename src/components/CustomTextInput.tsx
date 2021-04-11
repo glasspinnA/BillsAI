@@ -2,7 +2,6 @@ import { Input } from "@ui-kitten/components";
 import * as React from "react";
 import {
   KeyboardTypeOptions,
-  LayoutAnimation,
   ReturnKeyTypeOptions,
   TextInput,
 } from "react-native";

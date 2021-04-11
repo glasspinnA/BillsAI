@@ -1,8 +1,8 @@
 import * as React from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { IconChooser } from "../../enum/IconChooser";
 import { CustomIcon } from "../CustomIcon";
-
+import { Text, useTheme } from "@ui-kitten/components";
 interface UserChooserRowItemProps {
   user: UserDTO;
   setCanAnyItemBeSelected: boolean;
@@ -11,6 +11,7 @@ interface UserChooserRowItemProps {
 }
 
 const UserChooserRowItem = (props: UserChooserRowItemProps) => {
+  const theme = useTheme();
   const [isSelectedState, setSelectedState] = React.useState(
     props.user.isSelected
   );
@@ -24,29 +25,35 @@ const UserChooserRowItem = (props: UserChooserRowItemProps) => {
       <View>
         <View
           style={{
-            backgroundColor: isSelectedState ? "green" : "blue",
+            backgroundColor: theme["color-primary-500"],
             height: 50,
             width: 50,
             borderRadius: 100,
             alignItems: "center",
             justifyContent: "center",
+            borderWidth: 1.5,
+            borderColor: theme["color-primary-active-border"],
           }}
         >
-          <Text>{props.user.title}</Text>
+          <Text category="s1" style={{ color: theme["text-alternate-color"] }}>
+            {props.user.title}
+          </Text>
           {isSelectedState && (
             <View
               style={{
                 position: "absolute",
-                height: 50,
-                width: 50,
+                right: 0,
+                top: 0,
+                borderRadius: 100,
+                backgroundColor: theme["background-basic-color-1"],
               }}
             >
               {CustomIcon(IconChooser.CHECK)}
             </View>
           )}
         </View>
-        <View>
-          <Text>Hello</Text>
+        <View style={{ alignItems: "center", marginTop: 3 }}>
+          <Text>{props.user.name}</Text>
         </View>
       </View>
     );
