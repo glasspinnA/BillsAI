@@ -28,7 +28,7 @@ export default function TabOneScreen() {
   };
 
   return (
-    <Layout level="3" style={{ flex: 1 }}>
+    <Layout level="3" style={{ flex: 1, paddingHorizontal: 10 }}>
       <SafeAreaView style={{ flex: 1 }}>
         <Button onPress={Calculate} disabled={expenses.length == 0}>
           Calculate

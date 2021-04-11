@@ -1,5 +1,5 @@
 import { Divider } from "@ui-kitten/components/ui/divider/divider.component";
-import { Text } from "@ui-kitten/components";
+import { Text, useTheme } from "@ui-kitten/components";
 import * as React from "react";
 import { useRef } from "react";
 import {
@@ -16,6 +16,8 @@ import { IUserPayFlatList } from "../../interface/IUserPaySectionList";
 import { CustomIcon } from "../CustomIcon";
 import { IExpensesSectionList } from "../../interface/IExpensesSectionList";
 import { ExpenseDTO } from "../../DTO/ExpenseDTO";
+import GlobalLayout from "../../constants/GlobalLayout";
+import { ExpenseType } from "../../enum/ExpenseType";
 
 export interface UserExpenseRowItemProps {
   item: IUserPayFlatList | IExpensesSectionList;
@@ -23,6 +25,7 @@ export interface UserExpenseRowItemProps {
 }
 
 export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
+  const theme = useTheme();
   const [isBodyOpen, setBodyState] = React.useState(
     props.enableAccordion ? false : true
   );
@@ -48,46 +51,40 @@ export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
     return (data as PayDTO).userId !== undefined;
   };
 
-  const Item = (data: { data: PayDTO | ExpenseDTO }) => {
+  const OnItemHeaderClicked = () => {
+    Rotate();
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    setBodyState(!isBodyOpen);
+  };
+
+  const RenderItemHeader = () => {
     return (
-      <React.Fragment>
-        <View
-          style={{
-            flexDirection: "row",
-            paddingVertical: 10,
+      <View
+        style={[
+          {
+            backgroundColor: theme["background-basic-color-1"],
+            borderRadius: 10,
+            padding: 10,
             marginHorizontal: 10,
-          }}
-        >
-          {GetItemBody(data.data)}
-        </View>
-        <Divider />
-      </React.Fragment>
+          },
+          GlobalLayout.globalStyles.row,
+          GlobalLayout.globalStyles.rowItemShadow,
+        ]}
+      >
+        {GetItemHeader(props.item.data[0])}
+      </View>
     );
   };
 
-  const GetItemBody = (data: PayDTO | ExpenseDTO) => {
-    if (IsPayDTOObject(data)) {
+  const GetItemHeader = (item: PayDTO | ExpenseDTO) => {
+    if (IsPayDTOObject(item)) {
       return (
-        <View style={{ flex: 1 }}>
-          <Text>{data.sumToPay}</Text>
-        </View>
-      );
-    } else {
-      return (
-        <View style={{ flex: 1 }}>
-          <Text>{data.Name}</Text>
-        </View>
-      );
-    }
-  };
-
-  const GetItemHeader = (data: PayDTO | ExpenseDTO) => {
-    if (IsPayDTOObject(data)) {
-      return (
-        <View>
+        <View style={{ flex: 1, flexDirection: "row" }}>
           <View style={{ flex: 1 }}>
-            <Text>{data.sumToPay}</Text>
-            <Text>{data.userId}</Text>
+            <Text category="s1" style={{ color: theme["text-basic-color"] }}>
+              {item.username}
+            </Text>
+            <Text>{item.sumToPay}</Text>
           </View>
           <Animated.View
             style={{
@@ -103,23 +100,36 @@ export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
       return (
         <View>
           <View style={{ flex: 1 }}>
-            <Text>{props.item.id}</Text>
+            <Text category="s1" style={{ color: theme["text-basic-color"] }}>
+              {GetHeaderTitle(item.ExpenseType)}
+            </Text>
           </View>
         </View>
       );
     }
   };
 
+  const GetHeaderTitle = (expenseType: ExpenseType) => {
+    switch (expenseType) {
+      case ExpenseType.INCOME_BASED:
+        return "Income based";
+      default:
+        return "50/50 Shared";
+    }
+  };
+
   const RenderItemBody = () => {
     return (
       <View
-        style={{
-          marginTop: 5,
-          borderRadius: 5,
-          backgroundColor: "orange",
-          borderWidth: 1,
-          marginHorizontal: 10,
-        }}
+        style={[
+          {
+            marginTop: 10,
+            borderRadius: 10,
+            marginHorizontal: 10,
+            backgroundColor: theme["background-basic-color-1"],
+          },
+          GlobalLayout.globalStyles.rowItemShadow,
+        ]}
       >
         {props.item.data.map((x: ExpenseDTO | PayDTO, index: number) => (
           <Item data={x} key={index}></Item>
@@ -128,40 +138,66 @@ export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
     );
   };
 
-  const OnItemHeaderClicked = () => {
-    Rotate();
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    setBodyState(!isBodyOpen);
+  const Item = (data: { data: PayDTO | ExpenseDTO }) => {
+    return (
+      <React.Fragment>
+        <View
+          style={{
+            paddingVertical: 10,
+            marginHorizontal: 10,
+          }}
+        >
+          {IsPayDTOObject(data.data)
+            ? GetItemBody(data.data.productname, data.data.sumToPay.toString())
+            : GetItemBody(data.data.Name, data.data.Price.toString())}
+        </View>
+        <Divider />
+      </React.Fragment>
+    );
   };
 
-  const RenderItemHeader = () => {
+  const GetItemBody = (name: string, price: string) => {
     return (
       <View
         style={{
-          backgroundColor: "red",
           flex: 1,
           flexDirection: "row",
-          marginHorizontal: 10,
-          paddingVertical: 5,
-          borderRadius: 5,
-          borderWidth: 1,
         }}
       >
-        {GetItemHeader(props.item.data[0])}
+        <View style={{ flex: 1, alignSelf: "center" }}>
+          <Text category="s1">{name}</Text>
+        </View>
+        <View style={{ flex: 1, alignItems: "flex-end" }}>
+          <View
+            style={{
+              flexDirection: "row",
+              backgroundColor: theme["color-success-500"],
+              paddingVertical: 8,
+              paddingHorizontal: 15,
+              borderRadius: 10,
+            }}
+          >
+            {CustomIcon(IconChooser.MONEY, theme["text-alternate-color"])}
+            <Text
+              category="p1"
+              style={{ color: theme["text-alternate-color"] }}
+            >
+              {price}
+            </Text>
+          </View>
+        </View>
       </View>
     );
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <TouchableWithoutFeedback
-        onPress={OnItemHeaderClicked}
-        disabled={!props.enableAccordion}
-        style={{ paddingVertical: 5 }}
-      >
-        {RenderItemHeader()}
-        {isBodyOpen ? RenderItemBody() : null}
-      </TouchableWithoutFeedback>
-    </SafeAreaView>
+    <TouchableWithoutFeedback
+      onPress={OnItemHeaderClicked}
+      disabled={!props.enableAccordion}
+      style={{ paddingVertical: 5 }}
+    >
+      {RenderItemHeader()}
+      {isBodyOpen ? RenderItemBody() : null}
+    </TouchableWithoutFeedback>
   );
 }

@@ -3,14 +3,14 @@ import React from "react";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { IconChooser } from "../enum/IconChooser";
 
-export const CustomIcon = (icon: IconChooser) => {
+export const CustomIcon = (icon: IconChooser, color?: string) => {
   const theme = useTheme();
   switch (icon) {
     case IconChooser.MONEY:
       return (
         <Icon
           name="currency-usd"
-          color={theme["text-success-color"]}
+          color={color == undefined ? theme["text-success-color"] : color}
           size={17}
         />
       );
@@ -31,6 +31,12 @@ export const CustomIcon = (icon: IconChooser) => {
         />
       );
     case IconChooser.CHEVRON:
-      return <Icon name="chevron-up-circle" size={20} />;
+      return (
+        <Icon
+          name="chevron-up-circle"
+          size={23}
+          color={theme["color-primary-500"]}
+        />
+      );
   }
 };
