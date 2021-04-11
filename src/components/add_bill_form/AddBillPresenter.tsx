@@ -53,7 +53,7 @@ const AddForm = (props: AddFormPresenterProps) => {
   return (
     <BottomSheet ref={props.bottomSheetRef} index={1} snapPoints={snapPoints}>
       <AddBillView
-        data={data}
+        users={data}
         selectedIndex={selectedIndex}
         setSelectedIndex={(index: number) => setSelectedIndex(index)}
         isAnyItemSelected={IsAnyItemSelected}

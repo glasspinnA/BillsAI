@@ -15,7 +15,7 @@ import { HList } from "../AddExpenseBottomSheet/HList";
 import { RoundedButton } from "../RoundedButton";
 
 export interface AddBillViewProps {
-  data: UserDTO[];
+  users: UserDTO[];
   onAddExpense(data: IFormInputs): void;
   updateData(users: UserDTO[]): void;
   isAnyItemSelected(users: UserDTO[]): boolean;
@@ -106,7 +106,7 @@ export function AddBillView(props: AddBillViewProps) {
               required: true,
               validate: props.isAnyItemSelected,
             }}
-            defaultValue={props.data}
+            defaultValue={props.users}
           />
         </View>
         <View style={{ flex: 1 }}>
@@ -130,8 +130,12 @@ export function AddBillView(props: AddBillViewProps) {
                 props.setSelectedIndex(index);
               }}
             >
-              <Radio>Income based</Radio>
               <Radio>50/50 Shared</Radio>
+              <Radio
+                disabled={props.users.every((x) => x.income === undefined)}
+              >
+                Income based
+              </Radio>
             </RadioGroup>
           )}
           name={ADD_BILL_FORM.EXPENSE_TYPE}

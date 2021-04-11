@@ -10,7 +10,7 @@ export function TabThreeScreen(props: TabThreeScreenProps) {
   return (
     <Layout level="3" style={GlobalLayout.globalStyles.layout}>
       <SafeAreaView style={{ flex: 1 }}>
-        <Text category="h3">Sum to pay</Text>
+        <Text category="h3">Payment</Text>
         <FlatList
           data={flatlistDummyData}
           renderItem={({ item }) => (
