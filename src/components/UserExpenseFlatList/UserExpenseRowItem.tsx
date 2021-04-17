@@ -14,6 +14,7 @@ import { ItemRowTextContainer } from "../ItemRowTextContainer";
 import { Chevron } from "../Chevron";
 import { ExpenseToEdit } from "../../redux/reducer/baseReducer";
 import { useDispatch } from "react-redux";
+import { ExpenseToDelete } from "../../redux/reducer/baseReducer";
 
 export interface UserExpenseRowItemProps {
   item: IUserPayFlatList | IExpensesSectionList;
@@ -29,12 +30,21 @@ export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
   const dispatch = useDispatch();
 
   const IsPayDTOObject = (data: PayDTO | ExpenseDTO): data is PayDTO => {
-    return (data as PayDTO).userId !== undefined;
+    return data && (data as PayDTO).userId !== undefined;
   };
 
   const OnItemHeaderClicked = () => {
     setBodyState(!isBodyOpen);
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+  };
+
+  const OnDeleteExpensePressed = (expense: ExpenseDTO) => {
+    dispatch(ExpenseToDelete(expense));
+  };
+
+  const _EditExpense = (expense: ExpenseDTO) => {
+    dispatch(ExpenseToEdit(expense));
+    props.onEditPressed();
   };
 
   const RenderItemHeader = () => {
@@ -112,19 +122,21 @@ export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
             : GetItemBody(data.data.Name, data.data.Price.toString())}
 
           {!IsPayDTOObject(data.data) ? (
-            <Button onPress={() => _EditExpense(data.data as ExpenseDTO)}>
-              Edit
-            </Button>
+            <>
+              <Button onPress={() => _EditExpense(data.data as ExpenseDTO)}>
+                Edit
+              </Button>
+              <Button
+                onPress={() => OnDeleteExpensePressed(data.data as ExpenseDTO)}
+              >
+                Delete
+              </Button>
+            </>
           ) : null}
         </View>
         <Divider />
       </React.Fragment>
     );
-  };
-
-  const _EditExpense = (expense: ExpenseDTO) => {
-    dispatch(ExpenseToEdit(expense));
-    props.onEditPressed();
   };
 
   const GetItemBody = (name: string, price: string) => {

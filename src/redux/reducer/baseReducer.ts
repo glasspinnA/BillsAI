@@ -15,6 +15,19 @@ export const baseReducer = createSlice({
     ExpenseToEdit: (state, action: PayloadAction<ExpenseDTO>) => {
       return { ...state, expenseToEdit: action.payload };
     },
+    ExpenseToDelete: (state, action: PayloadAction<ExpenseDTO>) => {
+      return produce(state, (draft) => {
+        const indexToDelete = draft.expenses[
+          action.payload.ExpenseType
+        ].data.findIndex((x) => x.id === action.payload.id);
+        if (indexToDelete != -1) {
+          draft.expenses[action.payload.ExpenseType].data.splice(
+            indexToDelete,
+            1
+          );
+        }
+      });
+    },
     AddUsers: (state, action: PayloadAction<UserDTO[]>) => {
       return { ...state, users: action.payload };
     },
@@ -43,7 +56,12 @@ export const baseReducer = createSlice({
   },
 });
 
-export const { AddUsers, AddExpenses, ExpenseToEdit } = baseReducer.actions;
+export const {
+  AddUsers,
+  AddExpenses,
+  ExpenseToEdit,
+  ExpenseToDelete,
+} = baseReducer.actions;
 
 export default baseReducer.reducer;
 

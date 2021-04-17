@@ -1,5 +1,4 @@
 import BottomSheet from "@gorhom/bottom-sheet";
-import { Button } from "@ui-kitten/components/ui/button/button.component";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ExpenseDTO } from "../../DTO/ExpenseDTO";
