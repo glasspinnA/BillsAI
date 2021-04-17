@@ -5,4 +5,5 @@ export interface IFormInputs {
   PRICE: string;
   USER: UserDTO[];
   EXPENSE_TYPE: ExpenseType;
+  ID: string;
 }

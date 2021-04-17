@@ -1,8 +1,7 @@
 import { Divider } from "@ui-kitten/components/ui/divider/divider.component";
-import { Text, useTheme } from "@ui-kitten/components";
+import { Button, Text, useTheme } from "@ui-kitten/components";
 import * as React from "react";
-import { View, LayoutAnimation } from "react-native";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { View, LayoutAnimation, TouchableWithoutFeedback } from "react-native";
 import { PayDTO } from "../../DTO/PayDTO";
 import { IconChooser } from "../../enum/IconChooser";
 import { IUserPayFlatList } from "../../interface/IUserPaySectionList";
@@ -13,10 +12,13 @@ import GlobalLayout from "../../constants/GlobalLayout";
 import { ExpenseType } from "../../enum/ExpenseType";
 import { ItemRowTextContainer } from "../ItemRowTextContainer";
 import { Chevron } from "../Chevron";
+import { ExpenseToEdit } from "../../redux/reducer/baseReducer";
+import { useDispatch } from "react-redux";
 
 export interface UserExpenseRowItemProps {
   item: IUserPayFlatList | IExpensesSectionList;
   enableAccordion: boolean;
+  onEditPressed: () => void;
 }
 
 export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
@@ -24,6 +26,7 @@ export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
   const [isBodyOpen, setBodyState] = React.useState(
     props.enableAccordion ? false : true
   );
+  const dispatch = useDispatch();
 
   const IsPayDTOObject = (data: PayDTO | ExpenseDTO): data is PayDTO => {
     return (data as PayDTO).userId !== undefined;
@@ -107,10 +110,21 @@ export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
           {IsPayDTOObject(data.data)
             ? GetItemBody(data.data.productname, data.data.sumToPay.toString())
             : GetItemBody(data.data.Name, data.data.Price.toString())}
+
+          {!IsPayDTOObject(data.data) ? (
+            <Button onPress={() => _EditExpense(data.data as ExpenseDTO)}>
+              Edit
+            </Button>
+          ) : null}
         </View>
         <Divider />
       </React.Fragment>
     );
+  };
+
+  const _EditExpense = (expense: ExpenseDTO) => {
+    dispatch(ExpenseToEdit(expense));
+    props.onEditPressed();
   };
 
   const GetItemBody = (name: string, price: string) => {
@@ -153,8 +167,10 @@ export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
       disabled={!props.enableAccordion}
       style={{ paddingVertical: 5 }}
     >
-      {RenderItemHeader()}
-      {isBodyOpen ? RenderItemBody() : null}
+      <View>
+        {RenderItemHeader()}
+        {isBodyOpen ? RenderItemBody() : null}
+      </View>
     </TouchableWithoutFeedback>
   );
 }

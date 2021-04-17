@@ -9,8 +9,12 @@ export const baseReducer = createSlice({
   initialState: {
     users: [] as UserDTO[],
     expenses: [] as IExpensesSectionList[],
+    expenseToEdit: {} as ExpenseDTO,
   },
   reducers: {
+    ExpenseToEdit: (state, action: PayloadAction<ExpenseDTO>) => {
+      return { ...state, expenseToEdit: action.payload };
+    },
     AddUsers: (state, action: PayloadAction<UserDTO[]>) => {
       return { ...state, users: action.payload };
     },
@@ -19,18 +23,27 @@ export const baseReducer = createSlice({
       if (index == -1) {
         return { ...state, expenses: [...state.expenses, action.payload] };
       } else {
-        return produce(state, (draft) => {
-          draft.expenses[index].data = [
-            ...draft.expenses[index].data,
-            action.payload.data[0],
-          ];
-        });
+        const expenseIndex = state.expenses[index].data.findIndex(
+          (x) => x.id == action.payload.data[0].id
+        );
+        if (expenseIndex == -1) {
+          return produce(state, (draft) => {
+            draft.expenses[index].data = [
+              ...draft.expenses[index].data,
+              action.payload.data[0],
+            ];
+          });
+        } else {
+          return produce(state, (draft) => {
+            draft.expenses[index].data[expenseIndex] = action.payload.data[0];
+          });
+        }
       }
     },
   },
 });
 
-export const { AddUsers, AddExpenses } = baseReducer.actions;
+export const { AddUsers, AddExpenses, ExpenseToEdit } = baseReducer.actions;
 
 export default baseReducer.reducer;
 

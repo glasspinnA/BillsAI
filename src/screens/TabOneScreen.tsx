@@ -28,6 +28,10 @@ export default function TabOneScreen() {
     });
   };
 
+  const OnEditPressed = () => {
+    bottomSheetRef.current?.expand();
+  };
+
   return (
     <Layout level="3" style={GlobalLayout.globalStyles.layout}>
       <SafeAreaView style={{ flex: 1 }}>
@@ -38,7 +42,11 @@ export default function TabOneScreen() {
           data={expenses}
           keyExtractor={(item, index) => (item.id + index).toString()}
           renderItem={({ item }) => (
-            <UserExpenseRowItem item={item} enableAccordion={false} />
+            <UserExpenseRowItem
+              item={item}
+              enableAccordion={false}
+              onEditPressed={OnEditPressed}
+            />
           )}
         />
         <AddForm bottomSheetRef={bottomSheetRef} />

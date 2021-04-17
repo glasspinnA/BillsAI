@@ -10,6 +10,7 @@ import * as React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { View, StyleSheet } from "react-native";
 import { ADD_BILL_FORM } from "../../constants/FormNames";
+import { ExpenseDTO } from "../../DTO/ExpenseDTO";
 import { IFormInputs } from "../../interface/IFormInputs";
 import { HList } from "../AddExpenseBottomSheet/HList";
 import { RoundedButton } from "../RoundedButton";
@@ -21,14 +22,35 @@ export interface AddBillViewProps {
   isAnyItemSelected(users: UserDTO[]): boolean;
   setSelectedIndex(index: number): void;
   selectedIndex: number;
+  prefilledForm: ExpenseDTO;
 }
 
 export function AddBillView(props: AddBillViewProps) {
-  const { control, handleSubmit, trigger, errors } = useForm<IFormInputs>();
+  const {
+    control,
+    handleSubmit,
+    trigger,
+    errors,
+    setValue,
+  } = useForm<IFormInputs>();
   const theme = useTheme();
   React.useEffect(() => {
     trigger("USER");
   }, []);
+
+  React.useEffect(() => {
+    if (Object.keys(props.prefilledForm).length !== 0) PopulateForm();
+  }, [props.prefilledForm]);
+
+  const PopulateForm = () => {
+    setValue(ADD_BILL_FORM.PRODUCT, props.prefilledForm.Name);
+    setValue(
+      ADD_BILL_FORM.PRICE,
+      props.prefilledForm.Price && props.prefilledForm.Price.toString()
+    );
+    setValue(ADD_BILL_FORM.USER, props.prefilledForm.Users);
+    setValue(ADD_BILL_FORM.ID, props.prefilledForm.id);
+  };
 
   const RenderErrorMessage = (error: string) => {
     return (
@@ -142,6 +164,28 @@ export function AddBillView(props: AddBillViewProps) {
           defaultValue="0"
         />
       </View>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          // display: "none",
+        }}
+      >
+        <Controller
+          control={control}
+          render={({ onChange, onBlur, value }) => (
+            <Input
+              onBlur={onBlur}
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              placeholder="Product"
+            />
+          )}
+          name={ADD_BILL_FORM.ID}
+          rules={{ required: false }}
+          defaultValue="-1"
+        />
+      </View>
       <View style={{ flex: 1, paddingVertical: 10 }}>
         <RoundedButton
           onPress={handleSubmit(props.onAddExpense)}
@@ -151,7 +195,3 @@ export function AddBillView(props: AddBillViewProps) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-});

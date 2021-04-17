@@ -13,6 +13,7 @@ import { IFormInputs } from "../../interface/IFormInputs";
 import { AddExpenses } from "../../redux/reducer/baseReducer";
 import { RootState } from "../../redux/store/store";
 import { AddBillView } from "./AddBillView";
+import { v4 as uuidv4 } from "uuid";
 
 interface AddFormPresenterProps {
   bottomSheetRef: any;
@@ -22,6 +23,9 @@ const AddForm = (props: AddFormPresenterProps) => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const dispatch = useDispatch();
   const data = useSelector((state: RootState) => state.baseReducer.users);
+  const expenseToEdit = useSelector(
+    (state: RootState) => state.baseReducer.expenseToEdit
+  );
 
   const UpdateData = (data: UserDTO[]) => {
     // setData(data);
@@ -32,19 +36,20 @@ const AddForm = (props: AddFormPresenterProps) => {
   };
 
   const OnAddExpense = (data: IFormInputs) => {
-    const obj = {
-      Name: data.PRODUCT,
-      Price: parseInt(data.PRICE),
-      Users: data.USER.filter((x) => x.isSelected).map((x) => x as UserDTO),
-      ExpenseType: data.EXPENSE_TYPE,
-    } as ExpenseDTO;
-
-    const d = {
+    const expense = {
       id: data.EXPENSE_TYPE,
       sectionTitle: ExpenseType[data.EXPENSE_TYPE],
-      data: [obj],
+      data: [
+        {
+          id: data.ID === "-1" ? uuidv4() : data.ID,
+          Name: data.PRODUCT,
+          Price: parseInt(data.PRICE),
+          Users: data.USER.filter((x) => x.isSelected).map((x) => x as UserDTO),
+          ExpenseType: data.EXPENSE_TYPE,
+        } as ExpenseDTO,
+      ],
     } as IExpensesSectionList;
-    dispatch(AddExpenses(d));
+    dispatch(AddExpenses(expense));
     PerformAnimation(AnimationTypes.ROW_ITEM_ADD);
   };
 
@@ -59,6 +64,7 @@ const AddForm = (props: AddFormPresenterProps) => {
         isAnyItemSelected={IsAnyItemSelected}
         updateData={UpdateData}
         onAddExpense={OnAddExpense}
+        prefilledForm={expenseToEdit}
       />
     </BottomSheet>
   );
