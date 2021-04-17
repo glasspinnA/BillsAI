@@ -1,15 +1,15 @@
 import { Button, useTheme } from "@ui-kitten/components";
 import * as React from "react";
 import { View, SafeAreaView, TextInput } from "react-native";
-import GlobalLayout from "../../constants/GlobalLayout";
-import { IconChooser } from "../../enum/IconChooser";
+import GlobalLayout from "../../../constants/GlobalLayout";
+import { IconChooser } from "../../../enum/IconChooser";
 import {
   AnimationTypes,
   PerformAnimation,
-} from "../../helpers/LayoutAnimation";
-import { CustomIcon } from "../CustomIcon";
-import CustomTextInput from "../CustomTextInput";
-import { ItemRowTextContainer } from "../ItemRowTextContainer";
+} from "../../../helpers/LayoutAnimation";
+import { CustomIcon } from "../../Icons/CustomIcon";
+import CustomTextInput from "../../Inputs/CustomTextInput";
+import { ItemRowTextContainer } from "../../Texts/ItemRowTextContainer";
 
 interface UserItemRowProps {
   item: UserDTO;

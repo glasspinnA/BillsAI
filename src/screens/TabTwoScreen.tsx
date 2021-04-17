@@ -4,8 +4,8 @@ import * as React from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 import { useDispatch } from "react-redux";
 import { AddUsers } from "../redux/reducer/baseReducer";
-import { UserFlatList } from "../components/AddUserFlatList/UserFlatList";
-import { RoundedButton } from "../components/RoundedButton";
+import { UserFlatList } from "../components/FlatLists/AddUser/UserFlatList";
+import { RoundedButton } from "../components/Buttons/RoundedButton";
 import { View } from "react-native";
 import GlobalLayout from "../constants/GlobalLayout";
 

@@ -1,12 +1,12 @@
 import * as React from "react";
 import { View, Text, FlatList, LayoutAnimation } from "react-native";
-import CustomTextInput from "../CustomTextInput";
+import CustomTextInput from "../../Inputs/CustomTextInput";
 import UserItemRow from "./UserItemRow";
 import { v4 as uuidv4 } from "uuid";
 import {
   AnimationTypes,
   PerformAnimation,
-} from "../../helpers/LayoutAnimation";
+} from "../../../helpers/LayoutAnimation";
 import { EmptyListComponent } from "../EmptyListComponent";
 
 export interface UserFlatListProps {

@@ -2,8 +2,8 @@ import { useTheme } from "@ui-kitten/components/theme/theme/theme.service";
 import { Text } from "@ui-kitten/components";
 import * as React from "react";
 import { View } from "react-native";
-import { IconChooser } from "../../enum/IconChooser";
-import { CustomIcon } from "../CustomIcon";
+import { IconChooser } from "../../../enum/IconChooser";
+import { CustomIcon } from "../../Icons/CustomIcon";
 
 export interface UserIconProps {
   title: string;

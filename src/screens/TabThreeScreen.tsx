@@ -1,7 +1,7 @@
 import { Layout, Text } from "@ui-kitten/components";
 import * as React from "react";
 import { FlatList, SafeAreaView } from "react-native";
-import { UserExpenseRowItem } from "../components/UserExpenseFlatList/UserExpenseRowItem";
+import { UserExpenseRowItem } from "../components/FlatLists/Expense/UserExpenseRowItem";
 import GlobalLayout from "../constants/GlobalLayout";
 import { flatlistDummyData } from "../helpers/testData";
 export interface TabThreeScreenProps {}

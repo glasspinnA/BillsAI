@@ -1,16 +1,16 @@
 import BottomSheet from "@gorhom/bottom-sheet";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ExpenseDTO } from "../../DTO/ExpenseDTO";
-import { ExpenseType } from "../../enum/ExpenseType";
+import { ExpenseDTO } from "../../../DTO/ExpenseDTO";
+import { ExpenseType } from "../../../enum/ExpenseType";
 import {
   AnimationTypes,
   PerformAnimation,
-} from "../../helpers/LayoutAnimation";
-import { IExpensesSectionList } from "../../interface/IExpensesSectionList";
-import { IFormInputs } from "../../interface/IFormInputs";
-import { AddExpenses } from "../../redux/reducer/baseReducer";
-import { RootState } from "../../redux/store/store";
+} from "../../../helpers/LayoutAnimation";
+import { IExpensesSectionList } from "../../../interface/IExpensesSectionList";
+import { IFormInputs } from "../../../interface/IFormInputs";
+import { AddExpenses } from "../../../redux/reducer/baseReducer";
+import { RootState } from "../../../redux/store/store";
 import { AddBillView } from "./AddBillView";
 import { v4 as uuidv4 } from "uuid";
 

@@ -9,11 +9,11 @@ import {
 import * as React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { View, StyleSheet } from "react-native";
-import { ADD_BILL_FORM } from "../../constants/FormNames";
-import { ExpenseDTO } from "../../DTO/ExpenseDTO";
-import { IFormInputs } from "../../interface/IFormInputs";
-import { HList } from "../AddExpenseBottomSheet/HList";
-import { RoundedButton } from "../RoundedButton";
+import { ADD_BILL_FORM } from "../../../constants/FormNames";
+import { ExpenseDTO } from "../../../DTO/ExpenseDTO";
+import { IFormInputs } from "../../../interface/IFormInputs";
+import { HList } from "../../FlatLists/UserSelector/HList";
+import { RoundedButton } from "../../Buttons/RoundedButton";
 
 export interface AddBillViewProps {
   users: UserDTO[];

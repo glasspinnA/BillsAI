@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Animated, Easing, View } from "react-native";
-import { IconChooser } from "../enum/IconChooser";
+import { IconChooser } from "../../enum/IconChooser";
 import { CustomIcon } from "./CustomIcon";
 
 export interface ChevronProps {

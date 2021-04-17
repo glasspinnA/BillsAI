@@ -5,7 +5,10 @@ import {
   ReturnKeyTypeOptions,
   TextInput,
 } from "react-native";
-import { AnimationTypes, PerformAnimation } from "../helpers/LayoutAnimation";
+import {
+  AnimationTypes,
+  PerformAnimation,
+} from "../../helpers/LayoutAnimation";
 
 interface TextInputProps {
   placeholder: string;

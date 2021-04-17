@@ -1,7 +1,7 @@
 import { useTheme } from "@ui-kitten/components/theme/theme/theme.service";
 import React from "react";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { IconChooser } from "../enum/IconChooser";
+import { IconChooser } from "../../enum/IconChooser";
 
 export const CustomIcon = (icon: IconChooser, color?: string) => {
   const theme = useTheme();
