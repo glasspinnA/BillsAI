@@ -3,14 +3,14 @@ import { useNavigation } from "@react-navigation/native";
 import { Layout } from "@ui-kitten/components";
 import { Button } from "@ui-kitten/components/ui/button/button.component";
 import * as React from "react";
-import { SafeAreaView, FlatList } from "react-native";
+import { SafeAreaView } from "react-native";
 import { useSelector } from "react-redux";
 import { CalculateExpenses } from "../Calculate";
 import AddForm from "../components/Forms/CreateExpense/AddBillPresenter";
-import { UserExpenseRowItem } from "../components/FlatLists/Expense/UserExpenseRowItem";
 import GlobalLayout from "../constants/GlobalLayout";
 import { IUserExpensesRoute } from "../interface/IRoute";
 import { RootState } from "../redux/store/store";
+import { ExpenseList } from "../components/FlatLists/Expense/ExpenseList";
 
 export default function TabOneScreen() {
   const bottomSheetRef = React.useRef<BottomSheet>(null);
@@ -38,16 +38,10 @@ export default function TabOneScreen() {
         <Button onPress={Calculate} disabled={expenses.length == 0}>
           Calculate
         </Button>
-        <FlatList
+        <ExpenseList
           data={expenses}
-          keyExtractor={(item, index) => (item.id + index).toString()}
-          renderItem={({ item }) => (
-            <UserExpenseRowItem
-              item={item}
-              enableAccordion={false}
-              onEditPressed={OnEditPressed}
-            />
-          )}
+          enableAccordion={false}
+          onEditPressed={OnEditPressed}
         />
         <AddForm bottomSheetRef={bottomSheetRef} />
       </SafeAreaView>

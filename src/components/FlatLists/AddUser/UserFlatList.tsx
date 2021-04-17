@@ -1,13 +1,11 @@
 import * as React from "react";
-import { View, Text, FlatList, LayoutAnimation } from "react-native";
+import { LayoutAnimation } from "react-native";
 import CustomTextInput from "../../Inputs/CustomTextInput";
 import UserItemRow from "./UserItemRow";
 import { v4 as uuidv4 } from "uuid";
-import {
-  AnimationTypes,
-  PerformAnimation,
-} from "../../../helpers/LayoutAnimation";
+import { PerformAnimation } from "../../../helpers/LayoutAnimation";
 import { EmptyListComponent } from "../EmptyListComponent";
+import { BaseFlatList } from "../BaseFlatList";
 
 export interface UserFlatListProps {
   data: UserDTO[];
@@ -15,12 +13,10 @@ export interface UserFlatListProps {
 }
 
 export function UserFlatList(props: UserFlatListProps) {
-  const [refresh, setRefresh] = React.useState(false);
-  const flatlistRef = React.useRef<FlatList>(null);
   const DeleteItem = (id: any) => {
     const lists = props.data.filter((x) => x.id != id);
     props.updateData(lists);
-    setRefresh(!refresh);
+    // setRefresh(!refresh);
     PerformAnimation(LayoutAnimation.Presets.easeInEaseOut);
   };
 
@@ -47,7 +43,7 @@ export function UserFlatList(props: UserFlatListProps) {
       props.data[index].income = income;
       props.updateData(props.data);
     }
-    setRefresh(!refresh);
+    // setRefresh(!refresh);
   };
 
   const RenderEmptyListComponent = () => {
@@ -60,22 +56,18 @@ export function UserFlatList(props: UserFlatListProps) {
         placeholder="Add two or more users"
         onSubmit={OnSubmit}
       />
-      <FlatList
-        ref={flatlistRef}
+      <BaseFlatList
         data={props.data}
-        extraData={refresh}
-        renderItem={({ item }) => {
-          return (
-            <UserItemRow
-              item={item}
-              OnDeleteItem={DeleteItem}
-              onIncomeAdded={OnIncomeAdded}
-            />
-          );
-        }}
-        keyExtractor={(item) => item.id}
-        ListEmptyComponent={RenderEmptyListComponent}
-        onContentSizeChange={() => flatlistRef.current?.scrollToEnd()}
+        shouldRefresh={false}
+        rowComponent={(item) => (
+          <UserItemRow
+            item={item}
+            OnDeleteItem={DeleteItem}
+            onIncomeAdded={OnIncomeAdded}
+          />
+        )}
+        emptyListComponent={RenderEmptyListComponent}
+        shouldScrollToEnd={true}
       />
     </>
   );

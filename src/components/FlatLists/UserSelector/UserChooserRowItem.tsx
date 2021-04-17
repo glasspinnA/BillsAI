@@ -3,8 +3,6 @@ import { TouchableOpacity, View } from "react-native";
 import { UserIcon } from "./UserIcon";
 interface UserChooserRowItemProps {
   user: UserDTO;
-  setCanAnyItemBeSelected: boolean;
-  itemThatCanBeSelected: any;
   onSelected(item: any, isSelectedState: boolean): void;
   isReadOnly: boolean;
 }
