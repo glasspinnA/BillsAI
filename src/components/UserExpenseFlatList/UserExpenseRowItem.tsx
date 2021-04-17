@@ -15,6 +15,7 @@ import { Chevron } from "../Chevron";
 import { ExpenseToEdit } from "../../redux/reducer/baseReducer";
 import { useDispatch } from "react-redux";
 import { ExpenseToDelete } from "../../redux/reducer/baseReducer";
+import { HList } from "../AddExpenseBottomSheet/HList";
 
 export interface UserExpenseRowItemProps {
   item: IUserPayFlatList | IExpensesSectionList;
@@ -44,7 +45,7 @@ export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
 
   const _EditExpense = (expense: ExpenseDTO) => {
     dispatch(ExpenseToEdit(expense));
-    props.onEditPressed();
+    if (props.onEditPressed != undefined) props.onEditPressed();
   };
 
   const RenderItemHeader = () => {
@@ -131,6 +132,7 @@ export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
               >
                 Delete
               </Button>
+              <HList data={data.data.Users} isReadOnly={true} />
             </>
           ) : null}
         </View>

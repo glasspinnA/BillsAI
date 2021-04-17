@@ -4,7 +4,8 @@ import UserChooserRowItem from "./UserChooserRowItem";
 
 export interface HListProps {
   data: UserDTO[];
-  updateData(data: UserDTO[]): void;
+  updateData?: (data: UserDTO[]) => void;
+  isReadOnly: boolean;
 }
 
 export function HList(props: HListProps) {
@@ -15,14 +16,20 @@ export function HList(props: HListProps) {
     const index = props.data.findIndex((x) => x.id === item.id);
     if (index != -1) {
       props.data[index].isSelected = isSelectedState;
-      props.updateData(props.data);
+      if (props.updateData != undefined) props.updateData(props.data);
       setRefresh(!refresh);
     }
+  };
+
+  const EnableScroll = () => {
+    if (props.isReadOnly && props.data.length < 6) return false;
+    return true;
   };
   return (
     <FlatList
       extraData={refresh}
       horizontal={true}
+      scrollEnabled={EnableScroll()}
       data={props.data}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => {
@@ -32,6 +39,7 @@ export function HList(props: HListProps) {
             setCanAnyItemBeSelected={canAnyItemBeSelected}
             itemThatCanBeSelected={selectedItem}
             user={item}
+            isReadOnly={props.isReadOnly}
           />
         );
       }}

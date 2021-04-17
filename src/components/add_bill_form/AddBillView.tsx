@@ -121,6 +121,7 @@ export function AddBillView(props: AddBillViewProps) {
                   trigger("USER");
                   props.updateData(v);
                 }}
+                isReadOnly={false}
               />
             )}
             name={ADD_BILL_FORM.USER}
