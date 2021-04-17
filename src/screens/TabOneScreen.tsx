@@ -14,10 +14,9 @@ import { RootState } from "../redux/store/store";
 
 export default function TabOneScreen() {
   const bottomSheetRef = React.useRef<BottomSheet>(null);
-  const expenses = useSelector((state: RootState) => {
-    console.log(state.baseReducer.expenses);
-    return state.baseReducer.expenses;
-  });
+  const expenses = useSelector(
+    (state: RootState) => state.baseReducer.expenses
+  );
   const navigation = useNavigation();
 
   const Calculate = () => {

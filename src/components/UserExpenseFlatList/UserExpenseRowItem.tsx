@@ -19,7 +19,7 @@ import { ExpenseToDelete } from "../../redux/reducer/baseReducer";
 export interface UserExpenseRowItemProps {
   item: IUserPayFlatList | IExpensesSectionList;
   enableAccordion: boolean;
-  onEditPressed: () => void;
+  onEditPressed?: () => void;
 }
 
 export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
