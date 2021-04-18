@@ -6,11 +6,11 @@ import * as React from "react";
 import { SafeAreaView } from "react-native";
 import { useSelector } from "react-redux";
 import { CalculateExpenses } from "../Calculate";
+import { CollapsablePresenter } from "../components/FlatLists/CollapsableList/CollapsablePresenter";
 import AddForm from "../components/Forms/CreateExpense/AddBillPresenter";
 import GlobalLayout from "../constants/GlobalLayout";
 import { IUserExpensesRoute } from "../interface/IRoute";
 import { RootState } from "../redux/store/store";
-import { ExpenseList } from "../components/FlatLists/Expense/ExpenseList";
 
 export default function TabOneScreen() {
   const bottomSheetRef = React.useRef<BottomSheet>(null);
@@ -38,8 +38,8 @@ export default function TabOneScreen() {
         <Button onPress={Calculate} disabled={expenses.length == 0}>
           Calculate
         </Button>
-        <ExpenseList
-          data={expenses}
+        <CollapsablePresenter
+          item={expenses}
           enableAccordion={false}
           onEditPressed={OnEditPressed}
         />
