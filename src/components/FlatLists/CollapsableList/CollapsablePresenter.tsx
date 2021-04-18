@@ -12,24 +12,13 @@ export interface CollapsablePresenterProps {
 }
 
 export function CollapsablePresenter(props: CollapsablePresenterProps) {
-  const [isItemBodyOpen, setItemBodyState] = React.useState(
-    props.enableAccordion ? false : true
-  );
-
-  const OnItemHeaderPressed = () => {
-    setItemBodyState(!isItemBodyOpen);
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-  };
-
   return (
     <BaseFlatList
       data={props.item}
       rowComponent={(item) => (
         <CollapsableView
           item={item}
-          onItemHeaderPressed={OnItemHeaderPressed}
           onItemEditPressed={props.onEditPressed}
-          itemBodyState={isItemBodyOpen}
           enableAccordion={props.enableAccordion}
         />
       )}

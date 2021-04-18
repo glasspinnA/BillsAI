@@ -1,7 +1,7 @@
 import { Text, useTheme } from "@ui-kitten/components";
 import { Divider } from "@ui-kitten/components";
 import * as React from "react";
-import { View, TouchableWithoutFeedback } from "react-native";
+import { View, TouchableWithoutFeedback, LayoutAnimation } from "react-native";
 import GlobalLayout from "../../../constants/GlobalLayout";
 import { ExpenseDTO } from "../../../DTO/ExpenseDTO";
 import { PayDTO } from "../../../DTO/PayDTO";
@@ -16,22 +16,25 @@ import { PayRowItemHeader } from "./PayRowItem";
 
 export interface CollapsableViewProps {
   item: IUserPayFlatList | IExpensesSectionList;
-  itemBodyState: boolean;
   enableAccordion: boolean;
-  onItemHeaderPressed: () => void;
   onItemEditPressed?: () => void;
 }
 
 export function CollapsableView(props: CollapsableViewProps) {
   const theme = useTheme();
 
+  const [isItemBodyOpen, setItemBodyState] = React.useState(
+    props.enableAccordion ? false : true
+  );
+
+  const OnItemHeaderPressed = () => {
+    setItemBodyState(!isItemBodyOpen);
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+  };
+
   const GetItemHeader = (item: PayDTO | ExpenseDTO): JSX.Element => {
     if (IsPayDTO(item)) {
-      return PayRowItemHeader(
-        item.username,
-        item.sumToPay,
-        props.itemBodyState
-      );
+      return PayRowItemHeader(item.username, item.sumToPay, isItemBodyOpen);
     } else {
       return (
         <ItemRowTextContainer headerText={GetHeaderTitle(item.ExpenseType)} />
@@ -128,13 +131,13 @@ export function CollapsableView(props: CollapsableViewProps) {
 
   return (
     <TouchableWithoutFeedback
-      onPress={props.onItemHeaderPressed}
+      onPress={OnItemHeaderPressed}
       disabled={!props.enableAccordion}
       style={{ paddingVertical: 5 }}
     >
       <View>
         {RenderItemHeader()}
-        {props.itemBodyState ? RenderItemBody() : null}
+        {isItemBodyOpen ? RenderItemBody() : null}
       </View>
     </TouchableWithoutFeedback>
   );
