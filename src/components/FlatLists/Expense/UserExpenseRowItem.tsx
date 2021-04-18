@@ -120,7 +120,7 @@ export function UserExpenseRowItem(props: UserExpenseRowItemProps) {
         >
           {IsPayDTOObject(data.data)
             ? GetItemBody(data.data.productname, data.data.sumToPay.toString())
-            : GetItemBody(data.data.Name, data.data.Price.toString())}
+            : GetItemBody(data.data.name, data.data.Price.toString())}
 
           {!IsPayDTOObject(data.data) ? (
             <>

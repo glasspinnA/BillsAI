@@ -1,5 +1,6 @@
 import * as React from "react";
 import { TouchableOpacity, View } from "react-native";
+import { UserDTO } from "../../../DTO/UserDTO";
 import { UserIcon } from "./UserIcon";
 interface UserChooserRowItemProps {
   user: UserDTO;

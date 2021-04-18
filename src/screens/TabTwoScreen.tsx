@@ -8,6 +8,7 @@ import { UserFlatList } from "../components/FlatLists/AddUser/UserFlatList";
 import { RoundedButton } from "../components/Buttons/RoundedButton";
 import { View } from "react-native";
 import GlobalLayout from "../constants/GlobalLayout";
+import { UserDTO } from "../DTO/UserDTO";
 
 export default function TabTwoScreen() {
   const navigation = useNavigation();

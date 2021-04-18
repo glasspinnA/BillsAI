@@ -3,6 +3,7 @@ import { IExpensesSectionList } from "../../interface/IExpensesSectionList";
 import { RootState } from "../store/store";
 import produce from "immer";
 import { ExpenseDTO } from "../../DTO/ExpenseDTO";
+import { UserDTO } from "../../DTO/UserDTO";
 
 export const baseReducer = createSlice({
   name: "counter",

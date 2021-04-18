@@ -13,6 +13,7 @@ import { AddExpenses } from "../../../redux/reducer/baseReducer";
 import { RootState } from "../../../redux/store/store";
 import { AddBillView } from "./AddBillView";
 import { v4 as uuidv4 } from "uuid";
+import { UserDTO } from "../../../DTO/UserDTO";
 
 interface AddFormPresenterProps {
   bottomSheetRef: any;
@@ -41,7 +42,7 @@ const AddForm = (props: AddFormPresenterProps) => {
       data: [
         {
           id: data.ID === "-1" ? uuidv4() : data.ID,
-          Name: data.PRODUCT,
+          name: data.PRODUCT,
           Price: parseInt(data.PRICE),
           Users: data.USER.filter((x) => x.isSelected).map((x) => x as UserDTO),
           ExpenseType: data.EXPENSE_TYPE,

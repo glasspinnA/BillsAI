@@ -1,4 +1,5 @@
 import * as React from "react";
+import { UserDTO } from "../../../DTO/UserDTO";
 import { BaseFlatList } from "../BaseFlatList";
 import UserChooserRowItem from "./UserChooserRowItem";
 

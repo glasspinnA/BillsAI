@@ -14,6 +14,7 @@ import { ExpenseDTO } from "../../../DTO/ExpenseDTO";
 import { IFormInputs } from "../../../interface/IFormInputs";
 import { HList } from "../../FlatLists/UserSelector/HList";
 import { RoundedButton } from "../../Buttons/RoundedButton";
+import { UserDTO } from "../../../DTO/UserDTO";
 
 export interface AddBillViewProps {
   users: UserDTO[];
@@ -43,7 +44,7 @@ export function AddBillView(props: AddBillViewProps) {
   }, [props.prefilledForm]);
 
   const PopulateForm = () => {
-    setValue(ADD_BILL_FORM.PRODUCT, props.prefilledForm.Name);
+    setValue(ADD_BILL_FORM.PRODUCT, props.prefilledForm.name);
     setValue(
       ADD_BILL_FORM.PRICE,
       props.prefilledForm.Price && props.prefilledForm.Price.toString()

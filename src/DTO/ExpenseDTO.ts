@@ -1,8 +1,9 @@
 import { ExpenseType } from "../enum/ExpenseType";
+import { BaseDTO } from "./BaseDTO";
+import { UserDTO } from "./UserDTO";
 
-export interface ExpenseDTO {
+export interface ExpenseDTO extends BaseDTO {
   id: string;
-  Name: string;
   Price: number;
   Users: UserDTO[];
   ExpenseType: ExpenseType;

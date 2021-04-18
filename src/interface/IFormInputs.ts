@@ -1,3 +1,4 @@
+import { UserDTO } from "../DTO/UserDTO";
 import { ExpenseType } from "../enum/ExpenseType";
 
 export interface IFormInputs {

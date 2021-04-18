@@ -2,6 +2,7 @@ import { Button, useTheme } from "@ui-kitten/components";
 import * as React from "react";
 import { View, SafeAreaView, TextInput } from "react-native";
 import GlobalLayout from "../../../constants/GlobalLayout";
+import { UserDTO } from "../../../DTO/UserDTO";
 import { IconChooser } from "../../../enum/IconChooser";
 import {
   AnimationTypes,

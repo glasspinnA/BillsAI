@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import { PerformAnimation } from "../../../helpers/LayoutAnimation";
 import { EmptyListComponent } from "../EmptyListComponent";
 import { BaseFlatList } from "../BaseFlatList";
+import { UserDTO } from "../../../DTO/UserDTO";
 
 export interface UserFlatListProps {
   data: UserDTO[];

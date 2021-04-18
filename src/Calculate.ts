@@ -30,9 +30,9 @@ const CalculateIncomeBased = (expenses: ExpenseDTO[]): PayDTO[] => {
           ({
             username: user.name,
             expenseType: expense.ExpenseType,
-            productname: expense.Name,
+            productname: expense.name,
             sumToPay: (user.income != undefined ? user.income : 0) * procental,
-            name: expense.Name,
+            name: expense.name,
             userId: user.id,
           } as PayDTO)
       );
@@ -49,9 +49,9 @@ const CalculateEvenSharedExpenses = (expenses: ExpenseDTO[]): PayDTO[] => {
           ({
             username: user.name,
             expenseType: expense.ExpenseType,
-            productname: expense.Name,
+            productname: expense.name,
             sumToPay: priceToPay,
-            name: expense.Name,
+            name: expense.name,
             userId: user.id,
           } as PayDTO)
       );
