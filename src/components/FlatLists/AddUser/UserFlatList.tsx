@@ -1,50 +1,37 @@
 import * as React from "react";
-import { LayoutAnimation } from "react-native";
 import CustomTextInput from "../../Inputs/CustomTextInput";
 import UserItemRow from "./UserItemRow";
 import { v4 as uuidv4 } from "uuid";
-import { PerformAnimation } from "../../../helpers/LayoutAnimation";
 import { EmptyListComponent } from "../EmptyListComponent";
 import { BaseFlatList } from "../BaseFlatList";
 import { UserDTO } from "../../../DTO/UserDTO";
 
 export interface UserFlatListProps {
-  data: UserDTO[];
-  updateData(data: UserDTO[]): void;
+  users: UserDTO[];
+  onUserAdded: (user: UserDTO) => void;
+  onUserDeleted: (userId: string) => void;
+  onUserEdited: (userId: string, income: number) => void;
 }
 
 export function UserFlatList(props: UserFlatListProps) {
-  const DeleteItem = (id: any) => {
-    const lists = props.data.filter((x) => x.id != id);
-    props.updateData(lists);
-    // setRefresh(!refresh);
-    PerformAnimation(LayoutAnimation.Presets.easeInEaseOut);
+  const OnUserDeleted = (userId: string) => {
+    props.onUserDeleted(userId);
   };
 
-  const OnSubmit = (text: string) => {
-    const t: UserDTO[] = [
-      ...props.data,
-      {
-        id: uuidv4(),
-        name: text,
-        title:
-          text.length > 2
-            ? text.substring(0, 2).toUpperCase()
-            : text.toUpperCase(),
-        isSelected: true,
-      },
-    ];
-
-    props.updateData(t);
+  const OnUserAdded = (name: string) => {
+    props.onUserAdded({
+      id: uuidv4(),
+      name: name,
+      title:
+        name.length > 2
+          ? name.substring(0, 2).toUpperCase()
+          : name.toUpperCase(),
+      isSelected: true,
+    } as UserDTO);
   };
 
-  const OnIncomeAdded = (id: any, income: string) => {
-    const index = props.data.findIndex((x) => x.id === id);
-    if (index != -1) {
-      props.data[index].income = income;
-      props.updateData(props.data);
-    }
-    // setRefresh(!refresh);
+  const OnUserEdited = (userId: string, income: number) => {
+    props.onUserEdited(userId, income);
   };
 
   const RenderEmptyListComponent = () => {
@@ -55,16 +42,16 @@ export function UserFlatList(props: UserFlatListProps) {
     <>
       <CustomTextInput
         placeholder="Add two or more users"
-        onSubmit={OnSubmit}
+        onSubmit={OnUserAdded}
       />
       <BaseFlatList
-        data={props.data}
+        data={props.users}
         shouldRefresh={false}
         rowComponent={(item) => (
           <UserItemRow
             item={item}
-            OnDeleteItem={DeleteItem}
-            onIncomeAdded={OnIncomeAdded}
+            OnDeleteItem={OnUserDeleted}
+            onIncomeAdded={OnUserEdited}
           />
         )}
         emptyListComponent={RenderEmptyListComponent}

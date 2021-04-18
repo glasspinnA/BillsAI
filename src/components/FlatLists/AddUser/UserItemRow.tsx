@@ -14,8 +14,8 @@ import { ItemRowTextContainer } from "../../Texts/ItemRowTextContainer";
 
 interface UserItemRowProps {
   item: UserDTO;
-  OnDeleteItem(id: any): void;
-  onIncomeAdded(id: any, text: string): void;
+  OnDeleteItem(userId: string): void;
+  onIncomeAdded(userId: string, income: number): void;
 }
 
 const UserItemRow = (props: UserItemRowProps) => {
@@ -32,8 +32,8 @@ const UserItemRow = (props: UserItemRowProps) => {
     PerformAnimation(AnimationTypes.ROW_ITEM_ADD);
   };
 
-  const OnSubmit = (text: string) => {
-    props.onIncomeAdded(props.item.id, text);
+  const OnSubmit = (income: string) => {
+    props.onIncomeAdded(props.item.id, parseInt(income));
     setIncomeTextInputVisibility(!incomeTextInputVisibility);
   };
 

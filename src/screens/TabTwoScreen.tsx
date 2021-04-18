@@ -39,15 +39,32 @@ export default function TabTwoScreen() {
     navigation.navigate("TabOne");
   };
 
-  const UpdateData = (users: UserDTO[]) => {
-    setData(users);
+  const OnUserDeleted = (userId: string) => {
+    setData(data.filter((user) => user.id != userId));
+  };
+
+  const OnUserEdited = (userId: string, income: number) => {
+    setData(
+      data.map((user) =>
+        user.id === userId ? { ...user, income: income } : user
+      )
+    );
+  };
+
+  const OnUserAdded = (user: UserDTO) => {
+    setData((oldData) => [...oldData, user]);
   };
 
   return (
     <Layout level="3" style={GlobalLayout.globalStyles.layout}>
       <SafeAreaView style={{ flex: 1 }}>
         <View style={{ flex: 4 }}>
-          <UserFlatList data={data} updateData={UpdateData} />
+          <UserFlatList
+            users={data}
+            onUserAdded={OnUserAdded}
+            onUserDeleted={OnUserDeleted}
+            onUserEdited={OnUserEdited}
+          />
         </View>
         <View
           style={{
