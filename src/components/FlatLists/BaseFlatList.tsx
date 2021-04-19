@@ -6,6 +6,7 @@ export interface BaseFlatListProps {
   shouldRefresh?: boolean;
   horizontal?: boolean;
   shouldScrollToEnd?: boolean;
+  scrollEnabled?: boolean;
   emptyListComponent?: () => JSX.Element;
   rowComponent: (item: any) => JSX.Element;
 }
@@ -29,6 +30,8 @@ export function BaseFlatList(props: BaseFlatListProps) {
       keyExtractor={(item) => item.id}
       ListEmptyComponent={props.emptyListComponent}
       onContentSizeChange={ScrollToEnd}
+      scrollEnabled={props.scrollEnabled}
+      contentContainerStyle={{ flexGrow: 1 }}
     />
   );
 }

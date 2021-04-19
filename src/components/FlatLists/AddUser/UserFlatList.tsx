@@ -56,6 +56,7 @@ export function UserFlatList(props: UserFlatListProps) {
         )}
         emptyListComponent={RenderEmptyListComponent}
         shouldScrollToEnd={true}
+        scrollEnabled={props.users.length > 0}
       />
     </>
   );

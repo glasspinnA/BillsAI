@@ -9,13 +9,19 @@ export interface EmptyListComponentProps {
 
 export function EmptyListComponent(props: EmptyListComponentProps) {
   return (
-    <>
-      <Text category="h3" style={{ marginVertical: 10 }}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Text category="h1" style={{ marginVertical: 10 }}>
         {props.title}
       </Text>
-      <Text category="h5" style={{ marginVertical: 10 }}>
+      <Text category="h4" style={{ marginVertical: 60 }}>
         {props.text}
       </Text>
-    </>
+    </View>
   );
 }
