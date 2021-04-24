@@ -16,6 +16,7 @@ interface TextInputProps {
   returnKeyType?: ReturnKeyTypeOptions;
   onSubmit(text: string): void;
   isVisible?: boolean;
+  shoudFocus?: boolean;
 }
 
 const CustomTextInput = (props: TextInputProps) => {
@@ -23,7 +24,13 @@ const CustomTextInput = (props: TextInputProps) => {
 
   React.useEffect(() => {
     if (props.isVisible) TextInputRef.current?.focus();
-  });
+  }),
+    [props.isVisible];
+
+  React.useEffect(() => {
+    TextInputRef.current?.focus();
+  }),
+    [props.shoudFocus];
 
   const OnSubmit = (text: string) => {
     if (text.length === 0) return;

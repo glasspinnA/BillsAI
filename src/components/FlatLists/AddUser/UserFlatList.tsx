@@ -2,7 +2,7 @@ import * as React from "react";
 import CustomTextInput from "../../Inputs/CustomTextInput";
 import UserItemRow from "./UserItemRow";
 import { v4 as uuidv4 } from "uuid";
-import { EmptyListComponent } from "../EmptyListComponent";
+import { EmptyListComponent } from "../../EmptyList/EmptyList.compnent";
 import { BaseFlatList } from "../BaseFlatList";
 import { UserDTO } from "../../../DTO/UserDTO";
 
@@ -14,6 +14,7 @@ export interface UserFlatListProps {
 }
 
 export function UserFlatList(props: UserFlatListProps) {
+  const [textInputFocus, setTextInputFocus] = React.useState(false);
   const OnUserDeleted = (userId: string) => {
     props.onUserDeleted(userId);
   };
@@ -35,7 +36,13 @@ export function UserFlatList(props: UserFlatListProps) {
   };
 
   const RenderEmptyListComponent = () => {
-    return <EmptyListComponent title={"Noting here"} text={"Add a user"} />;
+    return (
+      <EmptyListComponent
+        title={"Noting here"}
+        text={"Add a user"}
+        onPress={() => setTextInputFocus(!textInputFocus)}
+      />
+    );
   };
 
   return (
@@ -43,6 +50,7 @@ export function UserFlatList(props: UserFlatListProps) {
       <CustomTextInput
         placeholder="Add two or more users"
         onSubmit={OnUserAdded}
+        shoudFocus={textInputFocus}
       />
       <BaseFlatList
         data={props.users}
