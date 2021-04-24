@@ -9,29 +9,11 @@ import { RoundedButton } from "../components/Buttons/RoundedButton";
 import { View } from "react-native";
 import GlobalLayout from "../constants/GlobalLayout";
 import { UserDTO } from "../DTO/UserDTO";
+import { userDummyData } from "../helpers/testData";
 
 export default function TabTwoScreen() {
   const navigation = useNavigation();
-  const [data, setData] = React.useState([
-    // {
-    //   id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    //   name: "First Item",
-    //   title: "FI",
-    //   isSelected: true,
-    // },
-    // {
-    //   id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    //   name: "Second Item",
-    //   title: "SI",
-    //   isSelected: true,
-    // },
-    // {
-    //   id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    //   name: "Third Item",
-    //   title: "TI",
-    //   isSelected: true,
-    // },
-  ] as UserDTO[]);
+  const [data, setData] = React.useState(userDummyData);
   const dispatch = useDispatch();
 
   const StartNextScreen = () => {

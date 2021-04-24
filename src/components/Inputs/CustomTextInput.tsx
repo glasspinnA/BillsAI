@@ -1,10 +1,6 @@
 import { Input } from "@ui-kitten/components";
 import * as React from "react";
-import {
-  KeyboardTypeOptions,
-  ReturnKeyTypeOptions,
-  TextInput,
-} from "react-native";
+import { KeyboardTypeOptions, ReturnKeyTypeOptions } from "react-native";
 import {
   AnimationTypes,
   PerformAnimation,
@@ -20,7 +16,7 @@ interface TextInputProps {
 }
 
 const CustomTextInput = (props: TextInputProps) => {
-  const TextInputRef = React.useRef<TextInput>(null);
+  const TextInputRef = React.useRef<Input>(null);
 
   React.useEffect(() => {
     if (props.isVisible) TextInputRef.current?.focus();
