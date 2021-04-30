@@ -6,6 +6,7 @@ import * as React from "react";
 import { SafeAreaView } from "react-native";
 import { useSelector } from "react-redux";
 import { CalculateExpenses } from "../Calculate";
+import { RoundedButton } from "../components/Buttons/RoundedButton";
 import { CollapsablePresenter } from "../components/FlatLists/CollapsableList/CollapsablePresenter";
 import AddForm from "../components/Forms/CreateExpense/Presenter/AddBillPresenter.component";
 import GlobalLayout from "../constants/GlobalLayout";
@@ -35,9 +36,11 @@ export default function TabOneScreen() {
   return (
     <Layout level="3" style={GlobalLayout.globalStyles.layout}>
       <SafeAreaView style={{ flex: 1 }}>
-        <Button onPress={Calculate} disabled={expenses.length == 0}>
-          Calculate
-        </Button>
+        <RoundedButton
+          title="Calculate"
+          onPress={Calculate}
+          disabled={expenses.length == 0}
+        />
         <CollapsablePresenter
           item={expenses}
           enableAccordion={false}

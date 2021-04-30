@@ -38,7 +38,7 @@ export function UserFlatList(props: UserFlatListProps) {
   const RenderEmptyListComponent = () => {
     return (
       <EmptyListComponent
-        title={"Noting here"}
+        title={"Nothing here"}
         text={"Add a user"}
         onPress={() => setTextInputFocus(!textInputFocus)}
       />
@@ -48,7 +48,7 @@ export function UserFlatList(props: UserFlatListProps) {
   return (
     <>
       <CustomTextInput
-        placeholder="Add two or more users"
+        placeholder="Add a user"
         onSubmit={OnUserAdded}
         shoudFocus={textInputFocus}
         keyboardType="default"

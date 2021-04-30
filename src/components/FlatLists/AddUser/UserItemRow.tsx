@@ -1,4 +1,4 @@
-import { Button, useTheme } from "@ui-kitten/components";
+import { useTheme } from "@ui-kitten/components";
 import * as React from "react";
 import { View, SafeAreaView, TextInput } from "react-native";
 import GlobalLayout from "../../../constants/GlobalLayout";
@@ -9,7 +9,6 @@ import {
   PerformAnimation,
 } from "../../../helpers/LayoutAnimation";
 import { IconButton } from "../../Buttons/IconButton";
-import { CustomIcon } from "../../Icons/CustomIcon";
 import CustomTextInput from "../../Inputs/CustomTextInput";
 import { ItemRowTextContainer } from "../../Texts/ItemRowTextContainer";
 
@@ -24,7 +23,7 @@ const UserItemRow = (props: UserItemRowProps) => {
   const [
     incomeTextInputVisibility,
     setIncomeTextInputVisibility,
-  ] = React.useState(false);
+  ] = React.useState(!props.item.income);
   const TextInputRef = React.useRef<TextInput>(null);
 
   const AddIncome = () => {

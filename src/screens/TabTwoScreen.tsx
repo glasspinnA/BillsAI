@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { Layout, Text } from "@ui-kitten/components";
 import * as React from "react";
-import { SafeAreaView, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native";
 import { useDispatch } from "react-redux";
 import { AddUsers } from "../redux/reducer/baseReducer";
 import { UserFlatList } from "../components/FlatLists/AddUser/UserFlatList";
@@ -10,6 +10,7 @@ import { View } from "react-native";
 import GlobalLayout from "../constants/GlobalLayout";
 import { UserDTO } from "../DTO/UserDTO";
 import { userDummyData } from "../helpers/testData";
+import { UserAmount } from "../components/Texts/UserAmount";
 
 export default function TabTwoScreen() {
   const navigation = useNavigation();
@@ -40,6 +41,7 @@ export default function TabTwoScreen() {
   return (
     <Layout level="3" style={GlobalLayout.globalStyles.layout}>
       <SafeAreaView style={{ flex: 1 }}>
+        <Text category="h3">Users</Text>
         <View style={{ flex: 4 }}>
           <UserFlatList
             users={data}
@@ -54,11 +56,18 @@ export default function TabTwoScreen() {
             justifyContent: "center",
           }}
         >
-          <RoundedButton
-            disabled={data.length < 2}
-            title={"Next"}
-            onPress={StartNextScreen}
-          />
+          {data.length >= 1 ? (
+            <>
+              {data.length < 2 ? (
+                <UserAmount nbrUsers={data.length} limit={2} />
+              ) : null}
+              <RoundedButton
+                disabled={data.length < 2}
+                title="Next"
+                onPress={StartNextScreen}
+              />
+            </>
+          ) : null}
         </View>
       </SafeAreaView>
     </Layout>

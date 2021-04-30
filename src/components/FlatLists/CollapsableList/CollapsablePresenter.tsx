@@ -1,5 +1,4 @@
 import * as React from "react";
-import { LayoutAnimation } from "react-native";
 import { IUserPayFlatList } from "../../../interface/IUserPaySectionList";
 import { IExpensesSectionList } from "../../../interface/IExpensesSectionList";
 import { CollapsableView } from "./CollapsableView";
@@ -14,7 +13,7 @@ export interface CollapsablePresenterProps {
 
 export function CollapsablePresenter(props: CollapsablePresenterProps) {
   const RenderEmptyListComponent = () => {
-    return <EmptyListComponent title={"Noting here"} />;
+    return <EmptyListComponent title={"Nothing here"} />;
   };
   return (
     <BaseFlatList
