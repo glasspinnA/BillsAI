@@ -38,5 +38,9 @@ export const CustomIcon = (icon: IconChooser, color?: string) => {
           color={theme["color-primary-500"]}
         />
       );
+    case IconChooser.EDIT:
+      return (
+        <Icon name="pencil" size={17} color={theme["color-primary-500"]} />
+      );
   }
 };

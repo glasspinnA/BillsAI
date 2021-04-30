@@ -8,6 +8,7 @@ import {
   AnimationTypes,
   PerformAnimation,
 } from "../../../helpers/LayoutAnimation";
+import { IconButton } from "../../Buttons/IconButton";
 import { CustomIcon } from "../../Icons/CustomIcon";
 import CustomTextInput from "../../Inputs/CustomTextInput";
 import { ItemRowTextContainer } from "../../Texts/ItemRowTextContainer";
@@ -58,18 +59,12 @@ const UserItemRow = (props: UserItemRowProps) => {
           />
         </View>
         <View style={{ flex: 1, justifyContent: "center" }}>
-          <Button
-            onPress={() => AddIncome()}
-            accessoryLeft={() => CustomIcon(IconChooser.MONEY)}
-            appearance="ghost"
-          ></Button>
+          <IconButton onPress={() => AddIncome()} icon={IconChooser.MONEY} />
         </View>
         <View style={{ flex: 1, justifyContent: "center" }}>
-          <Button
-            appearance="ghost"
-            status="danger"
-            accessoryLeft={() => CustomIcon(IconChooser.REMOVE)}
+          <IconButton
             onPress={() => props.OnDeleteItem(props.item.id)}
+            icon={IconChooser.REMOVE}
           />
         </View>
       </View>
