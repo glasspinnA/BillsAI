@@ -10,9 +10,11 @@ interface TextInputProps {
   placeholder: string;
   keyboardType?: KeyboardTypeOptions;
   returnKeyType?: ReturnKeyTypeOptions;
-  onSubmit(text: string): void;
   isVisible?: boolean;
   shoudFocus?: boolean;
+  value?: string;
+  onSubmit?: (text: string) => void;
+  onChangeText?: (value: string) => void;
 }
 
 const CustomTextInput = (props: TextInputProps) => {
@@ -24,12 +26,12 @@ const CustomTextInput = (props: TextInputProps) => {
     [props.isVisible];
 
   React.useEffect(() => {
-    TextInputRef.current?.focus();
+    if (props.shoudFocus) TextInputRef.current?.focus();
   }),
     [props.shoudFocus];
 
   const OnSubmit = (text: string) => {
-    if (text.length === 0) return;
+    if (text.length === 0 || props.onSubmit == undefined) return;
     props.onSubmit(text);
     TextInputRef.current?.clear();
     PerformAnimation(AnimationTypes.FLATLIST_ADD_USER);
@@ -41,8 +43,12 @@ const CustomTextInput = (props: TextInputProps) => {
       placeholder={props.placeholder}
       ref={TextInputRef}
       onSubmitEditing={(event) => OnSubmit(event.nativeEvent.text)}
-      keyboardType={props.keyboardType}
-      returnKeyType={props.returnKeyType}
+      keyboardType={
+        props.keyboardType == undefined ? "number-pad" : props.keyboardType
+      }
+      returnKeyType={"done"}
+      value={props.value}
+      onChangeText={(value) => props.onChangeText && props.onChangeText(value)}
     />
   );
 };

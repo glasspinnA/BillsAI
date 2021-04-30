@@ -83,8 +83,6 @@ const UserItemRow = (props: UserItemRowProps) => {
           <CustomTextInput
             placeholder={GetPlaceholderText()}
             onSubmit={OnSubmit}
-            keyboardType="numeric"
-            returnKeyType="done"
             isVisible={incomeTextInputVisibility}
           />
         )}

@@ -4,6 +4,7 @@ import { IUserPayFlatList } from "../../../interface/IUserPaySectionList";
 import { IExpensesSectionList } from "../../../interface/IExpensesSectionList";
 import { CollapsableView } from "./CollapsableView";
 import { BaseFlatList } from "../BaseFlatList";
+import { EmptyListComponent } from "../../EmptyList/EmptyList.compnent";
 
 export interface CollapsablePresenterProps {
   item: IUserPayFlatList[] | IExpensesSectionList[];
@@ -12,6 +13,9 @@ export interface CollapsablePresenterProps {
 }
 
 export function CollapsablePresenter(props: CollapsablePresenterProps) {
+  const RenderEmptyListComponent = () => {
+    return <EmptyListComponent title={"Noting here"} />;
+  };
   return (
     <BaseFlatList
       data={props.item}
@@ -22,6 +26,7 @@ export function CollapsablePresenter(props: CollapsablePresenterProps) {
           enableAccordion={props.enableAccordion}
         />
       )}
+      emptyListComponent={RenderEmptyListComponent}
     />
   );
 }

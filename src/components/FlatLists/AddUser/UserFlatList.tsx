@@ -51,6 +51,7 @@ export function UserFlatList(props: UserFlatListProps) {
         placeholder="Add two or more users"
         onSubmit={OnUserAdded}
         shoudFocus={textInputFocus}
+        keyboardType="default"
       />
       <BaseFlatList
         data={props.users}
