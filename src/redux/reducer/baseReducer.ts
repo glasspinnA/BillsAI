@@ -22,10 +22,16 @@ export const baseReducer = createSlice({
           action.payload.ExpenseType
         ].data.findIndex((x) => x.id === action.payload.id);
         if (indexToDelete != -1) {
-          draft.expenses[action.payload.ExpenseType].data.splice(
-            indexToDelete,
-            1
-          );
+          const isLastItemOnCurrentExpenseType =
+            draft.expenses[action.payload.ExpenseType].data.length == 1;
+          if (isLastItemOnCurrentExpenseType) {
+            draft.expenses.splice(action.payload.ExpenseType);
+          } else {
+            draft.expenses[action.payload.ExpenseType].data.splice(
+              indexToDelete,
+              1
+            );
+          }
         }
       });
     },
