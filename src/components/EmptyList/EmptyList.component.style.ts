@@ -7,6 +7,6 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   verticalSpace: {
-    marginVertical: 60,
+    marginVertical: 20,
   },
 });

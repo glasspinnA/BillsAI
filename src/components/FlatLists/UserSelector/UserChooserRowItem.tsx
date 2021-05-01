@@ -32,7 +32,8 @@ const UserChooserRowItem = (props: UserChooserRowItemProps) => {
         style={{
           flex: 1,
           justifyContent: "center",
-          marginHorizontal: 10,
+          paddingVertical: 15,
+          paddingRight: 10,
         }}
       >
         <UserIcon

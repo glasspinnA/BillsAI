@@ -1,7 +1,6 @@
 import BottomSheet from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
-import { Layout } from "@ui-kitten/components";
-import { Button } from "@ui-kitten/components/ui/button/button.component";
+import { Layout, Text } from "@ui-kitten/components";
 import * as React from "react";
 import { SafeAreaView } from "react-native";
 import { useSelector } from "react-redux";
@@ -36,6 +35,7 @@ export default function TabOneScreen() {
   return (
     <Layout level="3" style={GlobalLayout.globalStyles.layout}>
       <SafeAreaView style={{ flex: 1 }}>
+        <Text category="h3">Expenses</Text>
         <RoundedButton
           title="Calculate"
           onPress={Calculate}

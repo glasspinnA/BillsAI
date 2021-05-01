@@ -58,7 +58,7 @@ export function AddBillView(props: AddBillViewProps) {
   return (
     <View style={componentStyle.container}>
       <View style={{ flex: 1 }}>
-        <Text category="h4">Hello</Text>
+        <Text category="h4">Add expense</Text>
       </View>
       <View style={baseStyle.flexThree}>
         <View style={baseStyle.flexOne}>
@@ -80,7 +80,8 @@ export function AddBillView(props: AddBillViewProps) {
           />
         </View>
       </View>
-      <View style={baseStyle.flexTwo}>
+      <View style={baseStyle.flexThree}>
+        <Text category="s1">Users involved</Text>
         <View style={baseStyle.flexFour}>
           <Controller
             control={control}
@@ -108,6 +109,7 @@ export function AddBillView(props: AddBillViewProps) {
         </View>
       </View>
       <View style={componentStyle.userRowContainer}>
+        <Text category="s1">Expense type</Text>
         <Controller
           control={control}
           render={({ onChange }) => (
@@ -140,6 +142,7 @@ export function AddBillView(props: AddBillViewProps) {
               onChangeText={(value) => onChange(value)}
               value={value}
               placeholder="Product"
+              style={{ display: "none" }}
             />
           )}
           name={ADD_BILL_FORM.ID}

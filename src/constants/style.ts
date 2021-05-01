@@ -14,6 +14,9 @@ export default StyleSheet.create({
   flexFour: {
     flex: 4,
   },
+  flexFive: {
+    flex: 5,
+  },
   justifyCenter: {
     justifyContent: "center",
   },

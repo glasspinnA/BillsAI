@@ -15,7 +15,6 @@ export function EmptyListComponent(props: EmptyListComponentProps) {
     <RoundedButton
       title={props.text as string}
       onPress={props.onPress as () => void}
-      size={"large"}
     />
   );
 
@@ -24,7 +23,7 @@ export function EmptyListComponent(props: EmptyListComponentProps) {
   return (
     <View style={styles.container}>
       <View style={styles.verticalSpace}>
-        <Text category="h1">{props.title}</Text>
+        <Text category="h3">{props.title}</Text>
       </View>
       <View style={styles.verticalSpace}>
         {props.onPress && props.text ? RenderButton() : RenderSubTitle()}
