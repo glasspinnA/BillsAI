@@ -11,6 +11,7 @@ import GlobalLayout from "../constants/GlobalLayout";
 import { UserDTO } from "../DTO/UserDTO";
 import { userDummyData } from "../helpers/testData";
 import { UserAmount } from "../components/Texts/UserAmount";
+import { ScreenHeaderText } from "../components/Texts/ScreenHeader";
 
 export default function TabTwoScreen() {
   const navigation = useNavigation();
@@ -41,7 +42,7 @@ export default function TabTwoScreen() {
   return (
     <Layout level="3" style={GlobalLayout.globalStyles.layout}>
       <SafeAreaView style={{ flex: 1 }}>
-        <Text category="h3">Users</Text>
+        <ScreenHeaderText title="Users" />
         <View style={{ flex: 4 }}>
           <UserFlatList
             users={data}
