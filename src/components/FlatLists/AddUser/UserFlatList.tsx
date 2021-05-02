@@ -47,12 +47,15 @@ export function UserFlatList(props: UserFlatListProps) {
 
   return (
     <>
-      <CustomTextInput
-        placeholder="Add a user"
-        onSubmit={OnUserAdded}
-        shoudFocus={textInputFocus}
-        keyboardType="default"
-      />
+      {textInputFocus && (
+        <CustomTextInput
+          placeholder="Add a user"
+          onSubmit={OnUserAdded}
+          shoudFocus={textInputFocus}
+          keyboardType="default"
+        />
+      )}
+
       <BaseFlatList
         data={props.users}
         shouldRefresh={false}

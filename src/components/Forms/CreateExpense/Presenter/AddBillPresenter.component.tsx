@@ -17,15 +17,14 @@ import { UserDTO } from "../../../../DTO/UserDTO";
 
 interface AddFormPresenterProps {
   bottomSheetRef: any;
+  expenseToEdit: ExpenseDTO;
 }
 
 const AddForm = (props: AddFormPresenterProps) => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const dispatch = useDispatch();
   const data = useSelector((state: RootState) => state.baseReducer.users);
-  const expenseToEdit = useSelector(
-    (state: RootState) => state.baseReducer.expenseToEdit
-  );
+  const [shouldClearForm, setFormState] = React.useState(false);
 
   const UpdateData = (data: UserDTO[]) => {
     // setData(data);
@@ -55,8 +54,17 @@ const AddForm = (props: AddFormPresenterProps) => {
 
   const snapPoints = React.useMemo(() => [-1, "70%"], []);
 
+  const OnAnimate = (fromIndex: number, toIndex: number) => {
+    setFormState(fromIndex == 1 && toIndex == 0);
+  };
+
   return (
-    <BottomSheet ref={props.bottomSheetRef} index={1} snapPoints={snapPoints}>
+    <BottomSheet
+      ref={props.bottomSheetRef}
+      index={1}
+      snapPoints={snapPoints}
+      onAnimate={OnAnimate}
+    >
       <AddBillView
         users={data}
         selectedIndex={selectedIndex}
@@ -64,7 +72,8 @@ const AddForm = (props: AddFormPresenterProps) => {
         isAnyItemSelected={IsAnyItemSelected}
         updateData={UpdateData}
         onAddExpense={OnAddExpense}
-        prefilledForm={expenseToEdit}
+        prefilledForm={props.expenseToEdit}
+        clearForm={shouldClearForm}
       />
     </BottomSheet>
   );

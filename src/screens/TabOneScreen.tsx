@@ -17,6 +17,9 @@ export default function TabOneScreen() {
   const expenses = useSelector(
     (state: RootState) => state.baseReducer.expenses
   );
+  const expensesToEdit = useSelector(
+    (state: RootState) => state.baseReducer.expenseToEdit
+  );
   const navigation = useNavigation();
 
   const Calculate = () => {
@@ -46,7 +49,10 @@ export default function TabOneScreen() {
           enableAccordion={false}
           onEditPressed={OnEditPressed}
         />
-        <AddForm bottomSheetRef={bottomSheetRef} />
+        <AddForm
+          bottomSheetRef={bottomSheetRef}
+          expenseToEdit={expensesToEdit}
+        />
       </SafeAreaView>
     </Layout>
   );

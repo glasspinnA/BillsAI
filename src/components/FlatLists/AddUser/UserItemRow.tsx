@@ -77,7 +77,7 @@ const UserItemRow = (props: UserItemRowProps) => {
           <CustomTextInput
             placeholder={GetPlaceholderText()}
             onSubmit={OnSubmit}
-            isVisible={incomeTextInputVisibility}
+            shoudFocus={incomeTextInputVisibility}
           />
         )}
       </View>

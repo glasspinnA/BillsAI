@@ -10,7 +10,6 @@ interface TextInputProps {
   placeholder: string;
   keyboardType?: KeyboardTypeOptions;
   returnKeyType?: ReturnKeyTypeOptions;
-  isVisible?: boolean;
   shoudFocus?: boolean;
   value?: string;
   onSubmit?: (text: string) => void;
@@ -19,11 +18,6 @@ interface TextInputProps {
 
 const CustomTextInput = (props: TextInputProps) => {
   const TextInputRef = React.useRef<Input>(null);
-
-  React.useEffect(() => {
-    if (props.isVisible) TextInputRef.current?.focus();
-  }),
-    [props.isVisible];
 
   React.useEffect(() => {
     if (props.shoudFocus) TextInputRef.current?.focus();

@@ -20,6 +20,7 @@ export interface AddBillViewProps {
   setSelectedIndex(index: number): void;
   selectedIndex: number;
   prefilledForm: ExpenseDTO;
+  clearForm: boolean;
 }
 
 export function AddBillView(props: AddBillViewProps) {
@@ -45,14 +46,33 @@ export function AddBillView(props: AddBillViewProps) {
       ADD_BILL_FORM.PRICE,
       props.prefilledForm.Price && props.prefilledForm.Price.toString()
     );
-    setValue(ADD_BILL_FORM.USER, props.prefilledForm.Users);
     setValue(ADD_BILL_FORM.ID, props.prefilledForm.id);
+    const selectedUserIds = props.prefilledForm.Users.map((u) => u.id);
+    const users = props.users.map((u) =>
+      selectedUserIds.includes(u.id)
+        ? { ...u, isSelected: true }
+        : { ...u, isSelected: false }
+    );
+    setValue(ADD_BILL_FORM.USER, users);
   };
 
+  React.useEffect(() => {
+    if (props.clearForm) ClearForm();
+    console.log(props.clearForm);
+  }, [props.clearForm]);
+
   const OnAddPressed = (data: IFormInputs) => {
-    console.log(data);
     props.onAddExpense(data);
+    ClearForm();
+  };
+
+  const ClearForm = () => {
     reset();
+    const users = props.users.map((u) => {
+      return { ...u, isSelected: true };
+    });
+    console.log(users);
+    setValue(ADD_BILL_FORM.USER, users);
   };
 
   return (
@@ -142,7 +162,7 @@ export function AddBillView(props: AddBillViewProps) {
               onChangeText={(value) => onChange(value)}
               value={value}
               placeholder="Product"
-              style={{ display: "none" }}
+              // style={{ display: "none" }}
             />
           )}
           name={ADD_BILL_FORM.ID}
