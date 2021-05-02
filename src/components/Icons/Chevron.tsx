@@ -26,7 +26,7 @@ export function Chevron(props: ChevronProps) {
 
   const RotateData = fadeAnim.interpolate({
     inputRange: [0, 1],
-    outputRange: ["180deg", "0deg"],
+    outputRange: ["0deg", "-180deg"],
   });
 
   return (
