@@ -2,6 +2,7 @@ import * as React from "react";
 import { UserDTO } from "../../../DTO/UserDTO";
 import { BaseFlatList } from "../BaseFlatList";
 import UserChooserRowItem from "./UserChooserRowItem";
+import { Text } from "@ui-kitten/components";
 
 export interface HListProps {
   data: UserDTO[];
@@ -19,16 +20,21 @@ export function HList(props: HListProps) {
   };
 
   return (
-    <BaseFlatList
-      data={props.data}
-      rowComponent={(item) => (
-        <UserChooserRowItem
-          onSelected={OnSelectedRowItem}
-          user={item}
-          isReadOnly={props.isReadOnly}
-        />
-      )}
-      horizontal={true}
-    />
+    <>
+      <Text category="s1">
+        {props.isReadOnly ? "Shared with" : "Share with"}
+      </Text>
+      <BaseFlatList
+        data={props.data}
+        rowComponent={(item) => (
+          <UserChooserRowItem
+            onSelected={OnSelectedRowItem}
+            user={item}
+            isReadOnly={props.isReadOnly}
+          />
+        )}
+        horizontal={true}
+      />
+    </>
   );
 }

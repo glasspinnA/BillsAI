@@ -101,7 +101,6 @@ export function AddBillView(props: AddBillViewProps) {
         </View>
       </View>
       <View style={baseStyle.flexThree}>
-        <Text category="s1">Users involved</Text>
         <View style={baseStyle.flexFour}>
           <Controller
             control={control}

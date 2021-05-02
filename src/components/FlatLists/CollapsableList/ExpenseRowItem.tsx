@@ -30,16 +30,20 @@ export const ExpenseRowItemBody = (props: ExpenseRowItemBodyProps) => {
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
-        <IconButton
-          onPress={() => OnEditExpensePressed(props.expense)}
-          icon={IconChooser.EDIT}
-        />
-        <IconButton
-          onPress={() => OnDeleteExpensePressed(props.expense)}
-          icon={IconChooser.REMOVE}
-        />
+        <View style={{ flex: 1 }}>
+          <HList data={props.expense.Users} isReadOnly={true} />
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <IconButton
+            onPress={() => OnEditExpensePressed(props.expense)}
+            icon={IconChooser.EDIT}
+          />
+          <IconButton
+            onPress={() => OnDeleteExpensePressed(props.expense)}
+            icon={IconChooser.REMOVE}
+          />
+        </View>
       </View>
-      <HList data={props.expense.Users} isReadOnly={true} />
     </View>
   );
 };
