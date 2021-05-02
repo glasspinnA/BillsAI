@@ -1,32 +1,33 @@
 import { useTheme } from "@ui-kitten/components/theme/theme/theme.service";
 import { Text } from "@ui-kitten/components";
 import * as React from "react";
-import { View } from "react-native";
+import { StyleProp, View, ViewProps, ViewStyle } from "react-native";
 import { IconChooser } from "../../../enum/IconChooser";
 import { CustomIcon } from "../../Icons/CustomIcon";
+import { Size } from "../../../enum/Size";
 
 export interface UserIconProps {
   title: string;
   fullname?: string;
   isSelectedState?: boolean;
+  size: Size;
 }
 
 export function UserIcon(props: UserIconProps) {
   const theme = useTheme();
-
   return (
     <View style={{ flex: 1 }}>
       <View
         style={{
           alignSelf: "center",
           backgroundColor: theme["color-primary-500"],
-          height: 50,
-          width: 50,
           borderRadius: 100,
           alignItems: "center",
           justifyContent: "center",
           borderWidth: 1.5,
           borderColor: theme["color-primary-active-border"],
+          height: props.size == Size.SMALL ? 40 : 50,
+          width: props.size == Size.SMALL ? 40 : 50,
         }}
       >
         <Text category="s1" style={{ color: theme["text-alternate-color"] }}>

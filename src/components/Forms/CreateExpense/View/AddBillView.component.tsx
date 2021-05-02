@@ -58,7 +58,6 @@ export function AddBillView(props: AddBillViewProps) {
 
   React.useEffect(() => {
     if (props.clearForm) ClearForm();
-    console.log(props.clearForm);
   }, [props.clearForm]);
 
   const OnAddPressed = (data: IFormInputs) => {
@@ -71,7 +70,6 @@ export function AddBillView(props: AddBillViewProps) {
     const users = props.users.map((u) => {
       return { ...u, isSelected: true };
     });
-    console.log(users);
     setValue(ADD_BILL_FORM.USER, users);
   };
 

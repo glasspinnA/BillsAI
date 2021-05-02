@@ -1,6 +1,7 @@
 import * as React from "react";
 import { TouchableOpacity, View } from "react-native";
 import { UserDTO } from "../../../DTO/UserDTO";
+import { Size } from "../../../enum/Size";
 import { UserIcon } from "./UserIcon";
 interface UserChooserRowItemProps {
   user: UserDTO;
@@ -20,7 +21,10 @@ const UserChooserRowItem = (props: UserChooserRowItemProps) => {
   const RenderReadOnlyView = () => {
     return (
       <View style={{ marginHorizontal: 1 }}>
-        <UserIcon title={props.user.title} />
+        <UserIcon
+          title={props.user.title}
+          size={props.isReadOnly ? Size.SMALL : Size.MEDIUM}
+        />
       </View>
     );
   };
@@ -40,6 +44,7 @@ const UserChooserRowItem = (props: UserChooserRowItemProps) => {
           isSelectedState={isSelectedState}
           fullname={props.user.name}
           title={props.user.title}
+          size={props.isReadOnly ? Size.SMALL : Size.MEDIUM}
         />
       </TouchableOpacity>
     );
