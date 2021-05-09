@@ -10,11 +10,12 @@ import { CollapsablePresenter } from "../components/FlatLists/CollapsableList/Co
 import ExpenseForm from "../components/Forms/CreateExpense/Presenter/AddExpenseFormPresenter.component";
 import { ScreenHeaderText } from "../components/Texts/ScreenHeader";
 import GlobalLayout from "../constants/GlobalLayout";
+import { SCREEN_NAME } from "../constants/Screens";
 import { ExpenseDTO } from "../DTO/ExpenseDTO";
 import { IUserExpensesRoute } from "../interface/IRoute";
 import { RootState } from "../redux/store/store";
 
-export default function TabOneScreen() {
+export default function ExpenseScreen() {
   const bottomSheetRef = React.useRef<BottomSheet>(null);
   const expenses = useSelector(
     (state: RootState) => state.expense.expenseTypes
@@ -24,10 +25,10 @@ export default function TabOneScreen() {
   >(undefined);
   const navigation = useNavigation();
   const Calculate = () => {
-    navigation.navigate("TabThree", {
-      screen: "TabThreeScreen",
-      name: "TabThreeScreen",
-      key: "TabThreeScreen",
+    navigation.navigate(SCREEN_NAME.PAYMENT_SCREEN, {
+      screen: SCREEN_NAME.PAYMENT_SCREEN,
+      name: SCREEN_NAME.PAYMENT_SCREEN,
+      key: SCREEN_NAME.PAYMENT_SCREEN,
       params: {
         userExpenses: CalculateExpenses(expenses),
       },

@@ -12,15 +12,16 @@ import { UserDTO } from "../DTO/UserDTO";
 import { userDummyData } from "../helpers/testData";
 import { UserAmount } from "../components/Texts/UserAmount";
 import { ScreenHeaderText } from "../components/Texts/ScreenHeader";
+import { SCREEN_NAME } from "../constants/Screens";
 
-export default function TabTwoScreen() {
+export default function UserScreen() {
   const navigation = useNavigation();
   const [data, setData] = React.useState(userDummyData);
   const dispatch = useDispatch();
 
   const StartNextScreen = () => {
     dispatch(AddUsers(data));
-    navigation.navigate("TabOne");
+    navigation.navigate(SCREEN_NAME.EXPENSE_SCREEN);
   };
 
   const OnUserDeleted = (userId: string) => {

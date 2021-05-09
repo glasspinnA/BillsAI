@@ -2,23 +2,20 @@ import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
-import TabOneScreen from "../screens/TabOneScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
-import {
-  BottomTabParamList,
-  TabOneParamList,
-  TabTwoParamList,
-} from "../../types";
-import { TabThreeScreen } from "../screens/TabThreeScreen";
+import ExpenseScreen from "../screens/ExpenseScreen";
+import UserScreen from "../screens/UserScreen";
+import { BottomTabParamList } from "../../types";
+import { PaymentScreen } from "../screens/PaymentScreen";
+import { SCREEN_NAME } from "../constants/Screens";
 
-const BottomTab = createBottomTabNavigator<BottomTabParamList>();
+const BottomTab = createBottomTabNavigator();
 
 export default function BottomTabNavigator() {
   return (
-    <BottomTab.Navigator initialRouteName="TabTwo">
+    <BottomTab.Navigator initialRouteName={SCREEN_NAME.USER_SCREEN}>
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneNavigator}
+        name={SCREEN_NAME.EXPENSE_SCREEN}
+        component={ExpenseScreenNavigator}
         options={{
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="ios-code" color={color} />
@@ -26,8 +23,8 @@ export default function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoNavigator}
+        name={SCREEN_NAME.USER_SCREEN}
+        component={UserScreenNavigation}
         options={{
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="ios-code" color={color} />
@@ -35,8 +32,8 @@ export default function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="TabThree"
-        component={TabThreeNav}
+        name={SCREEN_NAME.PAYMENT_SCREEN}
+        component={PaymentScreenNavigation}
         options={{
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="ios-code" color={color} />
@@ -56,46 +53,41 @@ function TabBarIcon(props: {
   return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
 }
 
-// Each tab has its own navigation stack, you can read more about this pattern here:
-// https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const TabOneStack = createStackNavigator<TabOneParamList>();
-
-function TabOneNavigator() {
+const ExpenseStack = createStackNavigator();
+function ExpenseScreenNavigator() {
   return (
-    <TabOneStack.Navigator>
-      <TabOneStack.Screen
-        name="TabOneScreen"
-        component={TabOneScreen}
+    <ExpenseStack.Navigator>
+      <ExpenseStack.Screen
+        name={SCREEN_NAME.EXPENSE_SCREEN}
+        component={ExpenseScreen}
         options={{ headerShown: false }}
       />
-    </TabOneStack.Navigator>
+    </ExpenseStack.Navigator>
   );
 }
 
-const TabTwoStack = createStackNavigator<TabTwoParamList>();
-
-function TabTwoNavigator() {
+const UserStack = createStackNavigator();
+function UserScreenNavigation() {
   return (
-    <TabTwoStack.Navigator>
-      <TabTwoStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoScreen}
+    <UserStack.Navigator>
+      <UserStack.Screen
+        name={SCREEN_NAME.USER_SCREEN}
+        component={UserScreen}
         options={{ headerShown: false }}
       />
-    </TabTwoStack.Navigator>
+    </UserStack.Navigator>
   );
 }
 
-const TabThreeStack = createStackNavigator<TabTwoParamList>();
-
-function TabThreeNav() {
+const PaymentStack = createStackNavigator();
+function PaymentScreenNavigation() {
   return (
-    <TabThreeStack.Navigator>
-      <TabThreeStack.Screen
-        name="TabThreeScreen"
-        component={TabThreeScreen}
+    <PaymentStack.Navigator>
+      <PaymentStack.Screen
+        name={SCREEN_NAME.PAYMENT_SCREEN}
+        component={PaymentScreen}
         options={{ headerShown: false }}
       />
-    </TabThreeStack.Navigator>
+    </PaymentStack.Navigator>
   );
 }
