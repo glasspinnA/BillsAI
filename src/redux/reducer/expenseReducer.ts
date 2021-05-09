@@ -1,23 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IExpensesSectionList } from "../../interface/IExpensesSectionList";
-import { RootState } from "../store/store";
 import { ExpenseDTO } from "../../DTO/ExpenseDTO";
-import { UserDTO } from "../../DTO/UserDTO";
 import _ from "lodash";
 import produce from "immer";
 import { ExpenseType } from "../../enum/ExpenseType";
 import { WritableDraft } from "immer/dist/internal";
+import { UserDTO } from "../../DTO/UserDTO";
 
-export const baseReducer = createSlice({
-  name: "counter",
+export const expenseReducer = createSlice({
+  name: "expense",
   initialState: {
-    users: [] as UserDTO[],
     expenseTypes: [] as IExpensesSectionList[],
   },
   reducers: {
-    AddUsers: (state, action: PayloadAction<UserDTO[]>) => {
-      return { ...state, users: action.payload };
-    },
     ExpenseToDelete: (state, action: PayloadAction<ExpenseDTO>) => {
       return produce(state, (draftState) => {
         const expenseTypeIndex = GetExpenseTypeIndex(
@@ -125,13 +120,9 @@ const Add = (
 };
 
 export const {
-  AddUsers,
   AddExpenses,
   UpdateExpense,
   ExpenseToDelete,
-} = baseReducer.actions;
+} = expenseReducer.actions;
 
-export default baseReducer.reducer;
-
-export const GetUsers = (state: RootState): UserDTO[] =>
-  state.baseReducer.users;
+export default expenseReducer.reducer;

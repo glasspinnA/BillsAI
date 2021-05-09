@@ -17,7 +17,7 @@ import { RootState } from "../redux/store/store";
 export default function TabOneScreen() {
   const bottomSheetRef = React.useRef<BottomSheet>(null);
   const expenses = useSelector(
-    (state: RootState) => state.baseReducer.expenseTypes
+    (state: RootState) => state.expense.expenseTypes
   );
   const [expenseToEdit, setExpenseToEdit] = React.useState<
     ExpenseDTO | undefined
@@ -41,7 +41,7 @@ export default function TabOneScreen() {
   };
 
   return (
-    <Layout level="3" style={GlobalLayout.globalStyles.layout}>
+    <Layout level="2" style={GlobalLayout.globalStyles.layout}>
       <SafeAreaView style={{ flex: 1 }}>
         <ScreenHeaderText title="Expenses" />
         <RoundedButton

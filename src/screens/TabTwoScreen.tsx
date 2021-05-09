@@ -3,7 +3,7 @@ import { Layout, Text } from "@ui-kitten/components";
 import * as React from "react";
 import { SafeAreaView } from "react-native";
 import { useDispatch } from "react-redux";
-import { AddUsers } from "../redux/reducer/baseReducer";
+import { AddUsers } from "../redux/reducer/userReducer";
 import { UserFlatList } from "../components/FlatLists/AddUser/UserFlatList";
 import { RoundedButton } from "../components/Buttons/RoundedButton";
 import { View } from "react-native";
@@ -40,7 +40,7 @@ export default function TabTwoScreen() {
   };
 
   return (
-    <Layout level="3" style={GlobalLayout.globalStyles.layout}>
+    <Layout level="2" style={GlobalLayout.globalStyles.layout}>
       <SafeAreaView style={{ flex: 1 }}>
         <ScreenHeaderText title="Users" />
         <View style={{ flex: 4 }}>

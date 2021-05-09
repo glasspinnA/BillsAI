@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { useDispatch } from "react-redux";
 import { ExpenseDTO } from "../../../DTO/ExpenseDTO";
 import { IconChooser } from "../../../enum/IconChooser";
-import { ExpenseToDelete } from "../../../redux/reducer/baseReducer";
+import { ExpenseToDelete } from "../../../redux/reducer/expenseReducer";
 import { IconButton } from "../../Buttons/IconButton";
 import { HList } from "../UserSelector/HList";
 

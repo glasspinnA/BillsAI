@@ -9,7 +9,7 @@ export interface TabThreeScreenProps {}
 
 export function TabThreeScreen(props: TabThreeScreenProps) {
   return (
-    <Layout level="3" style={GlobalLayout.globalStyles.layout}>
+    <Layout level="2" style={GlobalLayout.globalStyles.layout}>
       <SafeAreaView style={{ flex: 1 }}>
         <ScreenHeaderText title="Payment" />
         <CollapsablePresenter item={flatlistDummyData} enableAccordion={true} />
