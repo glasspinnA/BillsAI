@@ -1,4 +1,4 @@
 export enum ExpenseType {
-  INCOME_BASED = 0,
-  EVEN_SHARED = 1,
+  INCOME_BASED = 1,
+  EVEN_SHARED = 0,
 }

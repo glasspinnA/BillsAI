@@ -17,7 +17,7 @@ import { PayRowItemHeader } from "./PayRowItem";
 export interface CollapsableViewProps {
   item: IUserPayFlatList | IExpensesSectionList;
   enableAccordion: boolean;
-  onItemEditPressed?: () => void;
+  onItemEditPressed?: (expense: ExpenseDTO) => void;
 }
 
 export function CollapsableView(props: CollapsableViewProps) {

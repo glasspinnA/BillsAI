@@ -46,26 +46,19 @@ const ExpenseForm = (props: AddFormPresenterProps) => {
       Users: data.USER.filter((x) => x.isSelected),
       ExpenseType: data.EXPENSE_TYPE,
     } as ExpenseDTO;
-
     if (data.ID === "-1") {
       AddExpense(expense);
     } else {
-      UpdateExpense(expense);
+      _UpdateExpense(expense);
     }
-
     PerformAnimation(AnimationTypes.ROW_ITEM_ADD);
   };
 
   const AddExpense = (expense: ExpenseDTO) => {
-    const expenseList = {
-      id: expense.ExpenseType,
-      sectionTitle: ExpenseType[expense.ExpenseType],
-      data: [expense],
-    } as IExpensesSectionList;
-    dispatch(AddExpenses(expenseList));
+    dispatch(AddExpenses(expense));
   };
 
-  const UpdateExpense = (expense: ExpenseDTO) => {
+  const _UpdateExpense = (expense: ExpenseDTO) => {
     dispatch(UpdateExpense(expense));
   };
 

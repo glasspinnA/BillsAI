@@ -3,16 +3,13 @@ import { View } from "react-native";
 import { useDispatch } from "react-redux";
 import { ExpenseDTO } from "../../../DTO/ExpenseDTO";
 import { IconChooser } from "../../../enum/IconChooser";
-import {
-  ExpenseToDelete,
-  ExpenseToEdit,
-} from "../../../redux/reducer/baseReducer";
+import { ExpenseToDelete } from "../../../redux/reducer/baseReducer";
 import { IconButton } from "../../Buttons/IconButton";
 import { HList } from "../UserSelector/HList";
 
 export interface ExpenseRowItemBodyProps {
   expense: ExpenseDTO;
-  onEditExpensePressed?: () => void;
+  onEditExpensePressed?: (expense: ExpenseDTO) => void;
 }
 
 export const ExpenseRowItemBody = (props: ExpenseRowItemBodyProps) => {
@@ -23,8 +20,8 @@ export const ExpenseRowItemBody = (props: ExpenseRowItemBodyProps) => {
   };
 
   const OnEditExpensePressed = (expense: ExpenseDTO) => {
-    dispatch(ExpenseToEdit(expense));
-    if (props.onEditExpensePressed != undefined) props.onEditExpensePressed();
+    if (props.onEditExpensePressed != undefined)
+      props.onEditExpensePressed(expense);
   };
 
   return (

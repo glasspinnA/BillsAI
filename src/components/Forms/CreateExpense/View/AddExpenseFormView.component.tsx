@@ -12,6 +12,7 @@ import baseStyle from "../../../../constants/style";
 import componentStyle from "./AddView.component.style";
 import { CustomController } from "./Controller.component";
 import { ErrorMessage } from "./ErrorMessage.component";
+import { ExpenseType } from "../../../../enum/ExpenseType";
 export interface AddExpenseFormProps {
   users: UserDTO[];
   onAddExpense(data: IFormInputs): void;
@@ -42,6 +43,7 @@ export function AddExpenseForm(props: AddExpenseFormProps) {
   }, [props.prefilledForm]);
 
   const PopulateForm = () => {
+    if (props.prefilledForm == undefined) return;
     setValue(ADD_BILL_FORM.PRODUCT, props.prefilledForm.name);
     setValue(
       ADD_BILL_FORM.PRICE,
@@ -72,6 +74,7 @@ export function AddExpenseForm(props: AddExpenseFormProps) {
       return { ...u, isSelected: true };
     });
     setValue(ADD_BILL_FORM.USER, users);
+    setValue(ADD_BILL_FORM.ID, "-1");
   };
 
   return (
@@ -148,7 +151,7 @@ export function AddExpenseForm(props: AddExpenseFormProps) {
             </RadioGroup>
           )}
           name={ADD_BILL_FORM.EXPENSE_TYPE}
-          defaultValue="0"
+          defaultValue={ExpenseType.EVEN_SHARED}
         />
       </View>
       <View style={baseStyle.flexOne}>

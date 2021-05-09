@@ -7,22 +7,22 @@ import { useSelector } from "react-redux";
 import { CalculateExpenses } from "../Calculate";
 import { RoundedButton } from "../components/Buttons/RoundedButton";
 import { CollapsablePresenter } from "../components/FlatLists/CollapsableList/CollapsablePresenter";
-import AddForm from "../components/Forms/CreateExpense/Presenter/AddBillPresenter.component";
+import ExpenseForm from "../components/Forms/CreateExpense/Presenter/AddExpenseFormPresenter.component";
 import { ScreenHeaderText } from "../components/Texts/ScreenHeader";
 import GlobalLayout from "../constants/GlobalLayout";
+import { ExpenseDTO } from "../DTO/ExpenseDTO";
 import { IUserExpensesRoute } from "../interface/IRoute";
 import { RootState } from "../redux/store/store";
 
 export default function TabOneScreen() {
   const bottomSheetRef = React.useRef<BottomSheet>(null);
   const expenses = useSelector(
-    (state: RootState) => state.baseReducer.expenses
+    (state: RootState) => state.baseReducer.expenseTypes
   );
-  const expensesToEdit = useSelector(
-    (state: RootState) => state.baseReducer.expenseToEdit
-  );
+  const [expenseToEdit, setExpenseToEdit] = React.useState<
+    ExpenseDTO | undefined
+  >(undefined);
   const navigation = useNavigation();
-
   const Calculate = () => {
     navigation.navigate("TabThree", {
       screen: "TabThreeScreen",
@@ -31,9 +31,13 @@ export default function TabOneScreen() {
       } as IUserExpensesRoute,
     });
   };
-
-  const OnEditPressed = () => {
+  const OnEditPressed = (expense: ExpenseDTO) => {
+    setExpenseToEdit(expense);
     bottomSheetRef.current?.expand();
+  };
+
+  const OnClearForm = () => {
+    setExpenseToEdit(undefined);
   };
 
   return (
@@ -50,9 +54,10 @@ export default function TabOneScreen() {
           enableAccordion={false}
           onEditPressed={OnEditPressed}
         />
-        <AddForm
+        <ExpenseForm
           bottomSheetRef={bottomSheetRef}
-          expenseToEdit={expensesToEdit}
+          expenseToEdit={expenseToEdit}
+          onClearForm={OnClearForm}
         />
       </SafeAreaView>
     </Layout>

@@ -4,11 +4,12 @@ import { IExpensesSectionList } from "../../../interface/IExpensesSectionList";
 import { CollapsableView } from "./CollapsableView";
 import { BaseFlatList } from "../BaseFlatList";
 import { EmptyListComponent } from "../../EmptyList/EmptyList.compnent";
+import { ExpenseDTO } from "../../../DTO/ExpenseDTO";
 
 export interface CollapsablePresenterProps {
   item: IUserPayFlatList[] | IExpensesSectionList[];
   enableAccordion: boolean;
-  onEditPressed?: () => void;
+  onEditPressed?: (expense: ExpenseDTO) => void;
 }
 
 export function CollapsablePresenter(props: CollapsablePresenterProps) {

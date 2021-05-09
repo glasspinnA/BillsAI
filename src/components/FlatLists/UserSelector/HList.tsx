@@ -19,6 +19,10 @@ export function HList(props: HListProps) {
     }
   };
 
+  React.useEffect(() => {
+    // console.log(props.data);
+  }, [props.data]);
+
   return (
     <>
       <Text category="s1">

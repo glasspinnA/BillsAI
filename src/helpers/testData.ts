@@ -273,18 +273,21 @@ export const userDummyData = (): UserDTO[] => {
           name: "First Item",
           title: "FI",
           isSelected: true,
+          income: 100,
         },
         {
           id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
           name: "Second Item",
           title: "SI",
           isSelected: true,
+          income: 200,
         },
         {
           id: "58694a0f-3da1-471f-bd96-145571e29d72",
           name: "Third Item",
           title: "TI",
           isSelected: true,
+          income: 300,
         },
       ]
     : [];
