@@ -6,7 +6,11 @@ import GlobalLayout from "../../../constants/GlobalLayout";
 import { ExpenseDTO } from "../../../DTO/ExpenseDTO";
 import { PayDTO } from "../../../DTO/PayDTO";
 import { IconChooser } from "../../../enum/IconChooser";
-import { GetHeaderTitle, IsPayDTO } from "../../../helpers/Common";
+import {
+  GetHeaderTitle,
+  IsPayDTO,
+  IsUserPayFlatList,
+} from "../../../helpers/Common";
 import { IExpensesSectionList } from "../../../interface/IExpensesSectionList";
 import { IUserPayFlatList } from "../../../interface/IUserPayFlatList";
 import { CustomIcon } from "../../Icons/CustomIcon";
@@ -32,17 +36,23 @@ export function CollapsableView(props: CollapsableViewProps) {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
   };
 
-  const GetItemHeader = (item: PayDTO | ExpenseDTO): JSX.Element => {
-    if (IsPayDTO(item)) {
-      return PayRowItemHeader(item.username, item.sumToPay, isItemBodyOpen);
+  const GetItemHeader = (): JSX.Element => {
+    if (IsUserPayFlatList(props.item)) {
+      return PayRowItemHeader(
+        props.item.data[0].username,
+        props.item.totalPay,
+        isItemBodyOpen
+      );
     } else {
       return (
-        <ItemRowTextContainer headerText={GetHeaderTitle(item.ExpenseType)} />
+        <ItemRowTextContainer
+          headerText={GetHeaderTitle(props.item.data[0].ExpenseType)}
+        />
       );
     }
   };
   const RenderItemHeader = () => {
-    return RenderItemWrapper(GetItemHeader(props.item.data[0]));
+    return RenderItemWrapper(GetItemHeader());
   };
 
   const RenderItemBody = (): JSX.Element => {
@@ -80,7 +90,7 @@ export function CollapsableView(props: CollapsableViewProps) {
           }}
         >
           {IsPayDTO(data.data)
-            ? GetItemBody(data.data.productname, data.data.sumToPay.toString())
+            ? GetItemBody(data.data.productname, data.data.sumToPay.toFixed(2))
             : GetItemBody(data.data.name, data.data.Price.toString())}
 
           {!IsPayDTO(data.data) ? (

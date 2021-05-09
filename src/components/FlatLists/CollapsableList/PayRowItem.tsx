@@ -5,12 +5,12 @@ import { ItemRowTextContainer } from "../../Texts/ItemRowTextContainer";
 
 export const PayRowItemHeader = (
   name: string,
-  sumToPay: number,
+  payment: string,
   isItemBodyOpen: boolean
 ) => {
   return (
     <View style={{ flex: 1, flexDirection: "row" }}>
-      <ItemRowTextContainer headerText={name} subText={sumToPay.toString()} />
+      <ItemRowTextContainer headerText={name} subText={payment} />
       <Chevron shouldToggleRotation={isItemBodyOpen} />
     </View>
   );
