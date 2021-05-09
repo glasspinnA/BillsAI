@@ -1,6 +1,6 @@
 import { chain, values } from "lodash";
 import { PayDTO } from "../DTO/PayDTO";
-import { IUserPaySectionList } from "../interface/IUserPaySectionList";
+import { IUserPayFlatList } from "../interface/IUserPayFlatList";
 
 export const GroupSumToPayByUserId = (pays: PayDTO[]) => {
   return chain(pays)
@@ -10,9 +10,8 @@ export const GroupSumToPayByUserId = (pays: PayDTO[]) => {
         ({
           id: userId,
           data: data,
-          sectionTitle: data[0].username,
           totalPay: data.reduce((cv, pv) => pv.sumToPay + cv, 0).toFixed(0),
-        } as IUserPaySectionList)
+        } as IUserPayFlatList)
     )
     .value();
 };

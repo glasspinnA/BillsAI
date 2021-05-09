@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IUserPayFlatList } from "../../../interface/IUserPaySectionList";
+import { IUserPayFlatList } from "../../../interface/IUserPayFlatList";
 import { IExpensesSectionList } from "../../../interface/IExpensesSectionList";
 import { CollapsableView } from "./CollapsableView";
 import { BaseFlatList } from "../BaseFlatList";

@@ -8,7 +8,7 @@ import { PayDTO } from "../../../DTO/PayDTO";
 import { IconChooser } from "../../../enum/IconChooser";
 import { GetHeaderTitle, IsPayDTO } from "../../../helpers/Common";
 import { IExpensesSectionList } from "../../../interface/IExpensesSectionList";
-import { IUserPayFlatList } from "../../../interface/IUserPaySectionList";
+import { IUserPayFlatList } from "../../../interface/IUserPayFlatList";
 import { CustomIcon } from "../../Icons/CustomIcon";
 import { ItemRowTextContainer } from "../../Texts/ItemRowTextContainer";
 import { ExpenseRowItemBody } from "./ExpenseRowItem";

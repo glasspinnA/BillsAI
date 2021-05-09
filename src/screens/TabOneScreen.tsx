@@ -26,10 +26,12 @@ export default function TabOneScreen() {
   const Calculate = () => {
     navigation.navigate("TabThree", {
       screen: "TabThreeScreen",
+      name: "TabThreeScreen",
+      key: "TabThreeScreen",
       params: {
         userExpenses: CalculateExpenses(expenses),
-      } as IUserExpensesRoute,
-    });
+      },
+    } as IUserExpensesRoute);
   };
   const OnEditPressed = (expense: ExpenseDTO) => {
     setExpenseToEdit(expense);

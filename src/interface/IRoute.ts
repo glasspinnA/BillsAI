@@ -1,5 +1,10 @@
 import { PayDTO } from "../DTO/PayDTO";
-import { IUserPaySectionList } from "./IUserPaySectionList";
+import { IUserPayFlatList } from "./IUserPayFlatList";
 export interface IUserExpensesRoute {
-  userExpenses: IUserPaySectionList[];
+  key: string;
+  name: string;
+  screen: string;
+  params: {
+    userExpenses: IUserPayFlatList[];
+  };
 }

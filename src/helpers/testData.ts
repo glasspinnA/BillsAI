@@ -2,7 +2,7 @@ import { UserDTO } from "../DTO/UserDTO";
 import { ExpenseType } from "../enum/ExpenseType";
 import { isDevModeEnabled } from "../env/configs";
 import { IExpensesSectionList } from "../interface/IExpensesSectionList";
-import { IUserPayFlatList } from "../interface/IUserPaySectionList";
+import { IUserPayFlatList } from "../interface/IUserPayFlatList";
 
 export const dummyData: IExpensesSectionList[] = [
   {
