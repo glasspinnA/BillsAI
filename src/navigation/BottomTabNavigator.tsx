@@ -7,6 +7,7 @@ import UserScreen from "../screens/UserScreen";
 import { BottomTabParamList } from "../../types";
 import { PaymentScreen } from "../screens/PaymentScreen";
 import { SCREEN_NAME } from "../constants/Screens";
+import { SettingScreen } from "../screens/SettingScreen";
 
 const BottomTab = createBottomTabNavigator();
 
@@ -34,6 +35,15 @@ export default function BottomTabNavigator() {
       <BottomTab.Screen
         name={SCREEN_NAME.PAYMENT_SCREEN}
         component={PaymentScreenNavigation}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="ios-code" color={color} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name={SCREEN_NAME.SETTING_SCREEN}
+        component={SettingStackNavigation}
         options={{
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="ios-code" color={color} />
@@ -89,5 +99,18 @@ function PaymentScreenNavigation() {
         options={{ headerShown: false }}
       />
     </PaymentStack.Navigator>
+  );
+}
+
+const SettingStack = createStackNavigator();
+function SettingStackNavigation() {
+  return (
+    <SettingStack.Navigator>
+      <SettingStack.Screen
+        name={SCREEN_NAME.SETTING_SCREEN}
+        component={SettingScreen}
+        options={{ headerShown: false }}
+      />
+    </SettingStack.Navigator>
   );
 }

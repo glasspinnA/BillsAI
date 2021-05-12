@@ -1,13 +1,11 @@
 import React from "react";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import Navigation from "./src/navigation";
 import useCachedResources from "./src/hooks/useCachedResources";
-import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
-import * as eva from "@eva-design/eva";
+import { IconRegistry } from "@ui-kitten/components";
 import { MaterialCommunityIconsPack } from "./src/adapter/IconAdapter";
 import { Provider } from "react-redux";
 import { Store } from "./src/redux/store/store";
-import { Platform, UIManager, StatusBar } from "react-native";
+import { Platform, UIManager } from "react-native";
+import { AppContainer } from "./AppContainer";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -22,14 +20,9 @@ export default function App() {
     return (
       <>
         <IconRegistry icons={MaterialCommunityIconsPack} />
-        <ApplicationProvider {...eva} theme={eva.light}>
-          <Provider store={Store}>
-            <SafeAreaProvider>
-              <StatusBar barStyle={"dark-content"} />
-              <Navigation />
-            </SafeAreaProvider>
-          </Provider>
-        </ApplicationProvider>
+        <Provider store={Store}>
+          <AppContainer />
+        </Provider>
       </>
     );
   } else {
