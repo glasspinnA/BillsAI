@@ -4,13 +4,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 import ExpenseScreen from "../screens/ExpenseScreen";
 import UserScreen from "../screens/UserScreen";
-import { BottomTabParamList } from "../../types";
 import { PaymentScreen } from "../screens/PaymentScreen";
 import { SCREEN_NAME } from "../constants/Screens";
 import { SettingScreen } from "../screens/SettingScreen";
 
 const BottomTab = createBottomTabNavigator();
-
 export default function BottomTabNavigator() {
   return (
     <BottomTab.Navigator initialRouteName={SCREEN_NAME.USER_SCREEN}>

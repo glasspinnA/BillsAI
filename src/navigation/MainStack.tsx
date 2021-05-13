@@ -4,10 +4,8 @@ import { PaymentScreen } from "../screens/PaymentScreen";
 import UserScreen from "../screens/UserScreen";
 import * as React from "react";
 import { SCREEN_NAME } from "../constants/Screens";
-
 export default function MainStack() {
   const Stack = createStackNavigator();
-
   return (
     <Stack.Navigator initialRouteName={SCREEN_NAME.USER_SCREEN}>
       <Stack.Screen
