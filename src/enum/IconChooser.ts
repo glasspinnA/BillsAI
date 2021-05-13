@@ -4,5 +4,4 @@ export enum IconChooser {
   CHECK = 2,
   CHEVRON = 3,
   EDIT = 4,
-  MENU = 5,
 }

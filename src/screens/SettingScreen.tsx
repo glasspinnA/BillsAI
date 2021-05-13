@@ -1,11 +1,11 @@
 import { Layout, Radio, RadioGroup } from "@ui-kitten/components";
 import * as React from "react";
-import { SafeAreaView, Switch } from "react-native";
+import { SafeAreaView, Switch, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { ScreenHeaderText } from "../components/Texts/ScreenHeader";
 import GlobalLayout from "../constants/GlobalLayout";
+import { Theme } from "../enum/Theme";
 import { SetDarkModeState, SetTheme } from "../redux/reducer/commonReducer";
-import { RootState } from "../redux/store/store";
+import { RootState, Store } from "../redux/store/store";
 
 export interface SettingScreenProps {}
 
@@ -18,14 +18,13 @@ export function SettingScreen(props: SettingScreenProps) {
   return (
     <Layout level="2" style={GlobalLayout.globalStyles.layout}>
       <SafeAreaView style={{ flex: 1 }}>
-        <ScreenHeaderText title="Setting" />
+        <Text>SettingScreen</Text>
         <Switch
           trackColor={{ false: "#767577", true: "#81b0ff" }}
           thumbColor={"#f4f3f4"}
           ios_backgroundColor="#3e3e3e"
           onValueChange={ToggleSwitch}
           value={isDarkMode}
-          style={{ backgroundColor: "red" }}
         ></Switch>
         <RadioGroup
           selectedIndex={SelectedTheme}
