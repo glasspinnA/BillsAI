@@ -6,6 +6,7 @@ import { RadioButton } from "../components/Radio/RadioButton/RadioButton.compone
 import { RadioGroup } from "../components/Radio/RadioGroup/RadioGroup.component";
 import { ScreenHeaderText } from "../components/Texts/ScreenHeader";
 import GlobalLayout from "../constants/GlobalLayout";
+import { Theme } from "../enum/Theme";
 import { SetDarkModeState, SetTheme } from "../redux/reducer/commonReducer";
 import { RootState } from "../redux/store/store";
 
@@ -33,8 +34,9 @@ export function SettingScreen(props: SettingScreenProps) {
           selectedIndex={SelectedTheme}
           onChange={(index) => SetSelectedTheme(index)}
         >
-          <RadioButton color="orange" />
-          <RadioButton />
+          <RadioButton color="orange" title={Theme[Theme.Light]} />
+          <RadioButton color="orange" title={Theme[Theme.Dark]} />
+          <RadioButton color="orange" title={Theme[Theme.Jonna]} />
         </RadioGroup>
       </SafeAreaView>
     </Layout>

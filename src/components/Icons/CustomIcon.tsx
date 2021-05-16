@@ -31,13 +31,7 @@ export const CustomIcon = (icon: IconChooser, color?: string) => {
         />
       );
     case IconChooser.CHECK_NO_BACKGROUND:
-      return (
-        <Icon
-          name="check"
-          size={17}
-          color={color == undefined ? theme["color-success-700"] : color}
-        />
-      );
+      return <Icon name="check" size={17} color={"black"} />;
     case IconChooser.CHEVRON:
       return (
         <Icon
