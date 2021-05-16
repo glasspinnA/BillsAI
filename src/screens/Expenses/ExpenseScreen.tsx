@@ -4,16 +4,16 @@ import { Layout, Text } from "@ui-kitten/components";
 import * as React from "react";
 import { SafeAreaView } from "react-native";
 import { useSelector } from "react-redux";
-import { CalculateExpenses } from "../Calculate";
-import { RoundedButton } from "../components/Buttons/RoundedButton";
-import { CollapsablePresenter } from "../components/FlatLists/CollapsableList/CollapsablePresenter";
-import ExpenseForm from "../components/Forms/CreateExpense/Presenter/AddExpenseFormPresenter.component";
-import { ScreenHeaderText } from "../components/Texts/ScreenHeader";
-import GlobalLayout from "../constants/GlobalLayout";
-import { SCREEN_NAME } from "../constants/Screens";
-import { ExpenseDTO } from "../DTO/ExpenseDTO";
-import { IUserExpensesRoute } from "../interface/IRoute";
-import { RootState } from "../redux/store/store";
+import { CalculateExpenses } from "../../Calculate";
+import { RoundedButton } from "../../components/Buttons/RoundedButton";
+import { CollapsablePresenter } from "../../components/FlatLists/CollapsableList/CollapsablePresenter";
+import ExpenseForm from "../../components/Forms/CreateExpense/Presenter/AddExpenseFormPresenter.component";
+import { ScreenHeaderText } from "../../components/Texts/ScreenHeader";
+import GlobalLayout from "../../constants/GlobalLayout";
+import { SCREEN_NAME } from "../../constants/Screens";
+import { ExpenseDTO } from "../../DTO/ExpenseDTO";
+import { IUserExpensesRoute } from "../../interface/IRoute";
+import { RootState } from "../../redux/store/store";
 
 export default function ExpenseScreen() {
   const bottomSheetRef = React.useRef<BottomSheet>(null);

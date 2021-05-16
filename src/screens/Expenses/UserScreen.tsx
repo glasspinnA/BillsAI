@@ -3,16 +3,16 @@ import { Layout, Text } from "@ui-kitten/components";
 import * as React from "react";
 import { SafeAreaView } from "react-native";
 import { useDispatch } from "react-redux";
-import { AddUsers } from "../redux/reducer/userReducer";
-import { UserFlatList } from "../components/FlatLists/AddUser/UserFlatList";
-import { RoundedButton } from "../components/Buttons/RoundedButton";
+import { AddUsers } from "../../redux/reducer/userReducer";
+import { UserFlatList } from "../../components/FlatLists/AddUser/UserFlatList";
+import { RoundedButton } from "../../components/Buttons/RoundedButton";
 import { View } from "react-native";
-import GlobalLayout from "../constants/GlobalLayout";
-import { UserDTO } from "../DTO/UserDTO";
-import { userDummyData } from "../helpers/testData";
-import { UserAmount } from "../components/Texts/UserAmount";
-import { ScreenHeaderText } from "../components/Texts/ScreenHeader";
-import { SCREEN_NAME } from "../constants/Screens";
+import GlobalLayout from "../../constants/GlobalLayout";
+import { UserDTO } from "../../DTO/UserDTO";
+import { userDummyData } from "../../helpers/testData";
+import { UserAmount } from "../../components/Texts/UserAmount";
+import { ScreenHeaderText } from "../../components/Texts/ScreenHeader";
+import { SCREEN_NAME } from "../../constants/Screens";
 
 export default function UserScreen() {
   const navigation = useNavigation();

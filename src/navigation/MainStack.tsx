@@ -1,7 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import ExpenseScreen from "../screens/ExpenseScreen";
-import { PaymentScreen } from "../screens/PaymentScreen";
-import UserScreen from "../screens/UserScreen";
+import ExpenseScreen from "../screens/Expenses/ExpenseScreen";
+import { PaymentScreen } from "../screens/Expenses/PaymentScreen";
+import UserScreen from "../screens/Expenses/UserScreen";
 import * as React from "react";
 import { SCREEN_NAME } from "../constants/Screens";
 export default function MainStack() {

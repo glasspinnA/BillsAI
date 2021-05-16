@@ -2,9 +2,9 @@ import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
-import ExpenseScreen from "../screens/ExpenseScreen";
-import UserScreen from "../screens/UserScreen";
-import { PaymentScreen } from "../screens/PaymentScreen";
+import ExpenseScreen from "../screens/Expenses/ExpenseScreen";
+import UserScreen from "../screens/Expenses/UserScreen";
+import { PaymentScreen } from "../screens/Expenses/PaymentScreen";
 import { SCREEN_NAME } from "../constants/Screens";
 import { SettingScreen } from "../screens/SettingScreen";
 
