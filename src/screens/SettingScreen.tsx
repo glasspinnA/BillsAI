@@ -1,7 +1,9 @@
-import { Layout, Radio, RadioGroup } from "@ui-kitten/components";
+import { Layout } from "@ui-kitten/components";
 import * as React from "react";
-import { SafeAreaView, Switch } from "react-native";
+import { SafeAreaView, Switch, FlexStyle } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+import { RadioButton } from "../components/Radio/RadioButton/RadioButton.component";
+import { RadioGroup } from "../components/Radio/RadioGroup/RadioGroup.component";
 import { ScreenHeaderText } from "../components/Texts/ScreenHeader";
 import GlobalLayout from "../constants/GlobalLayout";
 import { SetDarkModeState, SetTheme } from "../redux/reducer/commonReducer";
@@ -31,8 +33,8 @@ export function SettingScreen(props: SettingScreenProps) {
           selectedIndex={SelectedTheme}
           onChange={(index) => SetSelectedTheme(index)}
         >
-          <Radio>Option 1</Radio>
-          <Radio>Option 2</Radio>
+          <RadioButton color="orange" />
+          <RadioButton />
         </RadioGroup>
       </SafeAreaView>
     </Layout>

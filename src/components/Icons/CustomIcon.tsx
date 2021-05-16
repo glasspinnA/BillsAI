@@ -27,7 +27,15 @@ export const CustomIcon = (icon: IconChooser, color?: string) => {
         <Icon
           name="check-circle"
           size={17}
-          color={theme["color-success-700"]}
+          color={color == undefined ? theme["color-success-700"] : color}
+        />
+      );
+    case IconChooser.CHECK_NO_BACKGROUND:
+      return (
+        <Icon
+          name="check"
+          size={17}
+          color={color == undefined ? theme["color-success-700"] : color}
         />
       );
     case IconChooser.CHEVRON:
