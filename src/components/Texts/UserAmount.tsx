@@ -1,6 +1,6 @@
-import { useTheme } from "@ui-kitten/components/theme/theme/theme.service";
 import * as React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text } from "react-native";
+import { Circle } from "./Circle.component";
 
 export interface UserAmountProps {
   nbrUsers: number;
@@ -9,7 +9,6 @@ export interface UserAmountProps {
 
 export function UserAmount(props: UserAmountProps) {
   const usersLeft = props.limit - props.nbrUsers;
-  const theme = useTheme();
 
   return (
     <View style={{ alignItems: "center", marginVertical: 10 }}>
@@ -17,19 +16,7 @@ export function UserAmount(props: UserAmountProps) {
         <View>
           <Text> Add </Text>
         </View>
-        <View
-          style={[
-            styles.circle,
-            {
-              backgroundColor: theme["color-primary-default"],
-              borderColor: theme["color-primary-default"],
-            },
-          ]}
-        >
-          <Text style={{ color: theme["text-alternate-color"] }}>
-            {usersLeft}
-          </Text>
-        </View>
+        <Circle text={usersLeft.toString()} />
         <View>
           <Text> more {usersLeft > 1 ? "users" : "user"}</Text>
         </View>
@@ -37,11 +24,3 @@ export function UserAmount(props: UserAmountProps) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  circle: {
-    borderRadius: 10,
-    borderWidth: 1,
-    paddingHorizontal: 5,
-  },
-});

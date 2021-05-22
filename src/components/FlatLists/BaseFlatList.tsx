@@ -9,6 +9,7 @@ export interface BaseFlatListProps {
   scrollEnabled?: boolean;
   emptyListComponent?: () => JSX.Element;
   rowComponent: (item: any) => JSX.Element;
+  keyExtractor?: (item: any) => string;
 }
 
 export function BaseFlatList(props: BaseFlatListProps) {
@@ -27,7 +28,11 @@ export function BaseFlatList(props: BaseFlatListProps) {
       renderItem={({ item }) => {
         return props.rowComponent(item);
       }}
-      keyExtractor={(item) => item.id}
+      keyExtractor={
+        props.keyExtractor == null || props.keyExtractor == undefined
+          ? (item) => item.id
+          : props.keyExtractor
+      }
       ListEmptyComponent={props.emptyListComponent}
       onContentSizeChange={ScrollToEnd}
       scrollEnabled={props.scrollEnabled}

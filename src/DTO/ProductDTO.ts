@@ -1,6 +1,6 @@
-import { BaseDTO } from "./BaseDTO";
-
-export interface ProductDTO extends BaseDTO {
+export interface ProductDTO {
+  id: number;
+  name: string;
   barcode?: string;
   createdDate?: Date;
   deletedDate?: Date;

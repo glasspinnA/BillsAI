@@ -9,4 +9,6 @@ export enum IconChooser {
   SEARCH = 7,
   INCREASE_PLUS = 8,
   DECREASE_MINUS = 9,
+  SHOPPING_CART = 10,
+  FOOD = 11,
 }

@@ -1,4 +1,6 @@
+import { ProductDTO } from "../DTO/ProductDTO";
 import { UserDTO } from "../DTO/UserDTO";
+import { UserProductDTO } from "../DTO/UserProductDTO";
 import { ExpenseType } from "../enum/ExpenseType";
 import { isDevModeEnabled } from "../env/configs";
 import { IExpensesSectionList } from "../interface/IExpensesSectionList";
@@ -291,4 +293,22 @@ export const userDummyData = (): UserDTO[] => {
         },
       ]
     : [];
+};
+
+export const GetProductTestData = (): ProductDTO[] => {
+  return [
+    { id: 0, name: "lök" },
+    { id: 1, name: "tomat" },
+    { id: 2, name: "jordgubb" },
+    { id: 3, name: "paprika" },
+  ];
+};
+
+export const GetUserProductTestData = (): UserProductDTO[] => {
+  return [
+    { id: 0, name: "lök", amount: 1 },
+    { id: 1, name: "tomat", amount: 4 },
+    { id: 2, name: "jordgubb", amount: 6 },
+    { id: 3, name: "paprika", amount: 1 },
+  ];
 };

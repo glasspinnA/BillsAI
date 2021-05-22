@@ -66,5 +66,21 @@ export const CustomIcon = (icon: IconChooser, color?: string) => {
           color={theme["color-primary-500"]}
         />
       );
+    case IconChooser.SHOPPING_CART:
+      return (
+        <Icon
+          name="cart-outline"
+          size={20}
+          color={theme["color-primary-500"]}
+        />
+      );
+    case IconChooser.FOOD:
+      return (
+        <Icon
+          name="food-variant"
+          size={20}
+          color={theme["color-primary-500"]}
+        />
+      );
   }
 };

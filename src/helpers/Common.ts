@@ -1,5 +1,8 @@
 import { ExpenseDTO } from "../DTO/ExpenseDTO";
 import { PayDTO } from "../DTO/PayDTO";
+import { ProductDTO } from "../DTO/ProductDTO";
+import { UserDTO } from "../DTO/UserDTO";
+import { UserProductDTO } from "../DTO/UserProductDTO";
 import { ExpenseType } from "../enum/ExpenseType";
 import { IExpensesSectionList } from "../interface/IExpensesSectionList";
 import { IUserPayFlatList } from "../interface/IUserPayFlatList";
@@ -12,6 +15,12 @@ export const IsUserPayFlatList = (
   data: IUserPayFlatList | IExpensesSectionList
 ): data is IUserPayFlatList => {
   return data && (data as IUserPayFlatList).totalPay !== undefined;
+};
+
+export const IsUserProductDTO = (
+  data: UserProductDTO | ProductDTO
+): data is UserProductDTO => {
+  return data && (data as UserProductDTO).amount !== undefined;
 };
 
 export const GetHeaderTitle = (expenseType: ExpenseType) => {

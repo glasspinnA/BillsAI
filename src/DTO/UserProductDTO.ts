@@ -1,8 +1,9 @@
-export interface UserProduct {
+export interface UserProductDTO {
   id: number;
-  userId: string;
-  productId: string;
+  name: string;
+  userId: number;
+  productId: number;
   amount: number;
   createdDate: Date;
-  deletedDate: Date;
+  deletedDate?: Date;
 }
