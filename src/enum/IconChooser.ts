@@ -6,4 +6,7 @@ export enum IconChooser {
   EDIT = 4,
   MENU = 5,
   CHECK_NO_BACKGROUND = 6,
+  SEARCH = 7,
+  INCREASE_PLUS = 8,
+  DECREASE_MINUS = 9,
 }

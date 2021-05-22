@@ -14,6 +14,6 @@ export function IconButton(props: IconButtonProps) {
       onPress={props.onPress}
       accessoryLeft={() => CustomIcon(props.icon)}
       appearance="ghost"
-    ></Button>
+    />
   );
 }

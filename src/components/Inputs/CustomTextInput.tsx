@@ -1,16 +1,19 @@
-import { Input } from "@ui-kitten/components";
+import { Icon, Input } from "@ui-kitten/components";
 import * as React from "react";
 import { KeyboardTypeOptions, ReturnKeyTypeOptions } from "react-native";
+import { IconChooser } from "../../enum/IconChooser";
 import {
   AnimationTypes,
   PerformAnimation,
 } from "../../helpers/LayoutAnimation";
+import { CustomIcon } from "../Icons/CustomIcon";
 
 interface TextInputProps {
   placeholder: string;
   keyboardType?: KeyboardTypeOptions;
   returnKeyType?: ReturnKeyTypeOptions;
   shoudFocus?: boolean;
+  enableIcon?: boolean;
   value?: string;
   onSubmit?: (text: string) => void;
   onChangeText?: (value: string) => void;
@@ -31,6 +34,10 @@ const CustomTextInput = (props: TextInputProps) => {
     PerformAnimation(AnimationTypes.FLATLIST_ADD_USER);
   };
 
+  const RenderIcon = () => {
+    return props.enableIcon ? CustomIcon(IconChooser.SEARCH) : <></>;
+  };
+
   return (
     <Input
       style={{ paddingVertical: 5 }}
@@ -43,6 +50,7 @@ const CustomTextInput = (props: TextInputProps) => {
       returnKeyType={"done"}
       value={props.value}
       onChangeText={(value) => props.onChangeText && props.onChangeText(value)}
+      accessoryLeft={RenderIcon}
     />
   );
 };

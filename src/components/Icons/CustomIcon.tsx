@@ -46,5 +46,25 @@ export const CustomIcon = (icon: IconChooser, color?: string) => {
       );
     case IconChooser.MENU:
       return <Icon name="menu" size={20} color={theme["color-primary-500"]} />;
+    case IconChooser.SEARCH:
+      return (
+        <Icon name="magnify" size={20} color={theme["color-primary-500"]} />
+      );
+    case IconChooser.INCREASE_PLUS:
+      return (
+        <Icon
+          name="plus-circle-outline"
+          size={20}
+          color={theme["color-primary-500"]}
+        />
+      );
+    case IconChooser.DECREASE_MINUS:
+      return (
+        <Icon
+          name="minus-circle-outline"
+          size={20}
+          color={theme["color-primary-500"]}
+        />
+      );
   }
 };

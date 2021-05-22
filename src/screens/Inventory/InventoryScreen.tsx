@@ -1,15 +1,26 @@
 import { Layout } from "@ui-kitten/components";
 import * as React from "react";
 import { Text, SafeAreaView } from "react-native";
+import CustomTextInput from "../../components/Inputs/CustomTextInput";
 import GlobalLayout from "../../constants/GlobalLayout";
-
+import { ProductList } from "./../../components/FlatLists/ProductList/ProductList.component";
 export interface InventoryScreenProps {}
 
 export function InventoryScreen(props: InventoryScreenProps) {
+  const OnProductAdded = (text: string) => {
+    console.log(text);
+  };
+
   return (
     <Layout level="2" style={GlobalLayout.globalStyles.layout}>
       <SafeAreaView>
-        <Text>InventoryScreen</Text>
+        <CustomTextInput
+          placeholder="Add product"
+          keyboardType="default"
+          onSubmit={OnProductAdded}
+          enableIcon={true}
+        />
+        <ProductList />
       </SafeAreaView>
     </Layout>
   );
