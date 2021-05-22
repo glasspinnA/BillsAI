@@ -1,7 +1,10 @@
 import * as React from "react";
 import { BaseFlatList } from "../BaseFlatList";
 import { ProductItem } from "./ProductItem.component";
-export interface ProductListProps {}
+import { Screen } from "./../../../constants/Screens";
+export interface ProductListProps {
+  screen: Screen;
+}
 
 export function ProductList(props: ProductListProps) {
   return (

@@ -3,10 +3,14 @@ import * as React from "react";
 import { View, Text, SafeAreaView } from "react-native";
 import { Color } from "../../../constants/Color";
 import GlobalLayout from "../../../constants/GlobalLayout";
+import { Screen } from "../../../constants/Screens";
+import { IconChooser } from "../../../enum/IconChooser";
+import { IconButton } from "../../Buttons/IconButton";
 import { Counter } from "../../Counter/Counter.component";
 
 export interface ProductItemProps {
   item: any;
+  screen: Screen;
 }
 
 export function ProductItem(props: ProductItemProps) {
@@ -26,6 +30,7 @@ export function ProductItem(props: ProductItemProps) {
       <View style={GlobalLayout.flatList.row}>
         <Text>Hello</Text>
         <Counter count={count} onCountChange={OnCountChange} />
+        <IconButton onPress={() => null} icon={IconChooser.REMOVE} />
       </View>
     </SafeAreaView>
   );
