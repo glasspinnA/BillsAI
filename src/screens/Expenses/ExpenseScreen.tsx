@@ -6,6 +6,7 @@ import { SafeAreaView } from "react-native";
 import { useSelector } from "react-redux";
 import { CalculateExpenses } from "../../Calculate";
 import { RoundedButton } from "../../components/Buttons/RoundedButton";
+import { ScreenContainer } from "../../components/Container/ScreenContainer.component";
 import { CollapsablePresenter } from "../../components/FlatLists/CollapsableList/CollapsablePresenter";
 import ExpenseForm from "../../components/Forms/CreateExpense/Presenter/AddExpenseFormPresenter.component";
 import { ScreenHeaderText } from "../../components/Texts/ScreenHeader";
@@ -44,25 +45,23 @@ export default function ExpenseScreen() {
   };
 
   return (
-    <Layout level="2" style={GlobalLayout.globalStyles.layout}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <ScreenHeaderText title="Expenses" />
-        <RoundedButton
-          title="Calculate"
-          onPress={Calculate}
-          disabled={expenses.length == 0}
-        />
-        <CollapsablePresenter
-          item={expenses}
-          enableAccordion={false}
-          onEditPressed={OnEditPressed}
-        />
-        <ExpenseForm
-          bottomSheetRef={bottomSheetRef}
-          expenseToEdit={expenseToEdit}
-          onClearForm={OnClearForm}
-        />
-      </SafeAreaView>
-    </Layout>
+    <ScreenContainer>
+      <ScreenHeaderText title="Expenses" />
+      <RoundedButton
+        title="Calculate"
+        onPress={Calculate}
+        disabled={expenses.length == 0}
+      />
+      <CollapsablePresenter
+        item={expenses}
+        enableAccordion={false}
+        onEditPressed={OnEditPressed}
+      />
+      <ExpenseForm
+        bottomSheetRef={bottomSheetRef}
+        expenseToEdit={expenseToEdit}
+        onClearForm={OnClearForm}
+      />
+    </ScreenContainer>
   );
 }

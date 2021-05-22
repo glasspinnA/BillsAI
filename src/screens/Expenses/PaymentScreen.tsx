@@ -1,10 +1,8 @@
 import { useRoute } from "@react-navigation/native";
-import { Layout } from "@ui-kitten/components";
 import * as React from "react";
-import { SafeAreaView } from "react-native";
+import { ScreenContainer } from "../../components/Container/ScreenContainer.component";
 import { CollapsablePresenter } from "../../components/FlatLists/CollapsableList/CollapsablePresenter";
 import { ScreenHeaderText } from "../../components/Texts/ScreenHeader";
-import GlobalLayout from "../../constants/GlobalLayout";
 import { isDevModeEnabled } from "../../env/configs";
 import { flatlistDummyData } from "../../helpers/testData";
 import { IUserExpensesRoute } from "../../interface/IRoute";
@@ -22,11 +20,9 @@ export function PaymentScreen(props: PaymentScreenProps) {
   }, []);
 
   return (
-    <Layout level="2" style={GlobalLayout.globalStyles.layout}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <ScreenHeaderText title="Payment" />
-        <CollapsablePresenter item={payment} enableAccordion={true} />
-      </SafeAreaView>
-    </Layout>
+    <ScreenContainer>
+      <ScreenHeaderText title="Payment" />
+      <CollapsablePresenter item={payment} enableAccordion={true} />
+    </ScreenContainer>
   );
 }

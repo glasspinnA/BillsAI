@@ -1,11 +1,9 @@
 import { useRoute } from "@react-navigation/native";
-import { Layout } from "@ui-kitten/components";
 import * as React from "react";
-import { SafeAreaView } from "react-native";
+import { ScreenContainer } from "../../components/Container/ScreenContainer.component";
 import { BaseFlatList } from "../../components/FlatLists/BaseFlatList";
 import { ProductItem } from "../../components/FlatLists/ProductList/ProductItem.component";
 import CustomTextInput from "../../components/Inputs/CustomTextInput";
-import GlobalLayout from "../../constants/GlobalLayout";
 import { UserProductDTO } from "../../DTO/UserProductDTO";
 import { isDevModeEnabled } from "../../env/configs";
 import { GetUserProductTestData } from "../../helpers/testData";
@@ -27,22 +25,20 @@ export function InventoryScreen(props: InventoryScreenProps) {
   };
 
   return (
-    <Layout level="2" style={GlobalLayout.globalStyles.layout}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <CustomTextInput
-          placeholder="Add product"
-          keyboardType="default"
-          onSubmit={OnProductAdded}
-          enableIcon={true}
-        />
-        <BaseFlatList
-          data={userProducts}
-          shouldRefresh={false}
-          rowComponent={(item) => <ProductItem item={item} />}
-          shouldScrollToEnd={true}
-          keyExtractor={(item) => item.productId}
-        />
-      </SafeAreaView>
-    </Layout>
+    <ScreenContainer>
+      <CustomTextInput
+        placeholder="Add product"
+        keyboardType="default"
+        onSubmit={OnProductAdded}
+        enableIcon={true}
+      />
+      <BaseFlatList
+        data={userProducts}
+        shouldRefresh={false}
+        rowComponent={(item) => <ProductItem item={item} />}
+        shouldScrollToEnd={true}
+        keyExtractor={(item) => item.productId}
+      />
+    </ScreenContainer>
   );
 }
