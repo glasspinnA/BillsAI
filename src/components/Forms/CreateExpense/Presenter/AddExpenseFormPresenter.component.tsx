@@ -15,6 +15,7 @@ import { RootState } from "../../../../redux/store/store";
 import { AddExpenseForm } from "../View/AddExpenseFormView.component";
 import { v4 as uuidv4 } from "uuid";
 import { UserDTO } from "../../../../DTO/UserDTO";
+import { BottomSheetContainer } from "../../../BottomSheet/BottomSheet.component";
 
 interface AddFormPresenterProps {
   bottomSheetRef: any;
@@ -60,8 +61,6 @@ const ExpenseForm = (props: AddFormPresenterProps) => {
     dispatch(UpdateExpense(expense));
   };
 
-  const snapPoints = React.useMemo(() => [-1, "70%"], []);
-
   const OnAnimate = (fromIndex: number, toIndex: number) => {
     const shouldClearForm = fromIndex == 1 && toIndex == 0;
     setFormState(shouldClearForm);
@@ -69,10 +68,8 @@ const ExpenseForm = (props: AddFormPresenterProps) => {
   };
 
   return (
-    <BottomSheet
-      ref={props.bottomSheetRef}
-      index={1}
-      snapPoints={snapPoints}
+    <BottomSheetContainer
+      bottomSheetRef={props.bottomSheetRef}
       onAnimate={OnAnimate}
     >
       <AddExpenseForm
@@ -85,7 +82,7 @@ const ExpenseForm = (props: AddFormPresenterProps) => {
         prefilledForm={props.expenseToEdit}
         clearForm={shouldClearForm}
       />
-    </BottomSheet>
+    </BottomSheetContainer>
   );
 };
 

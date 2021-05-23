@@ -7,4 +7,7 @@ export interface IFormInputs {
   USER: UserDTO[];
   EXPENSE_TYPE: ExpenseType;
   ID: string;
+  AMOUNT: string;
+  NAME: string;
+  DATE: Date;
 }

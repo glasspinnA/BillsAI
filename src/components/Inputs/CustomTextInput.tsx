@@ -14,6 +14,7 @@ interface TextInputProps {
   returnKeyType?: ReturnKeyTypeOptions;
   shoudFocus?: boolean;
   enableIcon?: boolean;
+  disabled?: boolean;
   value?: string;
   onSubmit?: (text: string) => void;
   onChangeText?: (value: string) => void;
@@ -51,6 +52,7 @@ const CustomTextInput = (props: TextInputProps) => {
       value={props.value}
       onChangeText={(value) => props.onChangeText && props.onChangeText(value)}
       accessoryLeft={RenderIcon}
+      disabled={props.disabled}
     />
   );
 };

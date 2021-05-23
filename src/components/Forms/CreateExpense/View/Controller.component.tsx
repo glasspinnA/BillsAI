@@ -10,6 +10,8 @@ export interface CustomControllerProps {
   name: string;
   control: Control<IFormInputs>;
   error?: FieldError;
+  disabled?: boolean;
+  defaultValue?: string;
 }
 
 export function CustomController(props: CustomControllerProps) {
@@ -25,11 +27,12 @@ export function CustomController(props: CustomControllerProps) {
             keyboardType={
               props.name == ADD_BILL_FORM.PRODUCT ? "default" : undefined
             }
+            disabled={props.disabled}
           />
         )}
         name={props.name}
         rules={{ required: true }}
-        defaultValue=""
+        defaultValue={props.defaultValue == undefined ? "" : props.defaultValue}
       />
       {props.error && <ErrorMessage error={props.errorMessage} />}
     </>

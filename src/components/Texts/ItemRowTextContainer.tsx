@@ -17,7 +17,7 @@ export function ItemRowTextContainer(props: ItemRowTextContainerProps) {
     <View style={{ flex: 1 }}>
       <SubHeader>{props.headerText}</SubHeader>
       <View style={{ flexDirection: "row", marginTop: 4 }}>
-        {props.subIcon && CustomIcon(props.subIcon, Color.TEXT.BLACK)}
+        {props.subIcon && CustomIcon(props.subIcon, Color.BLACK)}
         {props.subText && <SubParagraph>{props.subText}</SubParagraph>}
       </View>
     </View>

@@ -6,4 +6,10 @@ const ADD_BILL_FORM = {
   ID: "ID",
 };
 
-export { ADD_BILL_FORM };
+const PRODUCT_FORM = {
+  NAME: "NAME",
+  AMOUNT: "AMOUNT",
+  DATE: "DATE",
+};
+
+export { ADD_BILL_FORM, PRODUCT_FORM };
