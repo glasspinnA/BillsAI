@@ -1,35 +1,45 @@
 import * as React from "react";
-import { ProductDTO } from "../../../DTO/ProductDTO";
 import { UserProductDTO } from "../../../DTO/UserProductDTO";
 import { IconChooser } from "../../../enum/IconChooser";
-import { IsUserProductDTO } from "../../../helpers/Common";
 import { IconButton } from "../../Buttons/IconButton";
 import { Counter } from "../../Counter/Counter.component";
-import { SubHeader } from "../../Texts/Subtitle/SubHeader.component";
+import { CustomIcon } from "../../Icons/CustomIcon";
+import { ItemRowTextContainer } from "../../Texts/ItemRowTextContainer";
+import { Paragraph } from "../../Texts/Paragraph/Paragraph.component";
 import { ItemContainer } from "../ItemContainer.component";
 
 export interface ProductItemProps {
-  item: ProductDTO | UserProductDTO;
+  item: UserProductDTO;
   onCounterChanged?: (productId: number, amount: number) => void;
+  onDeletePressed: (productId: number) => void;
 }
 
 export function ProductItem(props: ProductItemProps) {
   const [count, setCount] = React.useState(1);
   const OnCountChange = (isIncrease: boolean) => {
-    if (!IsUserProductDTO(props.item)) return;
+    if (props.onCounterChanged == undefined) return;
     const amount = isIncrease ? count + 1 : count - 1;
     setCount(amount);
-    props.onCounterChanged &&
-      props.onCounterChanged(props.item.productId, amount);
+    props.onCounterChanged(props.item.productId, amount);
   };
 
   return (
     <ItemContainer>
-      <SubHeader>{props.item.name}</SubHeader>
+      <ItemRowTextContainer
+        headerText={props.item.name}
+        subText={props.item.createdDate?.toLocaleDateString()}
+        subIcon={IconChooser.CALENDAR}
+      />
+      <Paragraph style={{ flex: 0.3, alignSelf: "center" }}>
+        {CustomIcon(IconChooser.FOOD_CHICKEN)} x {props.item.amount}
+      </Paragraph>
       {props.onCounterChanged && props.item && (
         <Counter count={count} onCountChange={OnCountChange} />
       )}
-      <IconButton onPress={() => null} icon={IconChooser.REMOVE} />
+      <IconButton
+        onPress={() => props.onDeletePressed(props.item.productId)}
+        icon={IconChooser.REMOVE}
+      />
     </ItemContainer>
   );
 }

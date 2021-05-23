@@ -24,6 +24,8 @@ export function InventoryScreen(props: InventoryScreenProps) {
     console.log(text);
   };
 
+  const OnDeletePressed = (productId: number) => {};
+
   return (
     <ScreenContainer>
       <CustomTextInput
@@ -35,7 +37,9 @@ export function InventoryScreen(props: InventoryScreenProps) {
       <BaseFlatList
         data={userProducts}
         shouldRefresh={false}
-        rowComponent={(item) => <ProductItem item={item} />}
+        rowComponent={(item) => (
+          <ProductItem item={item} onDeletePressed={OnDeletePressed} />
+        )}
         shouldScrollToEnd={true}
         keyExtractor={(item) => item.productId}
       />

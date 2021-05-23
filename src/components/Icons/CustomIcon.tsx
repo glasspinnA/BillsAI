@@ -71,12 +71,20 @@ export const CustomIcon = (icon: IconChooser, color?: string) => {
       return (
         <Icon name="food-variant" size={20} color={theme[Color.PRIMARY_500]} />
       );
+    case IconChooser.FOOD_CHICKEN:
+      return (
+        <Icon
+          name="food-drumstick-outline"
+          size={20}
+          color={theme[Color.PRIMARY_500]}
+        />
+      );
     case IconChooser.CALENDAR:
       return (
         <Icon
           name="calendar-range"
           size={20}
-          color={theme[Color.PRIMARY_500]}
+          color={color != undefined ? color : theme[Color.PRIMARY_500]}
         />
       );
   }

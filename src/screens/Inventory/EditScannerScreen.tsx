@@ -59,13 +59,20 @@ export function EditScannerScreen(props: EditScannerScreenProps) {
       })
     );
   };
+
+  const OnDeletePressed = (productId: number) => {};
+
   return (
     <ScreenContainer>
       <BaseFlatList
         data={userProducts}
         shouldRefresh={false}
         rowComponent={(item) => (
-          <ProductItem item={item} onCounterChanged={OnCounterChanged} />
+          <ProductItem
+            item={item}
+            onCounterChanged={OnCounterChanged}
+            onDeletePressed={OnDeletePressed}
+          />
         )}
         shouldScrollToEnd={true}
         keyExtractor={(item) => item.productId.toString()}

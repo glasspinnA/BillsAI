@@ -2,10 +2,10 @@ import * as React from "react";
 import { Text } from "@ui-kitten/components/ui/text/text.component";
 import { useTheme } from "@ui-kitten/components/theme/theme/theme.service";
 import { Color } from "../../../constants/Color";
-import { StyleProp } from "react-native";
+import { StyleProp, TextStyle } from "react-native";
 interface AppProps {
   whiteColor?: boolean;
-  style?: StyleProp<any>;
+  style?: StyleProp<TextStyle>;
 }
 export const Paragraph: React.FC<AppProps> = (props) => {
   const theme = useTheme();
