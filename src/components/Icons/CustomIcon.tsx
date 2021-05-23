@@ -87,5 +87,7 @@ export const CustomIcon = (icon: IconChooser, color?: string) => {
           color={color != undefined ? color : theme[Color.PRIMARY_500]}
         />
       );
+    case IconChooser.PLUS:
+      return <Icon name="plus" size={20} color={theme[Color.WHITE]} />;
   }
 };

@@ -13,4 +13,5 @@ export enum IconChooser {
   FOOD = 11,
   CALENDAR = 12,
   FOOD_CHICKEN = 13,
+  PLUS = 14,
 }
