@@ -8,7 +8,9 @@ interface ScreenContainerProps {}
 export const ScreenContainer: React.FC<ScreenContainerProps> = (props) => {
   return (
     <Layout level="2" style={GlobalLayout.globalStyles.layout}>
-      <SafeAreaView style={{ flex: 1 }}>{props.children}</SafeAreaView>
+      <SafeAreaView style={{ flex: 1, marginBottom: 5 }}>
+        {props.children}
+      </SafeAreaView>
     </Layout>
   );
 };

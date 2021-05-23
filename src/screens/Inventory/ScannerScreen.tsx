@@ -6,6 +6,7 @@ import { RoundedButton } from "../../components/Buttons/RoundedButton";
 import { ScreenContainer } from "../../components/Container/ScreenContainer.component";
 import { CustomIcon } from "../../components/Icons/CustomIcon";
 import { Circle } from "../../components/Texts/Circle.component";
+import { Paragraph } from "../../components/Texts/Paragraph/Paragraph.component";
 import { SCREEN_NAME } from "../../constants/Screens";
 import { ProductDTO } from "../../DTO/ProductDTO";
 import { IconChooser } from "../../enum/IconChooser";
@@ -36,20 +37,18 @@ export function ScannerScreen(props: ScannerScreenProps) {
     <ScreenContainer>
       <View style={{ flex: 1, justifyContent: "flex-end" }}>
         <BarcodeScanner onBarcodeScanned={OnBarcodeScanned} />
-        <View
-          style={{
-            alignSelf: "center",
-            marginBottom: 10,
-            flexDirection: "row",
-            paddingHorizontal: 10,
-          }}
-        >
-          <Text>
-            <Circle text={"1"} />
-          </Text>
-          {CustomIcon(IconChooser.FOOD)}
+        <>
+          <Paragraph
+            whiteColor={true}
+            style={{
+              alignSelf: "center",
+              marginBottom: 10,
+            }}
+          >
+            {CustomIcon(IconChooser.FOOD_CHICKEN)} x 1
+          </Paragraph>
           <RoundedButton title="Next" onPress={OnChangeScreen} />
-        </View>
+        </>
       </View>
     </ScreenContainer>
   );
