@@ -11,4 +11,5 @@ export enum IconChooser {
   DECREASE_MINUS = 9,
   SHOPPING_CART = 10,
   FOOD = 11,
+  CALENDAR = 12,
 }

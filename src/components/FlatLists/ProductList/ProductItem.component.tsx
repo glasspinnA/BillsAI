@@ -10,6 +10,8 @@ import { IconChooser } from "../../../enum/IconChooser";
 import { IsUserProductDTO } from "../../../helpers/Common";
 import { IconButton } from "../../Buttons/IconButton";
 import { Counter } from "../../Counter/Counter.component";
+import { SubtitleHeader } from "../../Texts/SubtitleHeader.component";
+import { ItemContainer } from "../ItemContainer.component";
 
 export interface ProductItemProps {
   item: ProductDTO | UserProductDTO;
@@ -17,7 +19,6 @@ export interface ProductItemProps {
 }
 
 export function ProductItem(props: ProductItemProps) {
-  const theme = useTheme();
   const [count, setCount] = React.useState(1);
   const OnCountChange = (isIncrease: boolean) => {
     if (!IsUserProductDTO(props.item)) return;
@@ -28,20 +29,12 @@ export function ProductItem(props: ProductItemProps) {
   };
 
   return (
-    <SafeAreaView
-      style={[
-        GlobalLayout.flatList.rowContainer,
-        GlobalLayout.flatList.rowItemShadow,
-        { backgroundColor: theme[Color.WHITE] },
-      ]}
-    >
-      <View style={GlobalLayout.flatList.row}>
-        <Text>Hello</Text>
-        {props.onCounterChanged && props.item && (
-          <Counter count={count} onCountChange={OnCountChange} />
-        )}
-        <IconButton onPress={() => null} icon={IconChooser.REMOVE} />
-      </View>
-    </SafeAreaView>
+    <ItemContainer>
+      <SubtitleHeader>{props.item.name}</SubtitleHeader>
+      {props.onCounterChanged && props.item && (
+        <Counter count={count} onCountChange={OnCountChange} />
+      )}
+      <IconButton onPress={() => null} icon={IconChooser.REMOVE} />
+    </ItemContainer>
   );
 }
