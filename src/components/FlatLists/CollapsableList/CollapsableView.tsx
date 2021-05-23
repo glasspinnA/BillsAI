@@ -15,6 +15,8 @@ import { IExpensesSectionList } from "../../../interface/IExpensesSectionList";
 import { IUserPayFlatList } from "../../../interface/IUserPayFlatList";
 import { CustomIcon } from "../../Icons/CustomIcon";
 import { ItemRowTextContainer } from "../../Texts/ItemRowTextContainer";
+import { Paragraph } from "../../Texts/Paragraph/Paragraph.component";
+import { SubHeader } from "../../Texts/Subtitle/SubHeader.component";
 import { ExpenseRowItemBody } from "./ExpenseRowItem";
 import { PayRowItemHeader } from "./PayRowItem";
 
@@ -114,7 +116,7 @@ export function CollapsableView(props: CollapsableViewProps) {
         }}
       >
         <View style={{ flex: 1, alignSelf: "center" }}>
-          <Text category="s1">{name}</Text>
+          <SubHeader>{name}</SubHeader>
         </View>
         <View style={{ flex: 1, alignItems: "flex-end" }}>
           <View
@@ -127,12 +129,7 @@ export function CollapsableView(props: CollapsableViewProps) {
             }}
           >
             {CustomIcon(IconChooser.MONEY, theme["text-alternate-color"])}
-            <Text
-              category="p1"
-              style={{ color: theme["text-alternate-color"] }}
-            >
-              {price}
-            </Text>
+            <Paragraph whiteColor={true}>{price}</Paragraph>
           </View>
         </View>
       </View>

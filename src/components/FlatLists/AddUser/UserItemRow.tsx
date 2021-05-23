@@ -11,6 +11,7 @@ import {
 import { IconButton } from "../../Buttons/IconButton";
 import CustomTextInput from "../../Inputs/CustomTextInput";
 import { ItemRowTextContainer } from "../../Texts/ItemRowTextContainer";
+import { ItemContainer } from "../ItemContainer.component";
 
 interface UserItemRowProps {
   item: UserDTO;

@@ -1,4 +1,4 @@
-import { Icon, Input } from "@ui-kitten/components";
+import { Input } from "@ui-kitten/components/ui/input/input.component";
 import * as React from "react";
 import { KeyboardTypeOptions, ReturnKeyTypeOptions } from "react-native";
 import { IconChooser } from "../../enum/IconChooser";

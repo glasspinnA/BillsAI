@@ -3,6 +3,7 @@ import { UserDTO } from "../../../DTO/UserDTO";
 import { BaseFlatList } from "../BaseFlatList";
 import UserChooserRowItem from "./UserChooserRowItem";
 import { Text } from "@ui-kitten/components";
+import { SubHeader } from "../../Texts/Subtitle/SubHeader.component";
 
 export interface HListProps {
   data: UserDTO[];
@@ -25,9 +26,7 @@ export function HList(props: HListProps) {
 
   return (
     <>
-      <Text category="s1">
-        {props.isReadOnly ? "Shared with" : "Share with"}
-      </Text>
+      <SubHeader>{props.isReadOnly ? "Shared with" : "Share with"}</SubHeader>
       <BaseFlatList
         data={props.data}
         rowComponent={(item) => (

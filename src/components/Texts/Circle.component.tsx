@@ -1,6 +1,7 @@
 import { useTheme } from "@ui-kitten/components/theme/theme/theme.service";
 import * as React from "react";
 import { View, StyleSheet, Text } from "react-native";
+import { Color } from "../../constants/Color";
 import { IconChooser } from "../../enum/IconChooser";
 import { CustomIcon } from "../Icons/CustomIcon";
 
@@ -16,12 +17,12 @@ export function Circle(props: CircleProps) {
       style={[
         styles.circle,
         {
-          backgroundColor: theme["color-primary-default"],
-          borderColor: theme["color-primary-default"],
+          backgroundColor: theme[Color.PRIMARY_500],
+          borderColor: theme[Color.PRIMARY_500],
         },
       ]}
     >
-      <Text style={{ color: theme["text-alternate-color"] }}>{props.text}</Text>
+      <Text style={{ color: theme[Color.TEXT.WHITE] }}>{props.text}</Text>
     </View>
   );
 }

@@ -13,6 +13,7 @@ import componentStyle from "./AddView.component.style";
 import { CustomController } from "./Controller.component";
 import { ErrorMessage } from "./ErrorMessage.component";
 import { ExpenseType } from "../../../../enum/ExpenseType";
+import { SubHeader } from "../../../Texts/Subtitle/SubHeader.component";
 export interface AddExpenseFormProps {
   users: UserDTO[];
   onAddExpense(data: IFormInputs): void;
@@ -130,7 +131,7 @@ export function AddExpenseForm(props: AddExpenseFormProps) {
         </View>
       </View>
       <View style={componentStyle.userRowContainer}>
-        <Text category="s1">Expense type</Text>
+        <SubHeader>Expense type</SubHeader>
         <Controller
           control={control}
           render={({ onChange }) => (

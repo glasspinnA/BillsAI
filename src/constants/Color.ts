@@ -1,5 +1,13 @@
 export const Color = {
+  BLACK: "#FFF",
   WHITE: "background-basic-color-1",
-  BLACK_TEXT: "text-basic-color",
-  WHITE_TEXT: "text-alternate-color",
+  PRIMARY_500: "color-primary-500",
+  BORDER: "color-primary-active-border",
+  TEXT: {
+    PRIMARY: "text-primary-color",
+    BLACK: "text-basic-color",
+    WHITE: "text-alternate-color",
+    DANGER: "text-danger-color",
+    SUCCESS: "text-success-color",
+  },
 };

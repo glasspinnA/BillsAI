@@ -2,7 +2,7 @@ import * as React from "react";
 import { View } from "react-native";
 import { IconChooser } from "../../enum/IconChooser";
 import { IconButton } from "../Buttons/IconButton";
-import { Text } from "@ui-kitten/components/ui/text/text.component";
+import { Paragraph } from "../Texts/Paragraph/Paragraph.component";
 export interface CounterProps {
   count: number;
   onCountChange: (increase: boolean) => void;
@@ -24,7 +24,7 @@ export function Counter(props: CounterProps) {
         icon={IconChooser.INCREASE_PLUS}
         onPress={OnIncreasePressed}
       />
-      <Text>{props.count}</Text>
+      <Paragraph>{props.count}</Paragraph>
       <IconButton
         icon={IconChooser.DECREASE_MINUS}
         onPress={OnDecreasePressed}

@@ -5,6 +5,9 @@ import { StyleProp, View, ViewProps, ViewStyle } from "react-native";
 import { IconChooser } from "../../../enum/IconChooser";
 import { CustomIcon } from "../../Icons/CustomIcon";
 import { Size } from "../../../enum/Size";
+import { Color } from "../../../constants/Color";
+import { SubHeader } from "../../Texts/Subtitle/SubHeader.component";
+import { Paragraph } from "../../Texts/Paragraph/Paragraph.component";
 
 export interface UserIconProps {
   title: string;
@@ -20,19 +23,17 @@ export function UserIcon(props: UserIconProps) {
       <View
         style={{
           alignSelf: "center",
-          backgroundColor: theme["color-primary-500"],
+          backgroundColor: theme[Color.PRIMARY_500],
           borderRadius: 100,
           alignItems: "center",
           justifyContent: "center",
           borderWidth: 1.5,
-          borderColor: theme["color-primary-active-border"],
+          borderColor: theme[Color.BORDER],
           height: props.size == Size.SMALL ? 40 : 50,
           width: props.size == Size.SMALL ? 40 : 50,
         }}
       >
-        <Text category="s1" style={{ color: theme["text-alternate-color"] }}>
-          {props.title}
-        </Text>
+        <SubHeader whiteColor={true}>{props.title}</SubHeader>
         {props.isSelectedState && (
           <View
             style={{
@@ -40,7 +41,7 @@ export function UserIcon(props: UserIconProps) {
               right: 0,
               top: 0,
               borderRadius: 100,
-              backgroundColor: theme["background-basic-color-1"],
+              backgroundColor: theme[Color.WHITE],
             }}
           >
             {CustomIcon(IconChooser.CHECK)}
@@ -54,9 +55,9 @@ export function UserIcon(props: UserIconProps) {
             marginTop: 3,
           }}
         >
-          <Text style={{ textAlign: "center", flexWrap: "wrap" }}>
+          <Paragraph style={{ textAlign: "center", flexWrap: "wrap" }}>
             {props.fullname}
-          </Text>
+          </Paragraph>
         </View>
       )}
     </View>
